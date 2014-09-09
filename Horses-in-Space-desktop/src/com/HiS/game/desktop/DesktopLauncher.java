@@ -1,6 +1,6 @@
 package com.HiS.game.desktop;
 
-import com.HiS.game.MyHorseGame;
+import com.HiS.game.HorseGame;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
@@ -10,6 +10,6 @@ public class DesktopLauncher {
 		config.title = "Horses in Space";
 		config.width = 400;
 		config.height = 240;
-		new LwjglApplication(new MyHorseGame(), config);
+		new LwjglApplication(new HorseGame(), config);
 	}
 }
