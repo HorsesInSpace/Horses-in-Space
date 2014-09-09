@@ -10,10 +10,14 @@ public class MyHorseGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 	
+	public MyHorseGame() {
+		
+	}
+	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		img = new Texture("assets/badlogic.jpg");
 	}
 
 	@Override
