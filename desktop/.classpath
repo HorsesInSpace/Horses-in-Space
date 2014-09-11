@@ -19,6 +19,6 @@
 	<classpathentry exported="true" kind="lib" path="../gradle/libs/com.badlogicgames.jlayer/jlayer/1.0.1-gdx/7cca83cec5c1b2f011362f4d85aabd71a73b049d/jlayer-1.0.1-gdx.jar" sourcepath="/gradle/libs/com.badlogicgames.jlayer/jlayer/1.0.1-gdx/f1c4ffebc5e4f68be914404faab580c20de8ea1f/jlayer-1.0.1-gdx-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="../gradle/libs/org.jcraft/jorbis/0.0.17/8872d22b293e8f5d7d56ff92be966e6dc28ebdc6/jorbis-0.0.17.jar" sourcepath="/gradle/libs/org.jcraft/jorbis/0.0.17/5446be5d62e4c6b347c8e6cd28dc00a936417ba2/jorbis-0.0.17-sources.jar"/>
 	<classpathentry kind="src" path="assets"/>
-	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/Horses-in-Space-core"/>
+	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/core"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
