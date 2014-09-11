@@ -17,7 +17,7 @@ public class GameWorld {
 	private boolean goingDown = true;
 
 	public GameWorld() {
-		Horse horse = new Horse();
+		Horse horse = Horse.getInstance();
 		objects.add(horse);
 	}
 	
