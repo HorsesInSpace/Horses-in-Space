@@ -38,7 +38,6 @@ tmp/
 *.swp
 *~.nib
 local.properties
-android/.classpath
 .settings/
 .loadpath
 .externalToolBuilders/
