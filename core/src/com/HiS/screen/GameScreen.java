@@ -45,7 +45,7 @@ public class GameScreen implements Screen {
 	@Override
 	public void render(float delta) {
 		this.world.update(delta);
-		this.renderer.render();
+		this.renderer.render(this.world.getObjects());
 	}
 
 	@Override

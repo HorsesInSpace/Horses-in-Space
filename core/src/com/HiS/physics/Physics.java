@@ -21,6 +21,7 @@ public class Physics {
 	
 	private Vector2 velocity;
 	private Vector2 position;
+	private Vector2 acceleration;
 	
 	public Physics(int width, int height, float weight, float posX, float posY) {
 		this.width = width;
@@ -29,6 +30,7 @@ public class Physics {
 		
 		this.position = new Vector2(posX, posY);
         this.velocity = new Vector2(0, 0);
+        this.acceleration = new Vector2(0, this.weight);
 	}
 
 	public int getWidth() {
@@ -77,5 +79,13 @@ public class Physics {
 
 	public void setPosition(Vector2 position) {
 		this.position = position;
+	}
+
+	public Vector2 getAcceleration() {
+		return acceleration;
+	}
+
+	public void setAcceleration(Vector2 acceleration) {
+		this.acceleration = acceleration;
 	}
 }

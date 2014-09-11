@@ -4,53 +4,35 @@ import java.util.ArrayList;
 
 import com.HiS.gameobject.GameObject;
 import com.HiS.gameobject.Horse;
+import com.HiS.physics.PhysEngine;
+import com.HiS.physics.Physics;
 import com.HiS.screen.GameScreen;
-import com.badlogic.gdx.math.Rectangle;
-
 
 public class GameWorld {
-	
-	private Rectangle rect = new Rectangle(0, 0, 34, 24);
+
 	private ArrayList<GameObject> objects = new ArrayList<>();
-	
-	private boolean goingRight = true;
-	private boolean goingDown = true;
+
+	private PhysEngine physEngine;
 
 	public GameWorld() {
-		Horse horse = Horse.getInstance();
-		objects.add(horse);
+		this.objects.add(new Horse(20, 15, 200, 15, (GameScreen.gameHeight - 15) - 15));
+		this.objects.add(new Horse(20, 15, 300, 45, (GameScreen.gameHeight - 15) - 15));
+		this.objects.add(new Horse(20, 15, 400, 75, (GameScreen.gameHeight - 15) - 15));
+		this.physEngine = new PhysEngine();
 	}
-	
+
 	public void update(float delta) {
 		for(GameObject gameObject : objects) {
-			gameObject.update(delta);
-		}
-		if (rect.x == 0) {
-			goingRight = true;
-		} else if ((rect.x + rect.width) > 137) {
-			goingRight = false;
-		}
-		
-		if (rect.y == 0) {
-			goingDown = true;
-		} else if ((rect.y + rect.height) > GameScreen.gameHeight) {
-			goingDown = false;
-		}
-		
-		if (goingRight) {
-			rect.x++;
-		} else {
-			rect.x--;
-		}
-		
-		if (goingDown) {
-			rect.y++;
-		} else {
-			rect.y--;
+			Physics physics = gameObject.getPhysics();
+			physics = this.physEngine.update(physics, delta);
+			if(physics == null) {
+				this.objects.remove(gameObject);
+				gameObject = null;
+			}
 		}
 	}
 
-	public Rectangle getRect() {
-		return rect;
+	public ArrayList<GameObject> getObjects() {
+		return objects;
 	}
 }

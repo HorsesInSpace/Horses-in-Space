@@ -1,5 +1,8 @@
 package com.HiS.world;
 
+import java.util.List;
+
+import com.HiS.gameobject.GameObject;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -29,17 +32,19 @@ public class GameRenderer {
 		this.shapeRenderer.setProjectionMatrix(this.cam.combined);
 	}
 	
-	public void render() {
+	public void render(List<GameObject> gameObjects) {
 		Gdx.gl.glClearColor(255, 0, 255, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		this.shapeRenderer.begin(ShapeType.Filled);
-		this.shapeRenderer.setColor(Color.RED);
-		
-		this.shapeRenderer.rect(this.world.getRect().x,
-				this.world.getRect().y, this.world.getRect().width,
-				this.world.getRect().height);
-		
-		this.shapeRenderer.end();
+		for(GameObject gameObject : gameObjects) {
+			this.shapeRenderer.begin(ShapeType.Filled);
+			this.shapeRenderer.setColor(Color.RED);
+			
+			this.shapeRenderer.rect(gameObject.getPhysics().getPosition().x,
+					gameObject.getPhysics().getPosition().y, gameObject.getPhysics().getWidth(),
+					gameObject.getPhysics().getHeight());
+			
+			this.shapeRenderer.end();
+		}
 	}
 }
