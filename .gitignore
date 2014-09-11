@@ -18,16 +18,17 @@ www-test/
 .gwt-tmp/
 
 ## Android Studio and Intellij and Android in general
-Horses-in-Space-android/libs/armeabi/
-Horses-in-Space-android/libs/armeabi-v7a/
-Horses-in-Space-android/libs/x86/
-Horses-in-Space-android/gen/
+android/libs/armeabi/
+android/libs/armeabi-v7a/
+android/libs/x86/
+android/gen/
 .idea/
 *.ipr
 *.iws
 *.iml
 out/
 com_crashlytics_export_strings.xml
+android/.classpath
 
 ## Eclipse
 .metadata
