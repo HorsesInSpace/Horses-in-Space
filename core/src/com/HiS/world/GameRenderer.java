@@ -33,7 +33,7 @@ public class GameRenderer {
 	}
 	
 	public void render(List<GameObject> gameObjects) {
-		Gdx.gl.glClearColor(255, 255, 255, 1f);
+		Gdx.gl.glClearColor(255, 255, 0, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		for(GameObject gameObject : gameObjects) {
