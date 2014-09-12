@@ -30,6 +30,7 @@ public class GameWorld {
 				gameObject = null;
 			}
 		}
+
 	}
 
 	public ArrayList<GameObject> getObjects() {
