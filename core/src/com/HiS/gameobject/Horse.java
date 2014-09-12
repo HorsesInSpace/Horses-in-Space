@@ -16,6 +16,7 @@ public class Horse implements GameObject {
 //		return instance;
 //	}
 	
+	//TODO can still be made into Singleton because the constructor can be parameterless and private
 	public Horse(int width, int height, float weight, float posX, float posY) {
 		this.physics = new Physics(width, height, weight, posX, posY);
 	}
