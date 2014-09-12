@@ -15,7 +15,6 @@ public class GameWorld {
 	private PhysEngine physEngine;
 
 	public GameWorld() {
-		Horse hor = Horse.getInstance();
 		this.objects.add(new Horse(20, 15, 200, 15, (GameScreen.gameHeight - 15) - 15));
 		this.objects.add(new Horse(20, 15, 300, 45, (GameScreen.gameHeight - 15) - 15));
 		this.objects.add(new Horse(20, 15, 400, 75, (GameScreen.gameHeight - 15) - 15));
@@ -31,7 +30,7 @@ public class GameWorld {
 				gameObject = null;
 			}
 		}
-		Horse horse = Horse.getInstance();
+
 	}
 
 	public ArrayList<GameObject> getObjects() {
