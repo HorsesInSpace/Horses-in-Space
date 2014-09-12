@@ -37,6 +37,7 @@ public class GameRenderer {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		for(GameObject gameObject : gameObjects) {
+			
 			this.shapeRenderer.begin(ShapeType.Filled);
 			this.shapeRenderer.setColor(Color.BLACK);
 			
