@@ -1,6 +1,7 @@
 package com.HiS.physics;
 
 import com.HiS.screen.GameScreen;
+import com.badlogic.gdx.Gdx;
 
 /**
  * The PhysEngine is a physics engine that is supposed to take care
@@ -19,13 +20,15 @@ public class PhysEngine {
 	
 	public Physics update(Physics physics, float delta) {
 		
-		physics.getVelocity().add(physics.getAcceleration().x * delta, physics.getAcceleration().y * delta);
+		physics.getVelocity().add(physics.getAcceleration().x * delta, 
+								  physics.getAcceleration().y * delta);
 
         if (physics.getVelocity().y > 200) {
         	physics.getVelocity().y = 200;
         }
 
-        physics.getPosition().add(physics.getVelocity().x * delta, physics.getVelocity().y * delta);
+        physics.getPosition().add(physics.getVelocity().x * delta, 
+        						  physics.getVelocity().y * delta);
 		
 		
 		if (physics.getPosition().y + physics.getHeight() + 15 > GameScreen.gameHeight) {
