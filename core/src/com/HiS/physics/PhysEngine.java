@@ -1,7 +1,6 @@
 package com.HiS.physics;
 
 import com.HiS.screen.GameScreen;
-import com.badlogic.gdx.Gdx;
 
 /**
  * The PhysEngine is a physics engine that is supposed to take care
