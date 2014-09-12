@@ -19,7 +19,8 @@ public class PhysEngine {
 	
 	public Physics update(Physics physics, float delta) {
 		
-		physics.getVelocity().add(physics.getAcceleration().x * delta, physics.getAcceleration().y * delta);
+		physics.getVelocity().add(physics.getAcceleration().x * delta,
+				physics.getAcceleration().y * delta);
 
         if (physics.getVelocity().y > 200) {
         	physics.getVelocity().y = 200;

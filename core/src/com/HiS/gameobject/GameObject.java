@@ -1,6 +1,7 @@
 package com.HiS.gameobject;
 
 import com.HiS.physics.Physics;
+import com.badlogic.gdx.graphics.Texture;
 
 /**
  * Interface for gameObjects. All objects with physics are gameObjects
@@ -23,6 +24,12 @@ public interface GameObject {
 	 * @return physics of the gameObject
 	 */
 	public Physics getPhysics();
+	
+	/**
+	 * This method returns a Texture object related to the gameObject
+	 * @return texture
+	 */
+	public Texture getTexture();
 	
 	/**
 	 * Destroys the object.
