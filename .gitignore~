@@ -28,7 +28,10 @@ android/gen/
 *.iml
 out/
 com_crashlytics_export_strings.xml
-android/.classpath
+
+##
+*.classpath
+*.classpath~
 
 ## Eclipse
 .metadata
