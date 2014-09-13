@@ -1,13 +1,27 @@
 package com.HiS.hishelpers;
 
+import com.HiS.gameobject.GameObject;
+import com.HiS.gameobject.Horse;
+import com.HiS.world.GameWorld;
 import com.badlogic.gdx.InputProcessor;
 
 
 public class InputHandler implements InputProcessor{
 	
+	private GameWorld world;
+	
+	public InputHandler(GameWorld world) {
+		this.world = world;
+	}
+	
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		return false;
+		for(GameObject gameObject : world.getObjects()) {
+			if (gameObject instanceof Horse) {
+				((Horse) gameObject).jump();
+			}
+		}
+		return true;
 	}
 	
 	@Override

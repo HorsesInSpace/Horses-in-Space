@@ -1,5 +1,6 @@
 package com.HiS.screen;
 
+import com.HiS.hishelpers.InputHandler;
 import com.HiS.world.GameRenderer;
 import com.HiS.world.GameWorld;
 import com.badlogic.gdx.Gdx;
@@ -22,6 +23,8 @@ public class GameScreen implements Screen {
 		this.world = new GameWorld();
 		
 		this.renderer = new GameRenderer(this.world, gameWidth, gameHeight);
+		
+		Gdx.input.setInputProcessor(new InputHandler(this.world));
 	}
 
 	@Override

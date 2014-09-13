@@ -17,6 +17,8 @@ public class Physics {
 	private int height;
 	private float weight;
 	
+	private boolean isGrounded;
+	
 	private Rectangle rect;
 	
 	private Vector2 velocity;
@@ -55,6 +57,14 @@ public class Physics {
 
 	public void setWeight(float weight) {
 		this.weight = weight;
+	}
+
+	public boolean isGrounded() {
+		return isGrounded;
+	}
+
+	public void setGrounded(boolean isGrounded) {
+		this.isGrounded = isGrounded;
 	}
 
 	public Rectangle getRect() {

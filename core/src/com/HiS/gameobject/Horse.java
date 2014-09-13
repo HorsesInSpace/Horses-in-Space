@@ -30,11 +30,14 @@ public class Horse implements GameObject {
 		// TODO Update the object
 		Gdx.app.log("Horse", "updating");
 	}
-
-	@Override
-	public void destroy() {
-		// TODO Correctly and effectively destroy the object
-		Gdx.app.log("Horse", "destroyed");
+	
+	public void jump() {
+		Gdx.app.log("Horse", "jumping");
+		// TODO Somehow move the logic below so that PhysEngine can take care of how a jump is made
+		if(this.physics.isGrounded()) {
+			this.physics.setGrounded(false);
+			this.physics.getVelocity().y = (float) - (140 - (this.physics.getWeight() * 0.05));
+		}
 	}
 
 	@Override
@@ -49,6 +52,12 @@ public class Horse implements GameObject {
 
 	public void setTexture(Texture texture) {
 		this.texture = texture;
+	}
+	
+	@Override
+	public void destroy() {
+		// TODO Correctly and effectively destroy the object
+		Gdx.app.log("Horse", "destroyed");
 	}
 
 }
