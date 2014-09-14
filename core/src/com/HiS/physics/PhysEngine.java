@@ -45,7 +45,7 @@ public class PhysEngine {
 		//		boolean isDead = collisionCheck(physics);
 
 		// TODO Check if something collides, and return null if it should be destroyed.
-		physics.getRect().setX(physics.getPosition().x);
+		physics.getRect().setX(physics.getPosition().x+physics.getHeight());
 		physics.getRect().setY(physics.getPosition().y);
 		return physics;
 	}

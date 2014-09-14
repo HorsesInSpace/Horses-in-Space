@@ -15,7 +15,7 @@ public class GameWorld {
 	private PhysEngine physEngine;
 
 	public GameWorld() {
-		this.objects.add(new Horse(null, 20, 15, 800, 20, (GameScreen.gameHeight - 15) - 15));
+		this.objects.add(new Horse(null, 20, 15, 80, 20, (GameScreen.gameHeight - 15) - 80));
 		this.objects.add(new Horse(null, 20, 15, 200, 15, (GameScreen.gameHeight - 15) - 15));
 		this.objects.add(new Horse(null, 20, 15, 300, 45, (GameScreen.gameHeight - 15) - 15));
 		this.objects.add(new Horse(null, 20, 15, 400, 75, (GameScreen.gameHeight - 15) - 15));
