@@ -15,6 +15,7 @@ public class GameWorld {
 	private PhysEngine physEngine;
 
 	public GameWorld() {
+		this.objects.add(new Horse(null, 20, 15, 800, 20, (GameScreen.gameHeight - 15) - 15));
 		this.objects.add(new Horse(null, 20, 15, 200, 15, (GameScreen.gameHeight - 15) - 15));
 		this.objects.add(new Horse(null, 20, 15, 300, 45, (GameScreen.gameHeight - 15) - 15));
 		this.objects.add(new Horse(null, 20, 15, 400, 75, (GameScreen.gameHeight - 15) - 15));
@@ -25,6 +26,9 @@ public class GameWorld {
 		for(GameObject gameObject : objects) {
 			Physics physics = gameObject.getPhysics();
 			physics = this.physEngine.update(physics, delta);
+			if(gameObject instanceof Horse) {
+				physEngine.collisionCheck(gameObject, objects);
+			}
 			if(physics == null) {
 				this.objects.remove(gameObject);
 				gameObject = null;

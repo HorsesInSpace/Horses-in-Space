@@ -33,6 +33,8 @@ public class Physics {
 		this.position = new Vector2(posX, posY);
         this.velocity = new Vector2(0, 0);
         this.acceleration = new Vector2(0, this.weight);
+        
+        this.rect = new Rectangle(posX,posY,width,height);
 	}
 
 	public int getWidth() {
