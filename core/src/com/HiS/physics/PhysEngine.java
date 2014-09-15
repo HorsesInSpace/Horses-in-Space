@@ -36,9 +36,11 @@ public class PhysEngine {
 		}
 
 		if (physics.getPosition().y + physics.getHeight() + 15 > GameScreen.gameHeight) {
+			physics.setGrounded(true);
+		}
+		if(physics.isGrounded()) {
 			physics.getVelocity().y = 0f;
 			physics.getPosition().y = GameScreen.gameHeight - (physics.getHeight() + 15);
-			physics.setGrounded(true);
 		}
 		//		boolean isDead = collisionCheck(physics);
 
