@@ -60,12 +60,12 @@ public class GameRenderer {
 		}
 		
 		renderTime += delta;
-		if(renderTime*20 >= width) {
+		if(renderTime*40 >= width) {
 			renderTime = 0;
 		}
 		batch.disableBlending();
-		batch.draw(AssetLoader.ground, 0-(renderTime*20), height-15, width+2, 15);
-		batch.draw(AssetLoader.ground, width-(renderTime*20), height-15, width+2, 15);
+		batch.draw(AssetLoader.ground, 0-(renderTime*40), height-15, width+2, 15);
+		batch.draw(AssetLoader.ground, width-(renderTime*40), height-15, width+2, 15);
 		batch.end();
 	}
 }
