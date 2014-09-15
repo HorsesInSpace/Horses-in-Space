@@ -36,16 +36,16 @@ public class GameRenderer {
 		Gdx.gl.glClearColor(255, 255, 0, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
+		this.shapeRenderer.begin(ShapeType.Filled);
 		for(GameObject gameObject : gameObjects) {
 			
-			this.shapeRenderer.begin(ShapeType.Filled);
 			this.shapeRenderer.setColor(Color.BLACK);
 			
 			this.shapeRenderer.rect(gameObject.getPhysics().getPosition().x,
 					gameObject.getPhysics().getPosition().y, gameObject.getPhysics().getWidth(),
 					gameObject.getPhysics().getHeight());
 			
-			this.shapeRenderer.end();
 		}
+		this.shapeRenderer.end();
 	}
 }
