@@ -50,7 +50,7 @@ public class GameScreen implements Screen {
 	public void render(float delta) {
 		runTime += delta;
 		this.world.update(delta);
-		this.renderer.render(runTime, this.world.getObjects());
+		this.renderer.render(delta, runTime, this.world.getObjects());
 	}
 
 	@Override

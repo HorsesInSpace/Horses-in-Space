@@ -10,6 +10,7 @@ public class AssetLoader {
 	
 	public static TextureRegion horse;
 	public static TextureRegion backGround;
+	public static TextureRegion ground;
 	
 	public static void load() {
 		texture = new Texture(Gdx.files.internal("data/textures.png"));
@@ -20,6 +21,9 @@ public class AssetLoader {
 		
 		backGround = new TextureRegion(texture, 101, 0, 400, 240);
 		backGround.flip(false, true);
+		
+		ground = new TextureRegion(texture, 101, 250, 400, 62);
+		ground.flip(false, true);
 	}
 	
 	public static void dispose() {

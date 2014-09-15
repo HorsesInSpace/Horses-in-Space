@@ -16,6 +16,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class GameRenderer {
 	
+	private float renderTime;
+	
 	private ShapeRenderer shapeRenderer;
 	private SpriteBatch batch;
 	
@@ -40,14 +42,14 @@ public class GameRenderer {
 		this.shapeRenderer.setProjectionMatrix(this.cam.combined);
 	}
 	
-	public void render(float runTime, List<? extends PhysObject> gameObjects) {
+	public void render(float delta, float runTime, List<? extends PhysObject> gameObjects) {
 		Gdx.gl.glClearColor(255, 255, 0, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		batch.begin();
 
 		batch.disableBlending();
-		batch.draw(AssetLoader.backGround, 0, 0, width, height);
+		batch.draw(AssetLoader.backGround, 0, -10, width, height);
 		batch.enableBlending();
 		for(PhysObject gameObject : gameObjects) {
 			batch.draw(AssetLoader.horse,
@@ -56,6 +58,14 @@ public class GameRenderer {
 	                gameObject.getPhysics().getWidth(), 
 	                gameObject.getPhysics().getHeight());
 		}
+		
+		renderTime += delta;
+		if(renderTime*20 >= width) {
+			renderTime = 0;
+		}
+		batch.disableBlending();
+		batch.draw(AssetLoader.ground, 0-(renderTime*20), height-15, width+2, 15);
+		batch.draw(AssetLoader.ground, width-(renderTime*20), height-15, width+2, 15);
 		batch.end();
 	}
 }
