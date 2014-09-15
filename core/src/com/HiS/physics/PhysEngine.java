@@ -1,12 +1,11 @@
 package com.HiS.physics;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.HiS.gameobject.GameObject;
 import com.HiS.screen.GameScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Rectangle;
 
 /**
  * The PhysEngine is a physics engine that is supposed to take care
@@ -20,7 +19,7 @@ import com.badlogic.gdx.math.Rectangle;
 public class PhysEngine {
 
 	public PhysEngine() {
-		
+
 	}
 
 	public Physics update(Physics physics, float delta) {
@@ -50,17 +49,19 @@ public class PhysEngine {
 		return physics;
 	}
 
-	public boolean collisionCheck(GameObject subject, ArrayList<GameObject> objects) {
-		for(GameObject object : objects) {
+	public boolean collisionCheck(GameObject subject, List<GameObject> objects) {
+		for(int i = 0; i < objects.size(); i++) {
+			GameObject object = objects.get(i);
 			if(!object.equals(subject)) {
-			if(Intersector.overlaps(subject.getPhysics().getRect(), object.getPhysics().getRect())) {
+				if(Intersector.overlaps(subject.getPhysics().getRect(), object.getPhysics().getRect())) {
 					Gdx.app.log("Something", "collided");
+					return true;
 				}
-//				if(physics.getPosition().x + (physics.getWidth()/2) > rect.getX() || 
-//						physics.getPosition().x + (physics.getWidth()/2) < rect.getX() + rect.getWidth()) {
-//					return true;
-//				}
-		}
+				//				if(physics.getPosition().x + (physics.getWidth()/2) > rect.getX() || 
+				//						physics.getPosition().x + (physics.getWidth()/2) < rect.getX() + rect.getWidth()) {
+				//					return true;
+				//				}
+			}
 		}
 		return false;
 
