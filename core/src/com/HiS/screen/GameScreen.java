@@ -11,6 +11,7 @@ public class GameScreen implements Screen {
 	private GameWorld world;
 	private GameRenderer renderer;
 	public static float gameHeight;
+	public float runTime;
 	
 	public GameScreen() {
 		Gdx.app.log("GameScreen", "CREATED");
@@ -19,7 +20,7 @@ public class GameScreen implements Screen {
 		int screenHeight = Gdx.graphics.getHeight();
 		float gameWidth = 136;
 		GameScreen.gameHeight = screenHeight / (screenWidth / gameWidth);
-		
+		this.runTime = 0;
 		this.world = new GameWorld();
 		
 		this.renderer = new GameRenderer(this.world, gameWidth, gameHeight);
@@ -47,8 +48,9 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
+		runTime += delta;
 		this.world.update(delta);
-		this.renderer.render(this.world.getObjects());
+		this.renderer.render(runTime, this.world.getObjects());
 	}
 
 	@Override

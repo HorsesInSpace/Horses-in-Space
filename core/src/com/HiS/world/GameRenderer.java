@@ -3,16 +3,19 @@ package com.HiS.world;
 import java.util.List;
 
 import com.HiS.gameobject.GameObject;
+import com.HiS.hishelpers.AssetLoader;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class GameRenderer {
 	
 	private ShapeRenderer shapeRenderer;
+	private SpriteBatch batch;
 	
 	private GameWorld world;
 	private OrthographicCamera cam;
@@ -28,24 +31,30 @@ public class GameRenderer {
 		this.cam = new OrthographicCamera();
 		this.cam.setToOrtho(true, width, height);
 		
+		this.batch = new SpriteBatch();
+		this.batch.setProjectionMatrix(this.cam.combined);
+		
 		this.shapeRenderer = new ShapeRenderer();
 		this.shapeRenderer.setProjectionMatrix(this.cam.combined);
 	}
 	
-	public void render(List<GameObject> gameObjects) {
+	public void render(float runTime, List<GameObject> gameObjects) {
 		Gdx.gl.glClearColor(255, 255, 0, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		this.shapeRenderer.begin(ShapeType.Filled);
+
+		batch.begin();
 		for(GameObject gameObject : gameObjects) {
 			
-			this.shapeRenderer.setColor(Color.BLACK);
-			
-			this.shapeRenderer.rect(gameObject.getPhysics().getPosition().x,
-					gameObject.getPhysics().getPosition().y, gameObject.getPhysics().getWidth(),
-					gameObject.getPhysics().getHeight());
+			batch.disableBlending();
+			batch.draw(AssetLoader.horse,
+	                gameObject.getPhysics().getPosition().x, 
+	                gameObject.getPhysics().getPosition().y, 
+	                gameObject.getPhysics().getWidth(), 
+	                gameObject.getPhysics().getHeight());
+			batch.enableBlending();
 			
 		}
-		this.shapeRenderer.end();
+		batch.end();
 	}
 }
