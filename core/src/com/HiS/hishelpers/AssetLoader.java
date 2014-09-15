@@ -5,6 +5,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+/**
+ * Static class used to load data such as Textures, sounds and other
+ * assets from files
+ * @author Morten
+ * @version 0.2
+ */
 public class AssetLoader {
 	private static Texture texture;
 	
@@ -12,6 +18,9 @@ public class AssetLoader {
 	public static TextureRegion backGround;
 	public static TextureRegion ground;
 	
+	/**
+	 * Loads all assets into memory for universal access
+	 */
 	public static void load() {
 		texture = new Texture(Gdx.files.internal("data/textures.png"));
 		texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
@@ -26,6 +35,9 @@ public class AssetLoader {
 		ground.flip(false, true);
 	}
 	
+	/**
+	 * removes assets from memory
+	 */
 	public static void dispose() {
 		texture.dispose();
 	}

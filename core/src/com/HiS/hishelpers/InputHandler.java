@@ -5,11 +5,20 @@ import com.HiS.gameobject.Horse;
 import com.HiS.world.GameWorld;
 import com.badlogic.gdx.InputProcessor;
 
-
+/**
+ * Class that handles input for control of the game
+ * @author Vemund, Lars
+ * @version 0.3
+ *
+ */
 public class InputHandler implements InputProcessor{
 	
 	private GameWorld world;
 	
+	/**
+	 * Constructor for class InputHandler
+	 * @param world the world of the game
+	 */
 	public InputHandler(GameWorld world) {
 		this.world = world;
 	}

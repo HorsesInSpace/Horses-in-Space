@@ -2,17 +2,14 @@ package com.HiS.world;
 
 import java.util.List;
 
-import com.HiS.gameobject.GameObject;
 import com.HiS.hishelpers.AssetLoader;
-import com.HiS.screen.GameScreen;
 import com.HiS.physics.PhysObject;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class GameRenderer {
 	
@@ -23,6 +20,8 @@ public class GameRenderer {
 	
 	private GameWorld world;
 	private OrthographicCamera cam;
+	
+	private TextureRegion horse, backGround, ground;
 	
 	private float width, height;
 	
@@ -40,6 +39,8 @@ public class GameRenderer {
 		
 		this.shapeRenderer = new ShapeRenderer();
 		this.shapeRenderer.setProjectionMatrix(this.cam.combined);
+		
+		initAssets();
 	}
 	
 	public void render(float delta, float runTime, List<? extends PhysObject> gameObjects) {
@@ -49,10 +50,10 @@ public class GameRenderer {
 		batch.begin();
 
 		batch.disableBlending();
-		batch.draw(AssetLoader.backGround, 0, -10, width, height);
+		batch.draw(backGround, 0, -10, width, height);
 		batch.enableBlending();
 		for(PhysObject gameObject : gameObjects) {
-			batch.draw(AssetLoader.horse,
+			batch.draw(horse,
 	                gameObject.getPhysics().getPosition().x, 
 	                gameObject.getPhysics().getPosition().y, 
 	                gameObject.getPhysics().getWidth(), 
@@ -64,8 +65,14 @@ public class GameRenderer {
 			renderTime = 0;
 		}
 		batch.disableBlending();
-		batch.draw(AssetLoader.ground, 0-(renderTime*40), height-15, width+2, 15);
-		batch.draw(AssetLoader.ground, width-(renderTime*40), height-15, width+2, 15);
+		batch.draw(ground, 0-(renderTime*40), height-15, width+2, 15);
+		batch.draw(ground, width-(renderTime*40), height-15, width+2, 15);
 		batch.end();
+	}
+	
+	public void initAssets() {
+		this.horse = AssetLoader.horse;
+		this.backGround = AssetLoader.backGround;
+		this.ground = AssetLoader.ground;
 	}
 }

@@ -4,6 +4,11 @@ import com.HiS.physics.PhysObject;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
+/**
+ * Class that defines the horse, or the player, if you will
+ * @author morten, lars
+ * @version 0.3
+ */
 public class Horse extends PhysGameObject implements GameObject, PhysObject {
 
 	private static Horse instance = null;
@@ -27,6 +32,10 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 		Gdx.app.log("Horse", "updating");
 	}
 	
+	/**
+	 * Makes the horse jump if it is grounded
+	 * Does nothing if in the air
+	 */
 	public void jump() {
 		Gdx.app.log("Horse", "jumping");
 		// TODO Somehow move the logic below so that PhysEngine can take care of how a jump is made
@@ -36,6 +45,9 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 		}
 	}
 	
+	/**
+	 * Destroys the object, NOT YET IMPLEMENTED
+	 */
 	@Override
 	public void destroy() {
 		// TODO Correctly and effectively destroy the object
