@@ -1,16 +1,17 @@
 package com.HiS.world;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import com.HiS.gameobject.GameObject;
 import com.HiS.gameobject.Horse;
+import com.HiS.gameobject.PhysGameObject;
 import com.HiS.physics.PhysEngine;
 import com.HiS.physics.Physics;
 import com.HiS.screen.GameScreen;
 
 public class GameWorld {
 
-	private ArrayList<GameObject> objects = new ArrayList<>();
+	private List<PhysGameObject> objects = new ArrayList<>();
 
 	private PhysEngine physEngine;
 
@@ -23,11 +24,11 @@ public class GameWorld {
 	}
 
 	public void update(float delta) {
-		for(GameObject gameObject : objects) {
+		for(PhysGameObject gameObject : objects) {
 			Physics physics = gameObject.getPhysics();
 			physics = this.physEngine.update(physics, delta);
 			if(gameObject instanceof Horse) {
-				physEngine.collisionCheck(gameObject, objects);
+				this.physEngine.collisionCheck(gameObject, objects);
 			}
 			if(physics == null) {
 				this.objects.remove(gameObject);
@@ -37,7 +38,7 @@ public class GameWorld {
 		
 	}
 
-	public ArrayList<GameObject> getObjects() {
+	public List<PhysGameObject> getObjects() {
 		return objects;
 	}
 }
