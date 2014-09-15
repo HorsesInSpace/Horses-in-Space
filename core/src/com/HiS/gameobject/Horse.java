@@ -1,5 +1,6 @@
 package com.HiS.gameobject;
 
+import com.HiS.hishelpers.AssetLoader;
 import com.HiS.physics.PhysObject;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -37,9 +38,11 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 	 * Does nothing if in the air
 	 */
 	public void jump() {
-		Gdx.app.log("Horse", "jumping");
+		
 		// TODO Somehow move the logic below so that PhysEngine can take care of how a jump is made
 		if(this.physics.isGrounded()) {
+			Gdx.app.log("Horse", "jumping");
+			AssetLoader.whinning.play();
 			this.physics.setGrounded(false);
 			this.physics.getVelocity().y = (float) - (140 - (this.physics.getWeight() * 0.05));
 		}

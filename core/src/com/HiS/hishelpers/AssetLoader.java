@@ -1,6 +1,8 @@
 package com.HiS.hishelpers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -18,6 +20,10 @@ public class AssetLoader {
 	public static TextureRegion backGround;
 	public static TextureRegion ground;
 	
+	public static Sound whinning;
+	
+	public static Music badHorsie;
+	
 	/**
 	 * Loads all assets into memory for universal access
 	 */
@@ -33,6 +39,10 @@ public class AssetLoader {
 		
 		ground = new TextureRegion(texture, 101, 250, 400, 62);
 		ground.flip(false, true);
+		
+		whinning = Gdx.audio.newSound(Gdx.files.internal("data/whinning.mp3"));
+		
+		badHorsie = Gdx.audio.newMusic(Gdx.files.internal("data/bad_horsie.mp3"));
 	}
 	
 	/**

@@ -22,6 +22,7 @@ public class HorseGame extends Game {
 		Gdx.app.log("Game", "created");
 		AssetLoader.load();
 		setScreen(new GameScreen());
+		AssetLoader.badHorsie.play();
 	}
 	
 	/**
