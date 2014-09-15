@@ -1,6 +1,5 @@
 package com.HiS.gameobject;
 
-import com.HiS.physics.Physics;
 import com.badlogic.gdx.graphics.Texture;
 
 /**
@@ -18,12 +17,6 @@ public interface GameObject {
 	 * movement independently from framerate.
 	 */
 	public void update(float delta);
-	
-	/**
-	 * This method returns a Physics object related to the gameObject
-	 * @return physics of the gameObject
-	 */
-	public Physics getPhysics();
 	
 	/**
 	 * This method returns a Texture object related to the gameObject

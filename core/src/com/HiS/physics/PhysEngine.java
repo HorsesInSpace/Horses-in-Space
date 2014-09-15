@@ -2,7 +2,6 @@ package com.HiS.physics;
 
 import java.util.List;
 
-import com.HiS.gameobject.GameObject;
 import com.HiS.screen.GameScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Intersector;
@@ -49,21 +48,16 @@ public class PhysEngine {
 		return physics;
 	}
 
-	public boolean collisionCheck(GameObject subject, List<GameObject> objects) {
-		for(int i = 0; i < objects.size(); i++) {
-			GameObject object = objects.get(i);
+	public boolean collisionCheck(PhysObject subject, List<? extends PhysObject> objects) {
+		for(PhysObject object : objects) {
 			if(!object.equals(subject)) {
 				if(Intersector.overlaps(subject.getPhysics().getRect(), object.getPhysics().getRect())) {
 					Gdx.app.log("Something", "collided");
 					return true;
 				}
-				//				if(physics.getPosition().x + (physics.getWidth()/2) > rect.getX() || 
-				//						physics.getPosition().x + (physics.getWidth()/2) < rect.getX() + rect.getWidth()) {
-				//					return true;
-				//				}
 			}
 		}
 		return false;
-
 	}
+	
 }

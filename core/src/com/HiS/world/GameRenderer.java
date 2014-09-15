@@ -5,6 +5,7 @@ import java.util.List;
 import com.HiS.gameobject.GameObject;
 import com.HiS.hishelpers.AssetLoader;
 import com.HiS.screen.GameScreen;
+import com.HiS.physics.PhysObject;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -39,7 +40,7 @@ public class GameRenderer {
 		this.shapeRenderer.setProjectionMatrix(this.cam.combined);
 	}
 	
-	public void render(float runTime, List<GameObject> gameObjects) {
+	public void render(float runTime, List<? extends PhysObject> gameObjects) {
 		Gdx.gl.glClearColor(255, 255, 0, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
@@ -48,7 +49,7 @@ public class GameRenderer {
 		batch.disableBlending();
 		batch.draw(AssetLoader.backGround, 0, 0, width, height);
 		batch.enableBlending();
-		for(GameObject gameObject : gameObjects) {
+		for(PhysObject gameObject : gameObjects) {
 			batch.draw(AssetLoader.horse,
 	                gameObject.getPhysics().getPosition().x, 
 	                gameObject.getPhysics().getPosition().y, 
