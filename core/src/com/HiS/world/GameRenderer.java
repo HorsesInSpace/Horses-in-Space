@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.HiS.gameobject.GameObject;
 import com.HiS.hishelpers.AssetLoader;
+import com.HiS.screen.GameScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -42,8 +43,12 @@ public class GameRenderer {
 		Gdx.gl.glClearColor(255, 255, 0, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-
 		batch.begin();
+
+		batch.disableBlending();
+		//batch.draw(AssetLoader.backGround, 0,0,width,height);
+		batch.draw(AssetLoader.backGround, 0, 0, width, height);
+		batch.enableBlending();
 		for(GameObject gameObject : gameObjects) {
 			batch.draw(AssetLoader.horse,
 	                gameObject.getPhysics().getPosition().x, 
