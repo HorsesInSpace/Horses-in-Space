@@ -1,15 +1,12 @@
 package com.HiS.gameobject;
 
-import com.HiS.physics.Physics;
+import com.HiS.physics.PhysObject;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
-public class Horse implements GameObject {
+public class Horse extends PhysGameObject implements GameObject, PhysObject {
 
 	private static Horse instance = null;
-	
-	private Physics physics;
-	private Texture texture;
 	
 	public static Horse getInstance() {
 		if(instance == null) {
@@ -21,8 +18,7 @@ public class Horse implements GameObject {
 	//TODO can still be made into Singleton by making constructor private. 
 	//public now b/c testing purposes
 	public Horse(Texture texture, int width, int height, float weight, float posX, float posY) {
-		this.physics = new Physics(width, height, weight, posX, posY);
-		this.texture = texture;
+		super(texture, width, height, weight, posX, posY);
 	}
 	
 	@Override
@@ -38,20 +34,6 @@ public class Horse implements GameObject {
 			this.physics.setGrounded(false);
 			this.physics.getVelocity().y = (float) - (140 - (this.physics.getWeight() * 0.05));
 		}
-	}
-
-	@Override
-	public Physics getPhysics() {
-		return this.physics;
-	}
-
-	@Override
-	public Texture getTexture() {
-		return this.texture;
-	}
-
-	public void setTexture(Texture texture) {
-		this.texture = texture;
 	}
 	
 	@Override
