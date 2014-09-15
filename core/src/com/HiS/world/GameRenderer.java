@@ -46,7 +46,6 @@ public class GameRenderer {
 		batch.begin();
 
 		batch.disableBlending();
-		//batch.draw(AssetLoader.backGround, 0,0,width,height);
 		batch.draw(AssetLoader.backGround, 0, 0, width, height);
 		batch.enableBlending();
 		for(GameObject gameObject : gameObjects) {
