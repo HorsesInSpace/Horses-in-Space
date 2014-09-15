@@ -45,15 +45,11 @@ public class GameRenderer {
 
 		batch.begin();
 		for(GameObject gameObject : gameObjects) {
-			
-			batch.disableBlending();
 			batch.draw(AssetLoader.horse,
 	                gameObject.getPhysics().getPosition().x, 
 	                gameObject.getPhysics().getPosition().y, 
 	                gameObject.getPhysics().getWidth(), 
 	                gameObject.getPhysics().getHeight());
-			batch.enableBlending();
-			
 		}
 		batch.end();
 	}
