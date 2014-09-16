@@ -20,7 +20,7 @@ public class PhysEngine {
 
 	/**
 	 * Constructor for physEngine
-	 * TODO: make class and method static, no need wor the object itself?
+	 * TODO: make class and method static, no need for the object itself?
 	 */
 	public PhysEngine() {
 

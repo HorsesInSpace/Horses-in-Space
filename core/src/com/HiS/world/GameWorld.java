@@ -28,6 +28,12 @@ public class GameWorld {
 
 	public void update(float delta) {
 		for(PhysGameObject gameObject : objects) {
+			if(gameObject instanceof Fence) {
+				gameObject.update(delta);
+			}
+		}
+		
+		for(PhysGameObject gameObject : objects) {
 			Physics physics = gameObject.getPhysics();
 			physics = this.physEngine.update(gameObject, delta);
 			if(gameObject instanceof Horse) {
