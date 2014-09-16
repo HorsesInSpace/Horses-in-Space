@@ -21,6 +21,7 @@ public class AssetLoader {
 	public static TextureRegion ground;
 	
 	public static Sound whinning;
+	public static Sound gallop;
 	
 	public static Music badHorsie;
 	
@@ -41,8 +42,11 @@ public class AssetLoader {
 		ground.flip(false, true);
 		
 		whinning = Gdx.audio.newSound(Gdx.files.internal("data/whinning.mp3"));
+		gallop = Gdx.audio.newSound(Gdx.files.internal("data/gallop.mp3"));
 		
 		badHorsie = Gdx.audio.newMusic(Gdx.files.internal("data/bad_horsie.mp3"));
+		
+		
 	}
 	
 	/**

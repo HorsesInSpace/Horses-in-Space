@@ -25,6 +25,7 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 	//public now b/c testing purposes
 	public Horse(Texture texture, int width, int height, float weight, float posX, float posY) {
 		super(texture, width, height, weight, posX, posY);
+		AssetLoader.gallop.loop();
 	}
 	
 	@Override
@@ -42,6 +43,7 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 		// TODO Somehow move the logic below so that PhysEngine can take care of how a jump is made
 		if(this.physics.isGrounded()) {
 			Gdx.app.log("Horse", "jumping");
+			AssetLoader.gallop.pause();
 			AssetLoader.whinning.play();
 			this.physics.setGrounded(false);
 			this.physics.getVelocity().y = (float) - (140 - (this.physics.getWeight() * 0.05));

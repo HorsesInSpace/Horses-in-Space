@@ -2,6 +2,7 @@ package com.HiS.physics;
 
 import java.util.List;
 
+import com.HiS.hishelpers.AssetLoader;
 import com.HiS.screen.GameScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Intersector;
@@ -53,6 +54,7 @@ public class PhysEngine {
 		if(physics.isGrounded()) {
 			physics.getVelocity().y = 0f;
 			physics.getPosition().y = GameScreen.gameHeight - (physics.getHeight() + 15);
+			AssetLoader.gallop.resume();
 		}
 		
 		// TODO Check if something collides, and return null if it should be destroyed.
