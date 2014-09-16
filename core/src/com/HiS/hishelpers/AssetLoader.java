@@ -19,6 +19,7 @@ public class AssetLoader {
 	public static TextureRegion horse;
 	public static TextureRegion backGround;
 	public static TextureRegion ground;
+	public static TextureRegion fence;
 	
 	public static Sound whinning;
 	public static Sound gallop;
@@ -40,6 +41,9 @@ public class AssetLoader {
 		
 		ground = new TextureRegion(texture, 102, 250, 399, 62);
 		ground.flip(false, true);
+		
+		fence = new TextureRegion(texture, 0, 0, 83,94);
+		fence.flip(false, true);
 		
 		whinning = Gdx.audio.newSound(Gdx.files.internal("data/whinning.mp3"));
 		gallop = Gdx.audio.newSound(Gdx.files.internal("data/gallop.mp3"));

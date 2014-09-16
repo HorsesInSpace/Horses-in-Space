@@ -3,6 +3,7 @@ package com.HiS.world;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.HiS.gameobject.Fence;
 import com.HiS.gameobject.Horse;
 import com.HiS.gameobject.PhysGameObject;
 import com.HiS.hishelpers.AssetLoader;
@@ -17,6 +18,7 @@ public class GameWorld {
 	private PhysEngine physEngine;
 
 	public GameWorld() {
+		this.objects.add(new Fence());
 //		this.objects.add(new Horse(null, 20, 15, 3, 20, (GameScreen.gameHeight - 15) - 80));
 		this.objects.add(new Horse(AssetLoader.horse, 20, 15, 300, 15, (float)(GameScreen.gameHeight - 15) - 15));
 //		this.objects.add(new Horse(null, 20, 15, 300, 45, (GameScreen.gameHeight - 15) - 15));
