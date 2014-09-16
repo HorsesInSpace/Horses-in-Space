@@ -4,8 +4,8 @@ import com.HiS.hishelpers.AssetLoader;
 
 public class Fence extends Obstacle {
 
-	public Fence() {
-		super(AssetLoader.fence, 3, 7, 1000, 200, 75);
+	public Fence(float x, float y) {
+		super(AssetLoader.fence, 3, 7, 1000, x, y);
 		// TODO Auto-generated constructor stub
 	}
 }

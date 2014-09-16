@@ -19,9 +19,9 @@ public class GameWorld {
 	private PhysEngine physEngine;
 
 	public GameWorld() {
-		this.objects.add(new Fence());
-		this.objects.add(new Fence());
-		this.objects.add(new Fence());
+		this.objects.add(new Fence(200, 75));
+		this.objects.add(new Fence(300, 75));
+		this.objects.add(new Fence(400, 75));
 		this.objects.add(new Horse(AssetLoader.horse, 20, 15, 200, 15, (float)(GameScreen.gameHeight - 15) - 15));
 		this.physEngine = new PhysEngine();
 	}
