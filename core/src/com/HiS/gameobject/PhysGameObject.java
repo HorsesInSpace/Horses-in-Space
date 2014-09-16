@@ -2,16 +2,16 @@ package com.HiS.gameobject;
 
 import com.HiS.physics.PhysObject;
 import com.HiS.physics.Physics;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public abstract class PhysGameObject implements GameObject, PhysObject {
 	
 	protected Physics physics;
-	protected Texture texture;
+	protected TextureRegion texture;
 
-	public PhysGameObject(Texture texture, int width, int height, float weight, float posX, float posY) {
+	public PhysGameObject(TextureRegion horse, int width, int height, float weight, float posX, float posY) {
 		this.physics = new Physics(width, height, weight, posX, posY);
-		this.texture = texture;
+		this.texture = horse;
 	}
 	
 	@Override
@@ -32,11 +32,11 @@ public abstract class PhysGameObject implements GameObject, PhysObject {
 	}
 
 	@Override
-	public Texture getTexture() {
+	public TextureRegion getTexture() {
 		return this.texture;
 	}
 
-	public void setTexture(Texture texture) {
+	public void setTexture(TextureRegion texture) {
 		this.texture = texture;
 	}
 

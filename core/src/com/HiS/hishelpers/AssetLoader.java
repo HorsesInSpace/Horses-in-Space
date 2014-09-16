@@ -10,8 +10,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 /**
  * Static class used to load data such as Textures, sounds and other
  * assets from files
- * @author Morten
- * @version 0.2
+ * @author Morten, Lars
+ * @version 0.3
  */
 public class AssetLoader {
 	private static Texture texture;
@@ -45,8 +45,6 @@ public class AssetLoader {
 		gallop = Gdx.audio.newSound(Gdx.files.internal("data/gallop.mp3"));
 		
 		badHorsie = Gdx.audio.newMusic(Gdx.files.internal("data/bad_horsie.mp3"));
-		
-		
 	}
 	
 	/**

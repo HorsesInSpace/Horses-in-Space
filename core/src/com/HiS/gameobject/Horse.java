@@ -3,7 +3,7 @@ package com.HiS.gameobject;
 import com.HiS.hishelpers.AssetLoader;
 import com.HiS.physics.PhysObject;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
  * Class that defines the horse, or the player, if you will
@@ -23,8 +23,8 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 	
 	//TODO can still be made into Singleton by making constructor private. 
 	//public now b/c testing purposes
-	public Horse(Texture texture, int width, int height, float weight, float posX, float posY) {
-		super(texture, width, height, weight, posX, posY);
+	public Horse(TextureRegion horse, int width, int height, float weight, float posX, float posY) {
+		super(horse, width, height, weight, posX, posY);
 		AssetLoader.gallop.loop();
 	}
 	

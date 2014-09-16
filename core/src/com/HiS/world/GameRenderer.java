@@ -2,6 +2,7 @@ package com.HiS.world;
 
 import java.util.List;
 
+import com.HiS.gameobject.PhysGameObject;
 import com.HiS.hishelpers.AssetLoader;
 import com.HiS.physics.PhysObject;
 import com.badlogic.gdx.Gdx;
@@ -52,8 +53,8 @@ public class GameRenderer {
 		batch.disableBlending();
 		batch.draw(backGround, 0, -10, width, height);
 		batch.enableBlending();
-		for(PhysObject gameObject : gameObjects) {
-			batch.draw(horse,
+		for(PhysGameObject gameObject : world.getObjects()) {
+			batch.draw(gameObject.getTexture(),
 	                gameObject.getPhysics().getPosition().x, 
 	                gameObject.getPhysics().getPosition().y, 
 	                gameObject.getPhysics().getWidth(), 
