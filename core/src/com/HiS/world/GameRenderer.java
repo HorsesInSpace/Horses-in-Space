@@ -1,10 +1,7 @@
 package com.HiS.world;
 
-import java.util.List;
-
 import com.HiS.gameobject.PhysGameObject;
 import com.HiS.hishelpers.AssetLoader;
-import com.HiS.physics.PhysObject;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -22,7 +19,7 @@ public class GameRenderer {
 	private GameWorld world;
 	private OrthographicCamera cam;
 	
-	private TextureRegion horse, backGround, ground;
+	private TextureRegion backGround, ground;
 	
 	private float width, height;
 	
@@ -44,7 +41,7 @@ public class GameRenderer {
 		initAssets();
 	}
 	
-	public void render(float delta, float runTime, List<? extends PhysObject> gameObjects) {
+	public void render(float delta, float runTime) {
 		Gdx.gl.glClearColor(255, 255, 0, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
@@ -72,7 +69,6 @@ public class GameRenderer {
 	}
 	
 	public void initAssets() {
-		this.horse = AssetLoader.horse;
 		this.backGround = AssetLoader.backGround;
 		this.ground = AssetLoader.ground;
 	}
