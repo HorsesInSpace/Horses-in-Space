@@ -32,13 +32,13 @@ public class AssetLoader {
 		texture = new Texture(Gdx.files.internal("data/textures.png"));
 		texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		
-		horse = new TextureRegion(texture, 0,0,100,94);
+		horse = new TextureRegion(texture, 0,0,99,94);
 		horse.flip(false, true);
 		
-		backGround = new TextureRegion(texture, 101, 0, 400, 240);
+		backGround = new TextureRegion(texture, 101, 0, 399, 240);
 		backGround.flip(false, true);
 		
-		ground = new TextureRegion(texture, 101, 250, 400, 62);
+		ground = new TextureRegion(texture, 102, 250, 399, 62);
 		ground.flip(false, true);
 		
 		whinning = Gdx.audio.newSound(Gdx.files.internal("data/whinning.mp3"));

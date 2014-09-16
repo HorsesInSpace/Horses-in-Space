@@ -11,8 +11,10 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		
 		config.title = "Horses in Space";
-		config.width = Toolkit.getDefaultToolkit().getScreenSize().width / 2;
-		config.height = Toolkit.getDefaultToolkit().getScreenSize().height / 2;
+		config.width = Toolkit.getDefaultToolkit().getScreenSize().width;
+		config.height = Toolkit.getDefaultToolkit().getScreenSize().height;
+		
+		config.fullscreen = true;
 		new LwjglApplication(new HorseGame(), config);
 	}
 }
