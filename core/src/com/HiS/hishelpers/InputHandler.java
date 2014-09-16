@@ -3,6 +3,7 @@ package com.HiS.hishelpers;
 import com.HiS.gameobject.GameObject;
 import com.HiS.gameobject.Horse;
 import com.HiS.world.GameWorld;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
 /**
@@ -12,9 +13,9 @@ import com.badlogic.gdx.InputProcessor;
  *
  */
 public class InputHandler implements InputProcessor{
-	
+
 	private GameWorld world;
-	
+
 	/**
 	 * Constructor for class InputHandler
 	 * @param world the world of the game
@@ -22,7 +23,7 @@ public class InputHandler implements InputProcessor{
 	public InputHandler(GameWorld world) {
 		this.world = world;
 	}
-	
+
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		for(GameObject gameObject : world.getObjects()) {
@@ -32,22 +33,30 @@ public class InputHandler implements InputProcessor{
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
 		return false;
-		}
-		
+	}
+
 	@Override
 	public boolean keyDown(int keycode) {
+		if(keycode == Input.Keys.SPACE || keycode == Input.Keys.W) {
+			for(GameObject gameObject : world.getObjects()) {
+				if (gameObject instanceof Horse) {
+					((Horse) gameObject).jump();
+				}
+			}
+			return true;
+		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean keyUp(int keycode) {
 		return false;
 	}
-	
+
 	@Override
 	public boolean keyTyped(char character) {
 		return false;
