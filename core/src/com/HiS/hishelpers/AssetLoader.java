@@ -25,6 +25,7 @@ public class AssetLoader {
 	public static Sound gallop;
 	
 	public static Music badHorsie;
+	public static Music journey;
 	
 	/**
 	 * Loads all assets into memory for universal access
