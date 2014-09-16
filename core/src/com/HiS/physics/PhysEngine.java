@@ -35,7 +35,7 @@ public class PhysEngine {
 	 * @return the physics after the update
 	 */
 	public Physics update(Physics physics, float delta) {
-
+		
 		if(!physics.isGrounded()) {
 			physics.getVelocity().add(physics.getAcceleration().x * delta, 
 					physics.getAcceleration().y * delta);
@@ -44,10 +44,12 @@ public class PhysEngine {
 				physics.getVelocity().y = 200;
 			}
 
-			physics.getPosition().add(physics.getVelocity().x * delta, 
-					physics.getVelocity().y * delta);
+			
 		}
 
+		physics.getPosition().add(physics.getVelocity().x * delta, 
+				physics.getVelocity().y * delta);
+		
 		if (physics.getPosition().y + physics.getHeight() + 15 > GameScreen.gameHeight) {
 			physics.setGrounded(true);
 		}
@@ -60,6 +62,7 @@ public class PhysEngine {
 		// TODO Check if something collides, and return null if it should be destroyed.
 		physics.getRect().setX(physics.getPosition().x+physics.getHeight());
 		physics.getRect().setY(physics.getPosition().y);
+		
 		return physics;
 	}
 

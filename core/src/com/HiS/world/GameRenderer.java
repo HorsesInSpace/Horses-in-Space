@@ -52,10 +52,10 @@ public class GameRenderer {
 		batch.enableBlending();
 		for(PhysGameObject gameObject : world.getObjects()) {
 			batch.draw(gameObject.getTexture(),
-	                gameObject.getPhysics().getPosition().x, 
-	                gameObject.getPhysics().getPosition().y, 
-	                gameObject.getPhysics().getWidth(), 
-	                gameObject.getPhysics().getHeight());
+	                gameObject.getPhysics().getRect().x, 
+	                gameObject.getPhysics().getRect().y, 
+	                gameObject.getPhysics().getRect().width, 
+	                gameObject.getPhysics().getRect().height);
 		}
 		
 		renderTime += delta;

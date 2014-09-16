@@ -10,6 +10,7 @@ import com.HiS.hishelpers.AssetLoader;
 import com.HiS.physics.PhysEngine;
 import com.HiS.physics.Physics;
 import com.HiS.screen.GameScreen;
+import com.badlogic.gdx.math.Vector2;
 
 public class GameWorld {
 
@@ -20,7 +21,7 @@ public class GameWorld {
 	public GameWorld() {
 		this.objects.add(new Fence());
 //		this.objects.add(new Horse(null, 20, 15, 3, 20, (GameScreen.gameHeight - 15) - 80));
-		this.objects.add(new Horse(AssetLoader.horse, 20, 15, 300, 15, (float)(GameScreen.gameHeight - 15) - 15));
+		this.objects.add(new Horse(AssetLoader.horse, 20, 15, 200, 15, (float)(GameScreen.gameHeight - 15) - 15));
 //		this.objects.add(new Horse(null, 20, 15, 300, 45, (GameScreen.gameHeight - 15) - 15));
 //		this.objects.add(new Horse(null, 20, 15, 400, 75, (GameScreen.gameHeight - 15) - 15));
 		this.physEngine = new PhysEngine();
@@ -36,6 +37,9 @@ public class GameWorld {
 			if(physics == null) {
 				this.objects.remove(gameObject);
 				gameObject = null;
+			}
+			if(gameObject instanceof Fence) {
+				gameObject.getPhysics().setVelocity(new Vector2(-35,0));
 			}
 		}
 		
