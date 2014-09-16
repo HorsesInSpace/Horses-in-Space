@@ -41,7 +41,7 @@ public abstract class PhysGameObject implements GameObject, PhysObject {
 	}
 	
 	/**
-	 * Sets the 
+	 * Sets the Physics.grounded to true
 	 */
 	@Override
 	public void ground() {
