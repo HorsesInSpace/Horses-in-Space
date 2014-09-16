@@ -30,7 +30,7 @@ public class GameWorld {
 	public void update(float delta) {
 		for(PhysGameObject gameObject : objects) {
 			Physics physics = gameObject.getPhysics();
-			physics = this.physEngine.update(physics, delta);
+			physics = this.physEngine.update(gameObject, delta);
 			if(gameObject instanceof Horse) {
 				this.physEngine.collisionCheck(gameObject, objects);
 			}

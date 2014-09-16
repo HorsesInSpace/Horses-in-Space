@@ -39,5 +39,13 @@ public abstract class PhysGameObject implements GameObject, PhysObject {
 	public void setTexture(TextureRegion texture) {
 		this.texture = texture;
 	}
+	
+	/**
+	 * Sets the 
+	 */
+	@Override
+	public void ground() {
+		this.physics.setGrounded(true);
+	}
 
 }

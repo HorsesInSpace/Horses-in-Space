@@ -34,7 +34,8 @@ public class PhysEngine {
 	 * used to measure movement per frame
 	 * @return the physics after the update
 	 */
-	public Physics update(Physics physics, float delta) {
+	public Physics update(PhysObject physObject, float delta) {
+		Physics physics = physObject.getPhysics();
 		
 		if(!physics.isGrounded()) {
 			physics.getVelocity().add(physics.getAcceleration().x * delta, 
@@ -50,17 +51,17 @@ public class PhysEngine {
 		physics.getPosition().add(physics.getVelocity().x * delta, 
 				physics.getVelocity().y * delta);
 		
-		if (physics.getPosition().y + physics.getHeight() + 15 > GameScreen.gameHeight) {
-			physics.setGrounded(true);
+		if (physics.getPosition().y + physics.getRect().height + 15 > GameScreen.gameHeight) {
+			physObject.ground();
 		}
 		if(physics.isGrounded()) {
 			physics.getVelocity().y = 0f;
-			physics.getPosition().y = GameScreen.gameHeight - (physics.getHeight() + 15);
+			physics.getPosition().y = GameScreen.gameHeight - (physics.getRect().height + 15);
 			AssetLoader.gallop.resume();
 		}
 		
 		// TODO Check if something collides, and return null if it should be destroyed.
-		physics.getRect().setX(physics.getPosition().x+physics.getHeight());
+		physics.getRect().setX(physics.getPosition().x + physics.getRect().height);
 		physics.getRect().setY(physics.getPosition().y);
 		
 		return physics;

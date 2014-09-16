@@ -13,8 +13,6 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class Physics {
 	
-	private int width;
-	private int height;
 	private float weight;
 	
 	private boolean isGrounded;
@@ -34,49 +32,15 @@ public class Physics {
 	 * @param posY position on screen, Y axis
 	 */
 	public Physics(int width, int height, float weight, float posX, float posY) {
-		this.width = width;
-		this.height = height;
 		this.weight = weight;
 		
-        this.rect = new Rectangle(posX+height,posY,width,height); 
+        this.rect = new Rectangle(posX,posY + height,width,height); 
         //Rectangle is used as an easier way to detect collisions in physEngine
 		
 		this.position = new Vector2(posX, posY);
         this.velocity = new Vector2(0, 0);
         this.acceleration = new Vector2(0, this.weight);
         
-	}
-
-	/**
-	 * getter for the width field
-	 * @return the current width of the object
-	 */
-	public int getWidth() {
-		return width;
-	}
-
-	/**
-	 * setter for the width field
-	 * @param width the new width of the object
-	 */
-	public void setWidth(int width) {
-		this.width = width;
-	}
-
-	/**
-	 * getter for the height of the object
-	 * @return the current height of the object
-	 */
-	public int getHeight() {
-		return height;
-	}
-
-	/**
-	 * setter for the height parameter of the object
-	 * @param height the new height for the object
-	 */
-	public void setHeight(int height) {
-		this.height = height;
 	}
 	
 	/**

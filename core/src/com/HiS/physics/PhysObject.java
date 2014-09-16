@@ -8,4 +8,9 @@ public interface PhysObject {
 	 */
 	public Physics getPhysics();
 	
+	/**
+	 * This method is supposed to 
+	 */
+	public void ground();
+	
 }
