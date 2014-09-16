@@ -50,6 +50,7 @@ public class AssetLoader {
 		gallop = Gdx.audio.newSound(Gdx.files.internal("data/gallop.mp3"));
 		
 		badHorsie = Gdx.audio.newMusic(Gdx.files.internal("data/bad_horsie.mp3"));
+		journey = Gdx.audio.newMusic(Gdx.files.internal("data/Journey.mp3"));
 	}
 	
 	/**
