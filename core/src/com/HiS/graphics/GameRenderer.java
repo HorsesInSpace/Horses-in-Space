@@ -67,12 +67,14 @@ public class GameRenderer {
 
 		// Draw game objects
 		for(PhysGameObject gameObject : world.getObjects()) {
-			this.batch.draw(
-					gameObject.getTexture(),
-					gameObject.getPhysics().getRect().x, 
-					gameObject.getPhysics().getRect().y, 
-					gameObject.getPhysics().getRect().width, 
-					gameObject.getPhysics().getRect().height);
+			if(gameObject.getPhysics().getRect().x + width > 0 && gameObject.getPhysics().getRect().x < width) {
+				this.batch.draw(
+						gameObject.getTexture(),
+						gameObject.getPhysics().getRect().x, 
+						gameObject.getPhysics().getRect().y, 
+						gameObject.getPhysics().getRect().width, 
+						gameObject.getPhysics().getRect().height);	
+			}
 		}
 
 		// TODO Add comment for this. I don't get it completely
