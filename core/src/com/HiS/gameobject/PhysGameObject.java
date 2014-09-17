@@ -74,7 +74,7 @@ public abstract class PhysGameObject implements GameObject, PhysObject, GfxObjec
 	}
 	
 	@Override
-	public void setPosition(float x, float y) {
+	public void setPosition(int x, int y) {
 		this.physics.setPosition(new Vector2(x, y));
 	}
 

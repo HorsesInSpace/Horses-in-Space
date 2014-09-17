@@ -11,5 +11,5 @@ public interface GfxObject {
 	
 	public Vector2 getPosition();
 	
-	public void setPosition(float x, float y);
+	public void setPosition(int x, int y);
 }
