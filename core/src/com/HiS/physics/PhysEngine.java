@@ -39,8 +39,8 @@ public class PhysEngine {
 			physics.getVelocity().add(physics.getAcceleration().x * delta, 
 					physics.getAcceleration().y * delta);
 
-			if (physics.getVelocity().y > 50) {
-				physics.getVelocity().y = 50;
+			if (physics.getVelocity().y > 100) {
+				physics.getVelocity().y = 100;
 			}
 
 			

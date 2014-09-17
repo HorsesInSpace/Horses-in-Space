@@ -7,6 +7,10 @@ public class TexObject implements GfxObject{
 
 	private TextureRegion texture;
 	
+	public TexObject(TextureRegion texture) {
+		this.texture = texture;
+	}
+	
 	@Override
 	public TextureRegion getTexture() {
 		return this.texture;

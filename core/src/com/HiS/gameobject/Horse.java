@@ -45,9 +45,9 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 		if(this.physics.isGrounded()) {
 			Gdx.app.log("Horse", "jumping");
 			AssetLoader.gallop.pause();
-			AssetLoader.whinning.play();
+			AssetLoader.whinning.play(1);
 			this.physics.setGrounded(false);
-			this.physics.getVelocity().y = (float) - (140 - (this.physics.getWeight() * 0.05));
+			this.physics.getVelocity().y = (float) - (120 - (this.physics.getWeight() * 0.05));
 			//this.physics.getAcceleration().y = (float) - (140 - (this.physics.getWeight() * 0.05));
 		}
 	}
@@ -65,7 +65,7 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 	public void handleCollision(PhysObject object) {
 		if(!object.hasCrashed()) {
 			object.setCrashed(true);
-			AssetLoader.punch.play();
+			AssetLoader.punch.play(1);
 			Gdx.app.log("Horse", "collided");
 		}
 		

@@ -17,8 +17,8 @@ public class AssetLoader {
 	private static Texture texture;
 	
 	public static TextureRegion horse;
-	public static TextureRegion backGround;
-	public static TextureRegion ground;
+	public static TextureRegion background;
+	public static TextureRegion foreground;
 	public static TextureRegion fence;
 	public static TextureRegion middleground1;
 	
@@ -40,14 +40,14 @@ public class AssetLoader {
 		horse = new TextureRegion(texture, 0,0,99,94);
 		horse.flip(false, true);
 		
-		backGround = new TextureRegion(texture, 101, 0, 399, 240);
-		backGround.flip(false, true);
+		background = new TextureRegion(texture, 101, 0, 399, 240);
+		background.flip(false, true);
 		
 		middleground1 = new TextureRegion(texture, 10, 326, 1280,99);
 		middleground1.flip(false, true);
 		
-		ground = new TextureRegion(texture, 102, 250, 399, 62);
-		ground.flip(false, true);
+		foreground = new TextureRegion(texture, 102, 250, 399, 62);
+		foreground.flip(false, true);
 		
 		fence = new TextureRegion(texture, 0, 0, 83,94);
 		fence.flip(false, true);
