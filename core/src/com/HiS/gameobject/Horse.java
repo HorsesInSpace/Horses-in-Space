@@ -31,6 +31,8 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 	@Override
 	public void update(float delta) {
 		// TODO Update the object
+		if(this.getPhysics().isGrounded())
+		AssetLoader.gallop.resume();
 	}
 	
 	/**
@@ -60,10 +62,10 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 	
 	@Override
 	public void handleCollision(PhysObject object) {
-		Gdx.app.log("Horse", "collided");
 		if(!object.hasCrashed()) {
 			object.setCrashed(true);
 			AssetLoader.punch.play();
+			Gdx.app.log("Horse", "collided");
 		}
 		
 	}

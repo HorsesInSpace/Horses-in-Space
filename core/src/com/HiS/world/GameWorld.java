@@ -22,7 +22,7 @@ public class GameWorld {
 		this.objects.add(new Fence(200, 75));
 		this.objects.add(new Fence(300, 75));
 		this.objects.add(new Fence(400, 75));
-		this.objects.add(new Horse(AssetLoader.horse, 20, 15, 200, 15, (float)(GameScreen.gameHeight - 15) - 15));
+		this.objects.add(new Horse(AssetLoader.horse, 20, 15, 300, 15, (float)(GameScreen.gameHeight - 15) - 15));
 		this.physEngine = new PhysEngine();
 	}
 
@@ -42,7 +42,7 @@ public class GameWorld {
 //				gameObject = null;
 			}
 			if(gameObject instanceof Fence) {
-				gameObject.getPhysics().setVelocity(new Vector2(-35,0));
+				gameObject.getPhysics().setVelocity(new Vector2(-65,0));
 			}
 		}
 		
