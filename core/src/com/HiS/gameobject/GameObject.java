@@ -1,6 +1,5 @@
 package com.HiS.gameobject;
 
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
  * Interface for gameObjects. All objects with physics are gameObjects
@@ -17,12 +16,6 @@ public interface GameObject {
 	 * movement independently from framerate.
 	 */
 	public void update(float delta);
-	
-	/**
-	 * This method returns a Texture object related to the gameObject
-	 * @return texture
-	 */
-	public TextureRegion getTexture();
 	
 	/**
 	 * Destroys the object.
