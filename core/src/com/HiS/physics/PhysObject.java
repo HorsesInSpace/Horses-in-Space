@@ -13,4 +13,13 @@ public interface PhysObject {
 	 */
 	public void ground();
 	
+	
+	public void setPhysics(Physics physics);
+
+	
+	public void handleCollision(PhysObject object);
+	
+	public boolean hasCrashed();
+	
+	public void setCrashed(boolean crash);
 }

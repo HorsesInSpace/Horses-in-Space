@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.HiS.hishelpers.AssetLoader;
 import com.HiS.screen.GameScreen;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Intersector;
 
 /**
@@ -77,23 +76,11 @@ public class PhysEngine {
 		for(PhysObject object : objects) {
 			if(!object.equals(subject)) {
 				if(Intersector.overlaps(subject.getPhysics().getRect(), object.getPhysics().getRect())) {
-					return handleCollision(subject, object);
+					subject.handleCollision(object);
 				}
 			}
 		}
 		return false;
-	}
-	
-	/**
-	 * A method that handles a collision between two objects, to decide what
-	 * happens with them.
-	 * @param subject the subject of the crash
-	 * @param object what object it crashed with
-	 * @return boolean true if a crash should damage the subject, false if not
-	 */
-	public boolean handleCollision(PhysObject subject, PhysObject object) {
-		Gdx.app.log("something", "collided");
-		return true;
 	}
 	
 }

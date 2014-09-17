@@ -27,21 +27,19 @@ public class GameWorld {
 	}
 
 	public void update(float delta) {
-		for(PhysGameObject gameObject : objects) {
-			if(gameObject instanceof Fence) {
-				gameObject.update(delta);
-			}
-		}
 		
 		for(PhysGameObject gameObject : objects) {
+			
+			gameObject.update(delta);
+			
 			Physics physics = gameObject.getPhysics();
 			physics = this.physEngine.update(gameObject, delta);
 			if(gameObject instanceof Horse) {
 				this.physEngine.collisionCheck(gameObject, objects);
 			}
 			if(physics == null) {
-				this.objects.remove(gameObject);
-				gameObject = null;
+//				this.objects.remove(gameObject);
+//				gameObject = null;
 			}
 			if(gameObject instanceof Fence) {
 				gameObject.getPhysics().setVelocity(new Vector2(-35,0));

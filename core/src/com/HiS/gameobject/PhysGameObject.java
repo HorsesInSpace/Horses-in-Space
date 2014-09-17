@@ -47,5 +47,23 @@ public abstract class PhysGameObject implements GameObject, PhysObject {
 	public void ground() {
 		this.physics.setGrounded(true);
 	}
+	
+	@Override
+	public void setPhysics(Physics physics) {
+		this.physics = physics;
+	}
+	
+	@Override
+	public void handleCollision(PhysObject object) {
+	}
+	
+	@Override
+	public void setCrashed(boolean crash) {
+	}
+	
+	@Override
+	public boolean hasCrashed() {
+		return false;
+	}
 
 }

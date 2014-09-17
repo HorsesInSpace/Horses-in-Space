@@ -23,6 +23,7 @@ public class AssetLoader {
 	
 	public static Sound whinning;
 	public static Sound gallop;
+	public static Sound punch;
 	
 	public static Music badHorsie;
 	public static Music journey;
@@ -51,6 +52,8 @@ public class AssetLoader {
 		
 		badHorsie = Gdx.audio.newMusic(Gdx.files.internal("data/bad_horsie.mp3"));
 		journey = Gdx.audio.newMusic(Gdx.files.internal("data/Journey.mp3"));
+		
+		punch = Gdx.audio.newSound(Gdx.files.internal("data/punch.mp3"));
 	}
 	
 	/**
