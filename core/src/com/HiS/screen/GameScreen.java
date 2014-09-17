@@ -1,7 +1,7 @@
 package com.HiS.screen;
 
+import com.HiS.graphics.GameRenderer;
 import com.HiS.hishelpers.InputHandler;
-import com.HiS.world.GameRenderer;
 import com.HiS.world.GameWorld;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;

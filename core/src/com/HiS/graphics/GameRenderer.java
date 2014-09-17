@@ -1,7 +1,8 @@
-package com.HiS.world;
+package com.HiS.graphics;
 
 import com.HiS.gameobject.PhysGameObject;
 import com.HiS.hishelpers.AssetLoader;
+import com.HiS.world.GameWorld;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -19,7 +20,7 @@ public class GameRenderer {
 	private GameWorld world;
 	private OrthographicCamera cam;
 	
-	private TextureRegion backGround, ground;
+	private TextureRegion backGround, ground, middleground1;
 	
 	private float width, height;
 	
@@ -50,6 +51,7 @@ public class GameRenderer {
 		batch.disableBlending();
 		batch.draw(backGround, 0, -10, width, height);
 		batch.enableBlending();
+		batch.draw(middleground1, 0, 30, width, height/4);
 		for(PhysGameObject gameObject : world.getObjects()) {
 			batch.draw(gameObject.getTexture(),
 	                gameObject.getPhysics().getRect().x, 
@@ -71,5 +73,6 @@ public class GameRenderer {
 	public void initAssets() {
 		this.backGround = AssetLoader.backGround;
 		this.ground = AssetLoader.ground;
+		this.middleground1 = AssetLoader.middleground1;
 	}
 }

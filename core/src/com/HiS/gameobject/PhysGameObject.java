@@ -1,10 +1,12 @@
 package com.HiS.gameobject;
 
+import com.HiS.graphics.GfxObject;
 import com.HiS.physics.PhysObject;
 import com.HiS.physics.Physics;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 
-public abstract class PhysGameObject implements GameObject, PhysObject {
+public abstract class PhysGameObject implements GameObject, PhysObject, GfxObject {
 	
 	protected Physics physics;
 	protected TextureRegion texture;
@@ -64,6 +66,16 @@ public abstract class PhysGameObject implements GameObject, PhysObject {
 	@Override
 	public boolean hasCrashed() {
 		return false;
+	}
+	
+	@Override
+	public Vector2 getPosition() {
+		return this.physics.getPosition();
+	}
+	
+	@Override
+	public void setPosition(float x, float y) {
+		this.physics.setPosition(new Vector2(x, y));
 	}
 
 }

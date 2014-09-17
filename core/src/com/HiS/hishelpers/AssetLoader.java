@@ -20,6 +20,7 @@ public class AssetLoader {
 	public static TextureRegion backGround;
 	public static TextureRegion ground;
 	public static TextureRegion fence;
+	public static TextureRegion middleground1;
 	
 	public static Sound whinning;
 	public static Sound gallop;
@@ -41,6 +42,9 @@ public class AssetLoader {
 		
 		backGround = new TextureRegion(texture, 101, 0, 399, 240);
 		backGround.flip(false, true);
+		
+		middleground1 = new TextureRegion(texture, 10, 326, 1280,99);
+		middleground1.flip(false, true);
 		
 		ground = new TextureRegion(texture, 102, 250, 399, 62);
 		ground.flip(false, true);

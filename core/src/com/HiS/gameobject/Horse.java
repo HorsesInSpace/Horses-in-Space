@@ -48,6 +48,7 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 			AssetLoader.whinning.play();
 			this.physics.setGrounded(false);
 			this.physics.getVelocity().y = (float) - (140 - (this.physics.getWeight() * 0.05));
+			//this.physics.getAcceleration().y = (float) - (140 - (this.physics.getWeight() * 0.05));
 		}
 	}
 	
