@@ -43,7 +43,7 @@ public class AssetLoader {
 		background = new TextureRegion(texture, 101, 0, 399, 240);
 		background.flip(false, true);
 		
-		middleground1 = new TextureRegion(texture, 10, 326, 1280,99);
+		middleground1 = new TextureRegion(texture, 11, 326, 1277,99);
 		middleground1.flip(false, true);
 		
 		foreground = new TextureRegion(texture, 102, 250, 399, 62);
