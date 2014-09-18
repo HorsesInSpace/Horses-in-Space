@@ -22,7 +22,9 @@ public class GameWorld {
 	private List<PhysGameObject> objects = new ArrayList<>();
 	private GfxObject background;
 	private GfxObject middleground1;
+	private GfxObject middleground2;
 	private GfxObject foreground;
+	private GfxObject foreground2;
 
 	private PhysEngine physEngine;
 	
@@ -38,7 +40,9 @@ public class GameWorld {
 		
 		this.background = new TexObject(AssetLoader.background);
 		this.middleground1 = new TexObject(AssetLoader.middleground1);
+		this.middleground2 = new TexObject(AssetLoader.middleground1);
 		this.foreground = new TexObject(AssetLoader.foreground);
+		this.foreground2 = new TexObject(AssetLoader.foreground);
 		
 		this.physEngine = new PhysEngine();
 		
