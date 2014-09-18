@@ -49,21 +49,12 @@ public class GameRenderer {
 
 		// Draw background
 		this.batch.disableBlending(); // Background is solid
-		this.batch.draw(this.world.getBackground().getTexture(), 0, -10, this.width, this.height);
-
-		// TODO Add comment for this. I don't get it completely
-		//renderTime plus delta equals total renderTime, when rendertime is such that it has moved the
-		//middleground all the way out of the screen, the texture is set to 0, so the middleground
-		//is reset. this WILL change for the better later
-		this.mgRenderTime += delta;
-		if(this.mgRenderTime*15 >= this.width) {
-			this.mgRenderTime = 0;
-		}
+		this.batch.draw(this.world.getBackground().getTexture(), this.world.getBackground().getRect().x, this.world.getBackground().getRect().y, this.world.getBackground().getRect().width, this.world.getBackground().getRect().height);
 
 		// Draw middleground 1
 		this.batch.enableBlending(); // Middleground has transparent areas
-		this.batch.draw(this.world.getMiddleground1().getTexture(), (float) (0-(this.mgRenderTime*15)), this.height-15-(this.height/4), this.width, this.height/4);
-		this.batch.draw(this.world.getMiddleground1().getTexture(), (float) (this.width-(this.mgRenderTime*15)), this.height-15-(this.height/4), this.width, this.height/4);
+		this.batch.draw(this.world.getMiddleground1().getTexture(), this.world.getMiddleground1().getRect().x, this.world.getMiddleground1().getRect().y, this.world.getMiddleground1().getRect().width, this.world.getMiddleground1().getRect().height);
+		this.batch.draw(this.world.getMiddleground2().getTexture(), this.world.getMiddleground2().getRect().x, this.world.getMiddleground2().getRect().y, this.world.getMiddleground2().getRect().width, this.world.getMiddleground2().getRect().height);
 
 		// Draw game objects
 		for(PhysGameObject gameObject : world.getObjects()) {
@@ -76,17 +67,11 @@ public class GameRenderer {
 						gameObject.getPhysics().getRect().height);	
 			}
 		}
-
-		// TODO Add comment for this. I don't get it completely
-		fgRenderTime += delta;
-		if(fgRenderTime*65 >= this.width) {
-			fgRenderTime = 0;
-		}
 		
 		// Foreground
 		this.batch.disableBlending(); // Foreground is solid
-		this.batch.draw(this.world.getForeground().getTexture(), 0-(fgRenderTime*65), this.height-15, this.width+2, 15);
-		this.batch.draw(this.world.getForeground().getTexture(), this.width-(fgRenderTime*65), this.height-15, this.width+2, 15);
+		this.batch.draw(this.world.getForeground1().getTexture(), this.world.getForeground1().getRect().x, this.world.getForeground1().getRect().y, this.world.getForeground1().getRect().width, this.world.getForeground1().getRect().height);
+		this.batch.draw(this.world.getForeground2().getTexture(), this.world.getForeground2().getRect().x, this.world.getForeground2().getRect().y, this.world.getForeground2().getRect().width, this.world.getForeground2().getRect().height);
 
 		// BATCH END
 		this.batch.end();

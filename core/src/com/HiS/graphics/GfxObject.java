@@ -1,6 +1,7 @@
 package com.HiS.graphics;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public interface GfxObject {
@@ -16,4 +17,6 @@ public interface GfxObject {
 	public Vector2 getPosition();
 	
 	public void setPosition(int x, int y);
+	
+	public Rectangle getRect();
 }

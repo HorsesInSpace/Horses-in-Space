@@ -4,6 +4,7 @@ import com.HiS.graphics.GfxObject;
 import com.HiS.physics.PhysObject;
 import com.HiS.physics.Physics;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class PhysGameObject implements GameObject, PhysObject, GfxObject {
@@ -76,6 +77,11 @@ public abstract class PhysGameObject implements GameObject, PhysObject, GfxObjec
 	@Override
 	public void setPosition(int x, int y) {
 		this.physics.setPosition(new Vector2(x, y));
+	}
+	
+	@Override
+	public Rectangle getRect() {
+		return this.getPhysics().getRect();
 	}
 
 }

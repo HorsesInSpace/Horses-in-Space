@@ -23,10 +23,11 @@ public class GameWorld {
 	private GfxObject background;
 	private GfxObject middleground1;
 	private GfxObject middleground2;
-	private GfxObject foreground;
+	private GfxObject foreground1;
 	private GfxObject foreground2;
 
 	private PhysEngine physEngine;
+	private float scrollSpeed = -(GameScreen.gameWidth/2);
 	
 	private Random rand;
 	
@@ -38,11 +39,14 @@ public class GameWorld {
 		this.objects.add(new Fence(400, 75));
 		this.objects.add(new Horse(AssetLoader.horse, 20, 15, 300, 15, (float)(GameScreen.gameHeight - 15) - 15));
 		
-		this.background = new TexObject(AssetLoader.background);
-		this.middleground1 = new TexObject(AssetLoader.middleground1);
-		this.middleground2 = new TexObject(AssetLoader.middleground1);
-		this.foreground = new TexObject(AssetLoader.foreground);
-		this.foreground2 = new TexObject(AssetLoader.foreground);
+		this.background = new TexObject(AssetLoader.background, 0, -90, GameScreen.gameHeight, GameScreen.gameWidth);
+
+		this.middleground1 = new TexObject(AssetLoader.middleground1, 0, GameScreen.gameHeight/4+(GameScreen.gameHeight/16), GameScreen.gameHeight/4, GameScreen.gameWidth);
+		this.middleground2 = new TexObject(AssetLoader.middleground1, this.getMiddleground1().getRect().width, GameScreen.gameHeight/4+(GameScreen.gameHeight/16), GameScreen.gameHeight/4, GameScreen.gameWidth);
+		
+		this.foreground1 = new TexObject(AssetLoader.foreground, 0,(GameScreen.gameHeight/2)+(GameScreen.gameHeight/20), GameScreen.gameHeight/4, GameScreen.gameWidth);
+		this.foreground2 = new TexObject(AssetLoader.foreground, this.foreground1.getRect().width, (GameScreen.gameHeight/2)+(GameScreen.gameHeight/20), GameScreen.gameHeight/4, GameScreen.gameWidth);
+
 		
 		this.physEngine = new PhysEngine();
 		
@@ -50,6 +54,22 @@ public class GameWorld {
 	}
 
 	public void update(float delta) {
+		this.foreground1.getRect().x += scrollSpeed*delta;
+		this.foreground2.getRect().x += scrollSpeed*delta;
+		if((this.foreground1.getRect().x + this.foreground1.getRect().width) < 0) {
+			this.foreground1.getRect().x = this.foreground2.getRect().x + this.foreground2.getRect().width;
+		}
+		if((this.foreground2.getRect().x + this.foreground2.getRect().width) < 0) {
+			this.foreground2.getRect().x = this.foreground1.getRect().x + this.foreground1.getRect().width;
+		}
+		this.middleground1.getRect().x -= (GameScreen.gameWidth/8)*delta;
+		this.middleground2.getRect().x -= (GameScreen.gameWidth/8)*delta;
+		if((this.middleground1.getRect().x + this.middleground1.getRect().width) < 0) {
+			this.middleground1.getRect().x = this.getMiddleground2().getRect().x+this.getMiddleground2().getRect().width;
+		}
+		if((this.middleground2.getRect().x + this.middleground2.getRect().width) < 0) {
+			this.middleground2.getRect().x = this.getMiddleground1().getRect().x+this.getMiddleground1().getRect().width;
+		}
 		
 		for(PhysGameObject gameObject : objects) {
 			
@@ -65,7 +85,7 @@ public class GameWorld {
 //				gameObject = null;
 			}
 			if(gameObject instanceof Fence) {
-				gameObject.getPhysics().setVelocity(new Vector2(-65,0));
+				gameObject.getPhysics().setVelocity(new Vector2(scrollSpeed,0));
 				Rectangle rect = gameObject.getPhysics().getRect();
 				if((rect.x + rect.width) < 0) {
 					float nextPos = GameScreen.gameWidth;
@@ -99,8 +119,16 @@ public class GameWorld {
 	public GfxObject getMiddleground1() {
 		return middleground1;
 	}
+	
+	public GfxObject getMiddleground2() {
+		return middleground2;
+	}
 
-	public GfxObject getForeground() {
-		return foreground;
+	public GfxObject getForeground1() {
+		return foreground1;
+	}
+	
+	public GfxObject getForeground2() {
+		return foreground2;
 	}
 }
