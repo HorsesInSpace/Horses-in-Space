@@ -25,7 +25,6 @@ public class AssetLoader {
 	public static Sound whinning;
 	public static Sound gallopSound;
 	public static Sound punch;
-	public static Sound horsePain;
 	
 	public static Music badHorsie;
 	public static Music journey;
@@ -68,5 +67,12 @@ public class AssetLoader {
 	 */
 	public static void dispose() {
 		texture.dispose();
+
+		badHorsie.dispose();
+		gallopMusic.dispose();
+		gallopSound.dispose();
+		journey.dispose();
+		punch.dispose();
+		whinning.dispose();
 	}
 }

@@ -30,8 +30,9 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 	@Override
 	public void update(float delta) {
 		// TODO Update the object
-		if(this.getPhysics().isGrounded())
-		AssetLoader.gallop.play();
+		if(this.getPhysics().isGrounded()) {
+			AssetLoader.gallopSound.resume();	
+		}
 	}
 	
 	/**
@@ -43,7 +44,7 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 		// TODO Somehow move the logic below so that PhysEngine can take care of how a jump is made
 		if(this.physics.isGrounded()) {
 			Gdx.app.log("Horse", "jumping");
-			AssetLoader.gallop.pause();
+			AssetLoader.gallopSound.pause();
 			AssetLoader.whinning.play(0.5f);
 			this.physics.setGrounded(false);
 			this.physics.getVelocity().y = (float) - (120 - (this.physics.getWeight() * 0.05));

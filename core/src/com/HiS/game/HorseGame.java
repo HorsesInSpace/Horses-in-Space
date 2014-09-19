@@ -30,7 +30,6 @@ public class HorseGame extends Game {
 	 */
 	@Override
 	public void create() {
-		// TODO Auto-generated method stub
 		Gdx.app.log("Game", "created");
 		AssetLoader.load();
 		setScreen(new GameScreen());
