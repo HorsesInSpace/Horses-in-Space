@@ -23,7 +23,7 @@ public class AssetLoader {
 	public static TextureRegion middleground1;
 	
 	public static Sound whinning;
-	public static Sound gallop;
+	public static Music gallop;
 	public static Sound punch;
 	public static Sound horsePain;
 	
@@ -52,13 +52,13 @@ public class AssetLoader {
 		fence = new TextureRegion(texture, 0, 0, 83,94);
 		fence.flip(false, true);
 		
-		whinning = Gdx.audio.newSound(Gdx.files.internal("data/whinning.mp3"));
-		gallop = Gdx.audio.newSound(Gdx.files.internal("data/gallop.mp3"));
+		whinning = Gdx.audio.newSound(Gdx.files.internal("data/whinning.ogg"));
+		gallop = Gdx.audio.newMusic(Gdx.files.internal("data/gallop.ogg"));
 		
-		badHorsie = Gdx.audio.newMusic(Gdx.files.internal("data/bad_horsie.mp3"));
-		journey = Gdx.audio.newMusic(Gdx.files.internal("data/Journey.mp3"));
+		badHorsie = Gdx.audio.newMusic(Gdx.files.internal("data/bad_horsie.ogg"));
+		journey = Gdx.audio.newMusic(Gdx.files.internal("data/Journey.ogg"));
 		
-		punch = Gdx.audio.newSound(Gdx.files.internal("data/punchPain.mp3"));
+		punch = Gdx.audio.newSound(Gdx.files.internal("data/punchPain.ogg"));
 	}
 	
 	/**

@@ -25,14 +25,13 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 	//public now b/c testing purposes
 	public Horse(TextureRegion horse, int width, int height, float weight, float posX, float posY) {
 		super(horse, width, height, weight, posX, posY);
-		AssetLoader.gallop.loop(1);
 	}
 	
 	@Override
 	public void update(float delta) {
 		// TODO Update the object
 		if(this.getPhysics().isGrounded())
-		AssetLoader.gallop.resume();
+		AssetLoader.gallop.play();
 	}
 	
 	/**
@@ -45,7 +44,7 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 		if(this.physics.isGrounded()) {
 			Gdx.app.log("Horse", "jumping");
 			AssetLoader.gallop.pause();
-			AssetLoader.whinning.play(1);
+			AssetLoader.whinning.play(0.5f);
 			this.physics.setGrounded(false);
 			this.physics.getVelocity().y = (float) - (120 - (this.physics.getWeight() * 0.05));
 			//this.physics.getAcceleration().y = (float) - (140 - (this.physics.getWeight() * 0.05));
