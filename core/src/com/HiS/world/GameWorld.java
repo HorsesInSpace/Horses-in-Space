@@ -54,6 +54,7 @@ public class GameWorld {
 	}
 
 	public void update(float delta) {
+		scrollSpeed -=delta;
 		this.foreground1.getRect().x += scrollSpeed*delta;
 		this.foreground2.getRect().x += scrollSpeed*delta;
 		if((this.foreground1.getRect().x + this.foreground1.getRect().width) < 0) {
@@ -62,8 +63,8 @@ public class GameWorld {
 		if((this.foreground2.getRect().x + this.foreground2.getRect().width) < 0) {
 			this.foreground2.getRect().x = this.foreground1.getRect().x + this.foreground1.getRect().width;
 		}
-		this.middleground1.getRect().x -= (GameScreen.gameWidth/8)*delta;
-		this.middleground2.getRect().x -= (GameScreen.gameWidth/8)*delta;
+		this.middleground1.getRect().x += (scrollSpeed/4)*delta;
+		this.middleground2.getRect().x += (scrollSpeed/4)*delta;
 		if((this.middleground1.getRect().x + this.middleground1.getRect().width) < 0) {
 			this.middleground1.getRect().x = this.getMiddleground2().getRect().x+this.getMiddleground2().getRect().width;
 		}

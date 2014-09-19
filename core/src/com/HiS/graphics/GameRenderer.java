@@ -1,6 +1,7 @@
 package com.HiS.graphics;
 
 import com.HiS.gameobject.PhysGameObject;
+import com.HiS.screen.GameScreen;
 import com.HiS.world.GameWorld;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -10,25 +11,17 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class GameRenderer {
 
-	private float fgRenderTime;
-	private float mgRenderTime;
-
 	private ShapeRenderer shapeRenderer;
 	private SpriteBatch batch;
 
 	private GameWorld world;
 	private OrthographicCamera cam;
 
-	private float width, height;
-
-	public GameRenderer(GameWorld world, float width, float height) {
+	public GameRenderer(GameWorld world) {
 		this.world = world;
 
-		this.width = width;
-		this.height = height;
-
 		this.cam = new OrthographicCamera();
-		this.cam.setToOrtho(true, width, height);
+		this.cam.setToOrtho(true, GameScreen.gameWidth, GameScreen.gameHeight);
 
 		this.batch = new SpriteBatch();
 		this.batch.setProjectionMatrix(this.cam.combined);
@@ -45,20 +38,18 @@ public class GameRenderer {
 		// BATCH BEGIN
 		this.batch.begin();
 
-
-
 		// Draw background
 		this.batch.disableBlending(); // Background is solid
 		this.batch.draw(this.world.getBackground().getTexture(), this.world.getBackground().getRect().x, this.world.getBackground().getRect().y, this.world.getBackground().getRect().width, this.world.getBackground().getRect().height);
 
-		// Draw middleground 1
+		// Draw middleground 1 and 2
 		this.batch.enableBlending(); // Middleground has transparent areas
 		this.batch.draw(this.world.getMiddleground1().getTexture(), this.world.getMiddleground1().getRect().x, this.world.getMiddleground1().getRect().y, this.world.getMiddleground1().getRect().width, this.world.getMiddleground1().getRect().height);
 		this.batch.draw(this.world.getMiddleground2().getTexture(), this.world.getMiddleground2().getRect().x, this.world.getMiddleground2().getRect().y, this.world.getMiddleground2().getRect().width, this.world.getMiddleground2().getRect().height);
 
 		// Draw game objects
 		for(PhysGameObject gameObject : world.getObjects()) {
-			if(gameObject.getPhysics().getRect().x + width > 0 && gameObject.getPhysics().getRect().x < width) {
+			if(gameObject.getPhysics().getRect().x + GameScreen.gameWidth > 0 && gameObject.getPhysics().getRect().x < GameScreen.gameWidth) {
 				this.batch.draw(
 						gameObject.getTexture(),
 						gameObject.getPhysics().getRect().x, 

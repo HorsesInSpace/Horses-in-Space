@@ -25,7 +25,7 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 	//public now b/c testing purposes
 	public Horse(TextureRegion horse, int width, int height, float weight, float posX, float posY) {
 		super(horse, width, height, weight, posX, posY);
-		AssetLoader.gallop.loop();
+		AssetLoader.gallop.loop(1);
 	}
 	
 	@Override
