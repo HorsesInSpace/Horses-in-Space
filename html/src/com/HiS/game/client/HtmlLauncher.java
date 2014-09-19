@@ -14,6 +14,6 @@ public class HtmlLauncher extends GwtApplication {
 
         @Override
         public ApplicationListener getApplicationListener () {
-                return new HorseGame();
+                return new HorseGame(HorseGame.Platform.HTML);
         }
 }

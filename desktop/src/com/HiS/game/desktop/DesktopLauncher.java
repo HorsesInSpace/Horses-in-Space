@@ -15,6 +15,6 @@ public class DesktopLauncher {
 		config.height = Toolkit.getDefaultToolkit().getScreenSize().height/2;
 		
 		config.fullscreen = false;
-		new LwjglApplication(new HorseGame(), config);
+		new LwjglApplication(new HorseGame(HorseGame.Platform.DESKTOP), config);
 	}
 }
