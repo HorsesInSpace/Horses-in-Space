@@ -36,8 +36,8 @@ public class HorseGame extends Game {
 		
 		switch (platform) {
 		case ANDROID:
-			musicVol = 0.2f;
-			gallopVol = 0.1f;
+			musicVol = 1f;
+			gallopVol = 1f;
 			soundVol = 1;
 			
 			AssetLoader.gallopMusic.setLooping(true);
@@ -48,7 +48,9 @@ public class HorseGame extends Game {
 			musicVol = 1;
 			gallopVol = 1;
 			soundVol = 1;
-			
+			AssetLoader.gallopMusic.setLooping(true);
+			AssetLoader.gallopMusic.setVolume(gallopVol);
+			AssetLoader.gallopMusic.play();
 			AssetLoader.gallopSound.loop(gallopVol);
 			break;
 		default:

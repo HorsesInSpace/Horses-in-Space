@@ -1,5 +1,6 @@
 package com.HiS.gameobject;
 
+import com.HiS.game.HorseGame;
 import com.HiS.hishelpers.AssetLoader;
 import com.HiS.physics.PhysObject;
 import com.badlogic.gdx.Gdx;
@@ -31,7 +32,10 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 	public void update(float delta) {
 		// TODO Update the object
 		if(this.getPhysics().isGrounded()) {
-			AssetLoader.gallopSound.resume();	
+			//code for desktop build
+			AssetLoader.gallopSound.resume();
+			//code for android build
+			AssetLoader.gallopMusic.play();
 		}
 	}
 	
@@ -45,6 +49,8 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 		if(this.physics.isGrounded()) {
 			Gdx.app.log("Horse", "jumping");
 			AssetLoader.gallopSound.pause();
+			//code for android
+			AssetLoader.gallopMusic.pause();
 			AssetLoader.whinning.play(0.5f);
 			this.physics.setGrounded(false);
 			this.physics.getVelocity().y = (float) - (120 - (this.physics.getWeight() * 0.05));
