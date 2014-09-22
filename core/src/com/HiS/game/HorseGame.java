@@ -24,6 +24,8 @@ public class HorseGame extends Game {
 	public HorseGame(Platform platform) {
 		HorseGame.platform = platform;
 	}
+	
+	public static long gallopSoundID;
 
 	/**
 	 * Method called upon game launch
@@ -32,6 +34,11 @@ public class HorseGame extends Game {
 	public void create() {
 		Gdx.app.log("Game", "created");
 		AssetLoader.load();
+		try {
+			Thread.sleep(100);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		setScreen(new GameScreen());
 		
 		switch (platform) {
@@ -40,18 +47,18 @@ public class HorseGame extends Game {
 			gallopVol = 1f;
 			soundVol = 1;
 			
-			AssetLoader.gallopMusic.setLooping(true);
-			AssetLoader.gallopMusic.setVolume(gallopVol);
-			AssetLoader.gallopMusic.play();
+//			AssetLoader.gallopMusic.setLooping(true);
+//			AssetLoader.gallopMusic.setVolume(gallopVol);
+//			AssetLoader.gallopMusic.play();
 			break;
 		case DESKTOP:
 			musicVol = 1;
 			gallopVol = 1;
 			soundVol = 1;
-			AssetLoader.gallopMusic.setLooping(true);
-			AssetLoader.gallopMusic.setVolume(gallopVol);
-			AssetLoader.gallopMusic.play();
-			AssetLoader.gallopSound.loop(gallopVol);
+//			AssetLoader.gallopMusic.setLooping(true);
+//			AssetLoader.gallopMusic.setVolume(gallopVol);
+//			AssetLoader.gallopMusic.play();
+//			AssetLoader.gallopSound.loop(gallopVol);
 			break;
 		default:
 			musicVol = 1;
@@ -59,6 +66,8 @@ public class HorseGame extends Game {
 			soundVol = 1;
 			break;
 		}
+		
+		gallopSoundID = AssetLoader.gallopSound.loop(gallopVol);
 		
 		AssetLoader.journey.setLooping(true);
 		AssetLoader.journey.setVolume(musicVol);

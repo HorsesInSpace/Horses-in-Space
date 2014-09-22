@@ -1,7 +1,9 @@
 package com.HiS.gameobject;
 
+import com.HiS.game.HorseGame;
 import com.HiS.hishelpers.AssetLoader;
 import com.HiS.physics.PhysObject;
+import com.HiS.world.GameWorld;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -31,10 +33,7 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 	public void update(float delta) {
 		// TODO Update the object
 		if(this.getPhysics().isGrounded()) {
-			//code for desktop build
-			AssetLoader.gallopSound.resume();
-			//code for android build
-			AssetLoader.gallopMusic.play();
+			AssetLoader.gallopSound.resume(HorseGame.gallopSoundID);
 		}
 	}
 	
@@ -47,13 +46,14 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 		// TODO Somehow move the logic below so that PhysEngine can take care of how a jump is made
 		if(this.physics.isGrounded()) {
 			Gdx.app.log("Horse", "jumping");
-			AssetLoader.gallopSound.pause();
-			//code for android
-			AssetLoader.gallopMusic.pause();
+			
+			AssetLoader.gallopSound.pause(HorseGame.gallopSoundID);
 			AssetLoader.whinning.play(0.5f);
+			
 			this.physics.setGrounded(false);
 			this.physics.getVelocity().y = (float) - (120 - (this.physics.getWeight() * 0.05));
-			//this.physics.getAcceleration().y = (float) - (140 - (this.physics.getWeight() * 0.05));
+			
+//			MEGAJUMP this.physics.getAcceleration().y = (float) - (140 - (this.physics.getWeight() * 0.05));
 		}
 	}
 	
