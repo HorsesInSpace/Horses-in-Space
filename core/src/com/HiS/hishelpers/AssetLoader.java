@@ -18,7 +18,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class AssetLoader {
 	private static Texture texture;
 	
-	public static TextureRegion horse, horse2, horse3;
+	public static TextureRegion horse, horse2, horse3, horseJump;
 	public static TextureRegion background;
 	public static TextureRegion foreground;
 	public static TextureRegion fence;
@@ -46,6 +46,8 @@ public class AssetLoader {
 		horse2.flip(false, true);
 		horse3 = new TextureRegion(texture, 0,645,150,93);
 		horse3.flip(false, true);
+		horseJump = new TextureRegion(texture, 0, 748, 150, 93);
+		horseJump.flip(false, true);
 		
 		TextureRegion[] horses = {horse, horse2, horse3};
 		anim = new Animation(0.10f, horses);
@@ -60,7 +62,7 @@ public class AssetLoader {
 		foreground = new TextureRegion(texture, 102, 250, 399, 62);
 		foreground.flip(false, true);
 		
-		fence = new TextureRegion(texture, 0, 0, 83,94);
+		fence = new TextureRegion(texture, 920, 448, 9, 84);
 		fence.flip(false, true);
 		
 		whinning = Gdx.audio.newSound(Gdx.files.internal("data/whinning.ogg"));

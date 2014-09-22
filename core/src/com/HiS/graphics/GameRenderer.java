@@ -60,12 +60,22 @@ public class GameRenderer {
 			if(gameObject.getPhysics().getRect().x + GameScreen.gameWidth > 0 && 
 					gameObject.getPhysics().getRect().x < GameScreen.gameWidth) {
 				if(gameObject instanceof Horse) {
-					this.batch.draw(
-							AssetLoader.anim.getKeyFrame(runTime),
-							gameObject.getPhysics().getRect().x, 
-							gameObject.getPhysics().getRect().y, 
-							gameObject.getPhysics().getRect().width, 
-							gameObject.getPhysics().getRect().height);	
+					if(gameObject.getPhysics().isGrounded()) {
+						this.batch.draw(
+								AssetLoader.anim.getKeyFrame(runTime),
+								gameObject.getPhysics().getRect().x, 
+								gameObject.getPhysics().getRect().y, 
+								gameObject.getPhysics().getRect().width, 
+								gameObject.getPhysics().getRect().height);
+					} else {
+						this.batch.draw(
+								AssetLoader.horseJump,
+								gameObject.getPhysics().getRect().x, 
+								gameObject.getPhysics().getRect().y, 
+								gameObject.getPhysics().getRect().width, 
+								gameObject.getPhysics().getRect().height);
+					}
+						
 				}
 				else {
 				this.batch.draw(

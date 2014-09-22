@@ -15,7 +15,7 @@ public class Physics {
 	
 	private float weight;
 	
-	private boolean isGrounded;
+	private boolean isGrounded = true;
 	
 	private Rectangle rect;
 	
