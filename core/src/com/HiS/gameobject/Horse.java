@@ -1,6 +1,5 @@
 package com.HiS.gameobject;
 
-import com.HiS.game.HorseGame;
 import com.HiS.hishelpers.AssetLoader;
 import com.HiS.physics.PhysObject;
 import com.badlogic.gdx.Gdx;

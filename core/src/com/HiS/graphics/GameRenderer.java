@@ -1,6 +1,8 @@
 package com.HiS.graphics;
 
+import com.HiS.gameobject.Horse;
 import com.HiS.gameobject.PhysGameObject;
+import com.HiS.hishelpers.AssetLoader;
 import com.HiS.screen.GameScreen;
 import com.HiS.world.GameWorld;
 import com.badlogic.gdx.Gdx;
@@ -57,6 +59,15 @@ public class GameRenderer {
 		for(PhysGameObject gameObject : world.getObjects()) {
 			if(gameObject.getPhysics().getRect().x + GameScreen.gameWidth > 0 && 
 					gameObject.getPhysics().getRect().x < GameScreen.gameWidth) {
+				if(gameObject instanceof Horse) {
+					this.batch.draw(
+							AssetLoader.anim.getKeyFrame(runTime),
+							gameObject.getPhysics().getRect().x, 
+							gameObject.getPhysics().getRect().y, 
+							gameObject.getPhysics().getRect().width, 
+							gameObject.getPhysics().getRect().height);	
+				}
+				else {
 				this.batch.draw(
 						gameObject.getTexture(),
 						gameObject.getPhysics().getRect().x, 
@@ -64,8 +75,9 @@ public class GameRenderer {
 						gameObject.getPhysics().getRect().width, 
 						gameObject.getPhysics().getRect().height);	
 			}
+			}
 		}
-		
+
 		// Foreground
 		this.batch.disableBlending(); // Foreground is solid
 		this.batch.draw(this.world.getForeground1().getTexture(), 

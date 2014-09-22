@@ -5,6 +5,8 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
@@ -16,11 +18,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class AssetLoader {
 	private static Texture texture;
 	
-	public static TextureRegion horse;
+	public static TextureRegion horse, horse2, horse3;
 	public static TextureRegion background;
 	public static TextureRegion foreground;
 	public static TextureRegion fence;
 	public static TextureRegion middleground1;
+	public static Animation anim;
 	
 	public static Sound whinning;
 	public static Sound gallopSound;
@@ -37,8 +40,16 @@ public class AssetLoader {
 		texture = new Texture(Gdx.files.internal("data/textures.png"));
 		texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		
-		horse = new TextureRegion(texture, 0,0,99,94);
+		horse = new TextureRegion(texture, 0,450,150,93);
 		horse.flip(false, true);
+		horse2 = new TextureRegion(texture, 0,550,150,93);
+		horse2.flip(false, true);
+		horse3 = new TextureRegion(texture, 0,645,150,93);
+		horse3.flip(false, true);
+		
+		TextureRegion[] horses = {horse, horse2, horse3};
+		anim = new Animation(0.10f, horses);
+		anim.setPlayMode(PlayMode.LOOP_PINGPONG);
 		
 		background = new TextureRegion(texture, 101, 0, 399, 240);
 		background.flip(false, true);

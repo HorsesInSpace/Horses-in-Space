@@ -37,15 +37,31 @@ public class GameWorld {
 		this.objects.add(new Fence(200, 75));
 		this.objects.add(new Fence(300, 75));
 		this.objects.add(new Fence(400, 75));
-		this.objects.add(new Horse(AssetLoader.horse, 20, 15, 300, 15, (float)(GameScreen.gameHeight - 15) - 15));
+		this.objects.add(new Horse(AssetLoader.horse, 22, 15, 300, 15, (float)(GameScreen.gameHeight - 15) - 15));
 		
-		this.background = new TexObject(AssetLoader.background, 0, -90, GameScreen.gameHeight, GameScreen.gameWidth);
+		this.background = new TexObject(AssetLoader.background, 
+				0, 
+				-90, 
+				GameScreen.gameHeight, 
+				GameScreen.gameWidth);
 
-		this.middleground1 = new TexObject(AssetLoader.middleground1, 0, GameScreen.gameHeight/4+(GameScreen.gameHeight/16), GameScreen.gameHeight/4, GameScreen.gameWidth);
-		this.middleground2 = new TexObject(AssetLoader.middleground1, this.getMiddleground1().getRect().width, GameScreen.gameHeight/4+(GameScreen.gameHeight/16), GameScreen.gameHeight/4, GameScreen.gameWidth);
+		this.middleground1 = new TexObject(AssetLoader.middleground1, 
+				0, 
+				GameScreen.gameHeight/4+(GameScreen.gameHeight/16), 
+				GameScreen.gameHeight/4, GameScreen.gameWidth);
+		this.middleground2 = new TexObject(AssetLoader.middleground1, 
+				this.getMiddleground1().getRect().width, 
+				GameScreen.gameHeight/4+(GameScreen.gameHeight/16), 
+				GameScreen.gameHeight/4, GameScreen.gameWidth);
 		
-		this.foreground1 = new TexObject(AssetLoader.foreground, 0,(GameScreen.gameHeight/2)+(GameScreen.gameHeight/20), GameScreen.gameHeight/4, GameScreen.gameWidth);
-		this.foreground2 = new TexObject(AssetLoader.foreground, this.foreground1.getRect().width, (GameScreen.gameHeight/2)+(GameScreen.gameHeight/20), GameScreen.gameHeight/4, GameScreen.gameWidth);
+		this.foreground1 = new TexObject(AssetLoader.foreground, 
+				0,
+				(GameScreen.gameHeight/2)+(GameScreen.gameHeight/20), 
+				GameScreen.gameHeight/4, GameScreen.gameWidth);
+		this.foreground2 = new TexObject(AssetLoader.foreground, 
+				this.foreground1.getRect().width, 
+				(GameScreen.gameHeight/2)+(GameScreen.gameHeight/20), 
+				GameScreen.gameHeight/4, GameScreen.gameWidth);
 
 		
 		this.physEngine = new PhysEngine();
