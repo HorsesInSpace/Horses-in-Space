@@ -3,7 +3,6 @@ package com.HiS.gameobject;
 import com.HiS.game.HorseGame;
 import com.HiS.hishelpers.AssetLoader;
 import com.HiS.physics.PhysObject;
-import com.HiS.world.GameWorld;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 

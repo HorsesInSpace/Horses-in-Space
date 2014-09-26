@@ -6,6 +6,7 @@ import java.util.Random;
 
 import com.HiS.gameobject.Fence;
 import com.HiS.gameobject.Horse;
+import com.HiS.gameobject.Obstacle;
 import com.HiS.gameobject.PhysGameObject;
 import com.HiS.graphics.GfxObject;
 import com.HiS.graphics.TexObject;
@@ -31,7 +32,7 @@ public class GameWorld {
 	
 	private Random rand;
 	
-	private Fence rightmostFence = null;
+	private Obstacle rightmostObstacle = null;
 
 	public GameWorld() {
 		this.objects.add(new Fence(200, 75));
@@ -101,24 +102,24 @@ public class GameWorld {
 //				this.objects.remove(gameObject);
 //				gameObject = null;
 			}
-			if(gameObject instanceof Fence) {
+			if(gameObject instanceof Obstacle) {
 				gameObject.getPhysics().setVelocity(new Vector2(scrollSpeed,0));
 				Rectangle rect = gameObject.getPhysics().getRect();
 				if((rect.x + rect.width) < 0) {
 					float nextPos = GameScreen.gameWidth;
-					if (rightmostFence != null) {
-						nextPos = rightmostFence.getPosition().x + rand.nextInt((int) (GameScreen.gameWidth*0.66)) + (GameScreen.gameWidth/2);
+					if (rightmostObstacle != null) {
+						nextPos = rightmostObstacle.getPosition().x + rand.nextInt((int) (GameScreen.gameWidth*0.66)) + (GameScreen.gameWidth/2);
 						Gdx.app.log("NextPos", "" + nextPos);
 					}
 					
 					gameObject.getPhysics().setPosition(new Vector2(nextPos, rect.y));
 					gameObject.setCrashed(false);
 					
-					Gdx.app.log("RecentFence", rightmostFence.toString());
+					Gdx.app.log("RecentFence", rightmostObstacle.toString());
 				}
-				if(rightmostFence == null ||
-						gameObject.getPosition().x > rightmostFence.getPosition().x) {
-					rightmostFence = (Fence) gameObject;
+				if(rightmostObstacle == null ||
+						gameObject.getPosition().x > rightmostObstacle.getPosition().x) {
+					rightmostObstacle = (Fence) gameObject;
 				}
 			}
 		}
