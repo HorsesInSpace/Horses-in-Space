@@ -47,7 +47,7 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 			Gdx.app.log("Horse", "jumping");
 			
 			AssetLoader.gallopSound.pause(HorseGame.gallopSoundID);
-			AssetLoader.whinning.play(0.5f);
+			AssetLoader.whinning.play(1f);
 			
 			this.physics.setGrounded(false);
 			this.physics.getVelocity().y = (float) - (120 - (this.physics.getWeight() * 0.05));
