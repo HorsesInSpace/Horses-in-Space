@@ -75,4 +75,9 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 		
 	}
 
+	public void slide() {
+		// TODO Auto-generated method stub
+		System.out.println("slidin mafakka");
+	}
+
 }

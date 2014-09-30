@@ -2,6 +2,7 @@ package com.HiS.hishelpers;
 
 import com.HiS.gameobject.GameObject;
 import com.HiS.gameobject.Horse;
+import com.HiS.screen.GameScreen;
 import com.HiS.world.GameWorld;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
@@ -26,9 +27,15 @@ public class InputHandler implements InputProcessor{
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		
+		
 		for(GameObject gameObject : world.getObjects()) {
 			if (gameObject instanceof Horse) {
-				((Horse) gameObject).jump();
+				if(screenX < GameScreen.screenWidth/2) {
+					((Horse) gameObject).jump();	
+				} else {
+					((Horse) gameObject).slide();
+				}
 			}
 		}
 		return true;
@@ -45,6 +52,14 @@ public class InputHandler implements InputProcessor{
 			for(GameObject gameObject : world.getObjects()) {
 				if (gameObject instanceof Horse) {
 					((Horse) gameObject).jump();
+				}
+			}
+			return true;
+		}
+		if(keycode == Input.Keys.CONTROL_LEFT || keycode == Input.Keys.ENTER) {
+			for(GameObject gameObject : world.getObjects()) {
+				if (gameObject instanceof Horse) {
+					((Horse) gameObject).slide();
 				}
 			}
 			return true;

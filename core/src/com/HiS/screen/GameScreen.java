@@ -12,13 +12,13 @@ public class GameScreen implements Screen {
 	private GameRenderer renderer;
 	public static float gameHeight;
 	public static float gameWidth = 136;
+	public static int screenWidth = Gdx.graphics.getWidth();
+	public static int screenHeight = Gdx.graphics.getHeight();
+	
 	public float runTime;
 	
 	public GameScreen() {
 		Gdx.app.log("GameScreen", "CREATED");
-		
-		int screenWidth = Gdx.graphics.getWidth();
-		int screenHeight = Gdx.graphics.getHeight();
 
 		GameScreen.gameHeight = screenHeight / (screenWidth / gameWidth);
 		this.runTime = 0;
