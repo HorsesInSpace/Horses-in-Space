@@ -38,12 +38,12 @@ public class GameWorld {
 		initWorld();
 	}
 
-	public void update(float delta) {
+	public void update(float delta, float runTime) {
 		scrollSpeed -= delta;
 		moveBackMiddle(delta);
 		for(PhysGameObject gameObject : objects) {
 			
-			gameObject.update(delta);
+			gameObject.update(delta, runTime);
 			
 			Physics physics = gameObject.getPhysics();
 			physics = this.physEngine.update(gameObject, delta);
@@ -60,7 +60,7 @@ public class GameWorld {
 				if((rect.x + rect.width) < 0) {
 					float nextPos = GameScreen.gameWidth;
 					if (rightmostObstacle != null) {
-						nextPos = rightmostObstacle.getPosition().x + rand.nextInt((int) (GameScreen.gameWidth*0.66)) + (GameScreen.gameWidth/2);
+						nextPos = rightmostObstacle.getPosition().x + rand.nextInt((int) (GameScreen.gameWidth * 0.66)) + (GameScreen.gameWidth/2);
 						Gdx.app.log("NextPos", "" + nextPos);
 					}
 					

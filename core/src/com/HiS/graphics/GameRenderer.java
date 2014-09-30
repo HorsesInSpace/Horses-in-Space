@@ -1,8 +1,6 @@
 package com.HiS.graphics;
 
-import com.HiS.gameobject.Horse;
 import com.HiS.gameobject.PhysGameObject;
-import com.HiS.hishelpers.AssetLoader;
 import com.HiS.screen.GameScreen;
 import com.HiS.world.GameWorld;
 import com.badlogic.gdx.Gdx;
@@ -59,32 +57,13 @@ public class GameRenderer {
 		for(PhysGameObject gameObject : world.getObjects()) {
 			if(gameObject.getPhysics().getRect().x + GameScreen.gameWidth > 0 && 
 					gameObject.getPhysics().getRect().x < GameScreen.gameWidth) {
-				if(gameObject instanceof Horse) {
-					if(gameObject.getPhysics().isGrounded()) {
-						this.batch.draw(
-								AssetLoader.anim.getKeyFrame(runTime),
-								gameObject.getPhysics().getRect().x, 
-								gameObject.getPhysics().getRect().y, 
-								gameObject.getPhysics().getRect().width, 
-								gameObject.getPhysics().getRect().height);
-					} else {
-						this.batch.draw(
-								AssetLoader.horseJump,
-								gameObject.getPhysics().getRect().x, 
-								gameObject.getPhysics().getRect().y, 
-								gameObject.getPhysics().getRect().width, 
-								gameObject.getPhysics().getRect().height);
-					}
-						
-				}
-				else {
+				
 				this.batch.draw(
 						gameObject.getTexture(),
 						gameObject.getPhysics().getRect().x, 
 						gameObject.getPhysics().getRect().y, 
 						gameObject.getPhysics().getRect().width, 
 						gameObject.getPhysics().getRect().height);	
-			}
 			}
 		}
 		// Foreground
@@ -102,5 +81,17 @@ public class GameRenderer {
 
 		// BATCH END
 		this.batch.end();
+		
+		// Horse collision box KEEP FOR TESTING
+//		ShapeRenderer shape = new ShapeRenderer();
+//		shape.setProjectionMatrix(cam.combined);
+//		shape.begin(ShapeType.Filled);
+//		shape.setColor(Color.RED);
+//		for(PhysGameObject gameobject : world.getObjects()) {
+//			if(gameobject instanceof Horse) {
+//				shape.rect(gameobject.getPhysics().getRect().x, gameobject.getPhysics().getRect().y, gameobject.getPhysics().getRect().width, gameobject.getPhysics().getRect().height);
+//			}
+//		}
+//		shape.end();
 	}
 }

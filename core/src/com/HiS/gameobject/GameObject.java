@@ -15,7 +15,7 @@ public interface GameObject {
 	 * @param delta deltatime measures the time it takes a frame to render and is used to normalize
 	 * movement independently from framerate.
 	 */
-	public void update(float delta);
+	public void update(float delta, float runTime);
 	
 	/**
 	 * Destroys the object.

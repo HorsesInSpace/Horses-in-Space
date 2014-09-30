@@ -18,7 +18,7 @@ public abstract class PhysGameObject implements GameObject, PhysObject, GfxObjec
 	}
 	
 	@Override
-	public void update(float delta) {
+	public void update(float delta, float runTime) {
 		// TODO Auto-generated method stub
 
 	}

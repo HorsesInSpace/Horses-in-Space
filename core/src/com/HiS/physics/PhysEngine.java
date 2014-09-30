@@ -56,7 +56,7 @@ public class PhysEngine {
 		
 		// TODO Check if something collides, and return null if it should be destroyed.
 		
-		physics.getRect().setX(physics.getPosition().x + physics.getRect().height);
+		physics.getRect().setX(physics.getPosition().x);
 		physics.getRect().setY(physics.getPosition().y);
 		
 		return physics;

@@ -10,7 +10,7 @@ public class Ufo extends Obstacle {
 	}
 	
 	@Override
-	public void update(float delta) {
+	public void update(float delta, float runTime) {
 
 	}
 

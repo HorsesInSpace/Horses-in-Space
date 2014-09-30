@@ -27,8 +27,8 @@ public class InputHandler implements InputProcessor{
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		
-		
+
+
 		for(GameObject gameObject : world.getObjects()) {
 			if (gameObject instanceof Horse) {
 				if(screenX < GameScreen.screenWidth/2) {
@@ -48,7 +48,7 @@ public class InputHandler implements InputProcessor{
 
 	@Override
 	public boolean keyDown(int keycode) {
-		if(keycode == Input.Keys.SPACE || keycode == Input.Keys.W) {
+		if(keycode == Input.Keys.SPACE || keycode == Input.Keys.W || keycode == Input.Keys.UP) {
 			for(GameObject gameObject : world.getObjects()) {
 				if (gameObject instanceof Horse) {
 					((Horse) gameObject).jump();
@@ -56,7 +56,7 @@ public class InputHandler implements InputProcessor{
 			}
 			return true;
 		}
-		if(keycode == Input.Keys.CONTROL_LEFT || keycode == Input.Keys.ENTER) {
+		if(keycode == Input.Keys.CONTROL_LEFT || keycode == Input.Keys.S || keycode == Input.Keys.DOWN) {
 			for(GameObject gameObject : world.getObjects()) {
 				if (gameObject instanceof Horse) {
 					((Horse) gameObject).slide();
@@ -69,6 +69,14 @@ public class InputHandler implements InputProcessor{
 
 	@Override
 	public boolean keyUp(int keycode) {
+		if(keycode == Input.Keys.CONTROL_LEFT || keycode == Input.Keys.S || keycode == Input.Keys.DOWN) {
+			for(GameObject gameObject : world.getObjects()) {
+				if (gameObject instanceof Horse) {
+					((Horse) gameObject).unSlide();
+				}
+			}
+			return true;
+		}
 		return false;
 	}
 
@@ -78,7 +86,12 @@ public class InputHandler implements InputProcessor{
 	}
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		return false;
+		for(GameObject gameObject : world.getObjects()) {
+			if (gameObject instanceof Horse) {
+				((Horse) gameObject).unSlide();
+			}
+		}
+		return true;
 	}
 	@Override
 	public boolean scrolled(int amount) {

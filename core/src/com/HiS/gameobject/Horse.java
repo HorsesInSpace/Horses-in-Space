@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Horse extends PhysGameObject implements GameObject, PhysObject {
 
 	private static Horse instance = null;
+	private boolean sliding = false;
 	
 	public static Horse getInstance() {
 		if(instance == null) {
@@ -29,9 +30,14 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 	}
 	
 	@Override
-	public void update(float delta) {
+	public void update(float delta, float runTime) {
 		// TODO Update the object
-		if(this.getPhysics().isGrounded()) {
+		if(!this.getPhysics().isGrounded()) {
+			this.texture = AssetLoader.horseJump;
+		} else if (this.sliding) {
+			this.texture = AssetLoader.horseJump;
+		} else {
+			this.texture = AssetLoader.anim.getKeyFrame(runTime);
 			AssetLoader.gallopSound.resume(HorseGame.gallopSoundID);
 		}
 	}
@@ -76,8 +82,18 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 	}
 
 	public void slide() {
-		// TODO Auto-generated method stub
-		System.out.println("slidin mafakka");
+		Gdx.app.log("Horse", "slidin");
+		this.sliding = true;
+		this.physics.getRect().height /= 2;
+		
+	}
+	
+	public void unSlide() {
+		if(this.sliding) {
+			Gdx.app.log("Horse", "not slidin");
+			this.sliding = false;
+			this.physics.getRect().height *= 2;
+		}
 	}
 
 }
