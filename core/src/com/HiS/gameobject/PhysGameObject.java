@@ -12,9 +12,9 @@ public abstract class PhysGameObject implements GameObject, PhysObject, GfxObjec
 	protected Physics physics;
 	protected TextureRegion texture;
 
-	public PhysGameObject(TextureRegion horse, int width, int height, float weight, float posX, float posY) {
+	public PhysGameObject(TextureRegion texture, int width, int height, float weight, float posX, float posY) {
 		this.physics = new Physics(width, height, weight, posX, posY);
-		this.texture = horse;
+		this.texture = texture;
 	}
 	
 	@Override

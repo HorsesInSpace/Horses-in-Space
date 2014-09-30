@@ -65,7 +65,7 @@ public class AssetLoader {
 		fence = new TextureRegion(texture, 920, 448, 9, 84);
 		fence.flip(false, true);
 		
-		whinning = Gdx.audio.newSound(Gdx.files.internal("data/whinning.ogg"));
+		whinning = Gdx.audio.newSound(Gdx.files.internal("data/jump.ogg"));
 		gallopSound = Gdx.audio.newSound(Gdx.files.internal("data/gallop.ogg"));
 		
 		badHorsie = Gdx.audio.newMusic(Gdx.files.internal("data/bad_horsie.ogg"));

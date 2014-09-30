@@ -87,7 +87,6 @@ public class GameRenderer {
 			}
 			}
 		}
-
 		// Foreground
 		this.batch.disableBlending(); // Foreground is solid
 		this.batch.draw(this.world.getForeground1().getTexture(), 

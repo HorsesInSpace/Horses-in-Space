@@ -3,7 +3,6 @@ package com.HiS.gameobject;
 import com.HiS.game.HorseGame;
 import com.HiS.hishelpers.AssetLoader;
 import com.HiS.physics.PhysObject;
-import com.HiS.world.GameWorld;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -48,7 +47,7 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 			Gdx.app.log("Horse", "jumping");
 			
 			AssetLoader.gallopSound.pause(HorseGame.gallopSoundID);
-			AssetLoader.whinning.play(0.5f);
+			AssetLoader.whinning.play(1f);
 			
 			this.physics.setGrounded(false);
 			this.physics.getVelocity().y = (float) - (120 - (this.physics.getWeight() * 0.05));
@@ -74,6 +73,11 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 			Gdx.app.log("Horse", "collided");
 		}
 		
+	}
+
+	public void slide() {
+		// TODO Auto-generated method stub
+		System.out.println("slidin mafakka");
 	}
 
 }
