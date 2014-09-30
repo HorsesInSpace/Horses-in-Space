@@ -42,7 +42,7 @@ public class AssetLoader {
 		
 		horse = new TextureRegion(texture, 0,450,150,93);
 		horse.flip(false, true);
-		horse2 = new TextureRegion(texture, 0,550,150,93);
+		horse2 = new TextureRegion(texture, 0,548,150,93);
 		horse2.flip(false, true);
 		horse3 = new TextureRegion(texture, 0,645,150,93);
 		horse3.flip(false, true);
