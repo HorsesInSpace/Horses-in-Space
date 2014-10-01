@@ -13,7 +13,6 @@ import com.HiS.graphics.TexObject;
 import com.HiS.hishelpers.AssetLoader;
 import com.HiS.physics.Collision;
 import com.HiS.physics.PhysEngine;
-import com.HiS.physics.Physics;
 import com.HiS.screen.GameScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
@@ -28,7 +27,7 @@ public class GameWorld {
 	private GfxObject foreground1;
 	private GfxObject foreground2;
 	
-	private long score;
+	public long score;
 
 	private PhysEngine physEngine;
 	private float scrollSpeed = -(GameScreen.gameWidth/2);
@@ -64,18 +63,13 @@ public class GameWorld {
 					}
 					break;
 				case CRASHED:
-					//
+					GameScreen.running = false;
 					break;
 				default:
 					//
 					break;
 				}
-			}
-//			if(physics == null) {
-//				this.objects.remove(gameObject);
-//				gameObject = null;
-//			}
-			if(gameObject instanceof Obstacle) {
+			} else if(gameObject instanceof Obstacle) {
 				gameObject.getPhysics().setVelocity(new Vector2(scrollSpeed,0));
 				Rectangle rect = gameObject.getPhysics().getRect();
 				if((rect.x + rect.width) < 0) {

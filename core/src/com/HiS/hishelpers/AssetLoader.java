@@ -40,6 +40,7 @@ public class AssetLoader {
 	 */
 	public static void load() {
 		font = new BitmapFont(Gdx.files.internal("data/monohorseinspaced.fnt"));
+		font.setScale(.25f, -.25f);
 		
 		texture = new Texture(Gdx.files.internal("data/textures.png"));
 		texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);

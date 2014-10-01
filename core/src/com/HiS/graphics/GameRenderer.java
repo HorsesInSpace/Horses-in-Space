@@ -2,6 +2,7 @@ package com.HiS.graphics;
 
 import com.HiS.gameobject.Horse;
 import com.HiS.gameobject.PhysGameObject;
+import com.HiS.hishelpers.AssetLoader;
 import com.HiS.screen.GameScreen;
 import com.HiS.world.GameWorld;
 import com.badlogic.gdx.Gdx;
@@ -61,7 +62,7 @@ public class GameRenderer {
 		for(PhysGameObject gameObject : world.getObjects()) {
 			if(gameObject.getPhysics().getRect().x + GameScreen.gameWidth > 0 && 
 					gameObject.getPhysics().getRect().x < GameScreen.gameWidth) {
-				
+
 				this.batch.draw(
 						gameObject.getTexture(),
 						gameObject.getPhysics().getRect().x, 
@@ -83,19 +84,28 @@ public class GameRenderer {
 				this.world.getForeground2().getRect().width, 
 				this.world.getForeground2().getRect().height);
 
+
+		// Convert integer into String
+		String score = this.world.score + "";
+		this.batch.enableBlending();
+		// Draw text
+		AssetLoader.font.draw(batch, "" + this.world.score, (136 / 2) - (3 * score.length() - 1), 11);
 		// BATCH END
 		this.batch.end();
-		
+
+
+
+
 		// Horse collision box KEEP FOR TESTING
-//		ShapeRenderer shape = new ShapeRenderer();
-//		shape.setProjectionMatrix(cam.combined);
-//		shape.begin(ShapeType.Filled);
-//		shape.setColor(Color.RED);
-//		for(PhysGameObject gameobject : world.getObjects()) {
-//			if(gameobject instanceof Horse) {
-//				shape.rect(gameobject.getPhysics().getRect().x, gameobject.getPhysics().getRect().y, gameobject.getPhysics().getRect().width, gameobject.getPhysics().getRect().height);
-//			}
-//		}
-//		shape.end();
+		//		ShapeRenderer shape = new ShapeRenderer();
+		//		shape.setProjectionMatrix(cam.combined);
+		//		shape.begin(ShapeType.Filled);
+		//		shape.setColor(Color.RED);
+		//		for(PhysGameObject gameobject : world.getObjects()) {
+		//			if(gameobject instanceof Horse) {
+		//				shape.rect(gameobject.getPhysics().getRect().x, gameobject.getPhysics().getRect().y, gameobject.getPhysics().getRect().width, gameobject.getPhysics().getRect().height);
+		//			}
+		//		}
+		//		shape.end();
 	}
 }
