@@ -51,10 +51,8 @@ public class GameScreen implements Screen {
 	@Override
 	public void render(float delta) {
 		runTime += delta;
-		if (running) {
-			this.world.update(delta, runTime);
-			this.renderer.render(delta, runTime);
-		}
+		if (running) this.world.update(delta, runTime);
+		this.renderer.render(delta, runTime);
 	}
 
 	@Override
@@ -81,7 +79,6 @@ public class GameScreen implements Screen {
 		this.world = new GameWorld();
 		this.renderer.setWorld(this.world);
 		GameScreen.running = true;
-		
 		return this.world;
 	}
 

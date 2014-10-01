@@ -4,7 +4,9 @@ import com.HiS.gameobject.GameObject;
 import com.HiS.gameobject.Horse;
 import com.HiS.screen.GameScreen;
 import com.HiS.world.GameWorld;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 
 /**
@@ -68,6 +70,11 @@ public class InputHandler implements InputProcessor{
 		}
 		if (!GameScreen.running && keycode == Input.Keys.R) {
 			this.world = this.screen.restart();
+		}
+		
+		// reset highscore TESTING PURPOSES
+		if (Gdx.input.isKeyPressed(Keys.CONTROL_LEFT) && Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) && Gdx.input.isKeyPressed(Keys.R)) {
+			AssetLoader.resetHighScore();
 		}
 		return false;
 	}

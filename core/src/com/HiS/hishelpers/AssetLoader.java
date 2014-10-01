@@ -1,8 +1,10 @@
 package com.HiS.hishelpers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -35,12 +37,15 @@ public class AssetLoader {
 	public static Music journey;
 	public static Music gallopMusic;
 	
+	public static Preferences prefs;
+	
 	/**
 	 * Loads all assets into memory for universal access
 	 */
 	public static void load() {
 		font = new BitmapFont(Gdx.files.internal("data/monohorseinspaced.fnt"));
-		font.setScale(.25f, -.25f);
+		font.setScale(.10f, -.10f);
+//		font.setColor(Color.PURPLE);
 		
 		texture = new Texture(Gdx.files.internal("data/textures.png"));
 		texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
@@ -78,6 +83,30 @@ public class AssetLoader {
 		gallopMusic = Gdx.audio.newMusic(Gdx.files.internal("data/gallop.ogg"));
 		
 		punch = Gdx.audio.newSound(Gdx.files.internal("data/punchPain.ogg"));
+		
+		// Create (or retrieve existing) preferences file
+		prefs = Gdx.app.getPreferences("ZombieBird");
+
+		// Provide default high score of 0
+		if (!prefs.contains("highScore")) {
+		    prefs.putInteger("highScore", 0);
+		}
+	}
+	
+	// Receives an integer and maps it to the String highScore in prefs
+	public static void setHighScore(long val) {
+	    prefs.putLong("highScore", val);
+	    prefs.flush();
+	}
+
+	// Retrieves the current high score
+	public static long getHighScore() {
+	    return prefs.getLong("highScore");
+	}
+	
+	public static void resetHighScore() {
+		prefs.remove("highScore");
+		prefs.flush();
 	}
 	
 	/**

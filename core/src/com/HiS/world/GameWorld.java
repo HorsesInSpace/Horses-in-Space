@@ -64,6 +64,9 @@ public class GameWorld {
 					break;
 				case CRASHED:
 					GameScreen.running = false;
+					if (score > AssetLoader.getHighScore()) {
+		                AssetLoader.setHighScore(score);
+		            }
 					break;
 				default:
 					//

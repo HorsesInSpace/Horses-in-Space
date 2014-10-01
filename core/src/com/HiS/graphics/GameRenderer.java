@@ -85,11 +85,50 @@ public class GameRenderer {
 				this.world.getForeground2().getRect().height);
 
 
-		// Convert integer into String
-		String score = this.world.score + "";
 		this.batch.enableBlending();
-		// Draw text
-		AssetLoader.font.draw(batch, "" + this.world.score, (136 / 2) - (3 * score.length() - 1), 11);
+
+		
+		String score = "Score: ";
+		
+		if (GameScreen.running) {
+
+			AssetLoader.font.draw(
+					batch,
+					score,
+					GameScreen.gameWidth/2,
+					0);
+			String str = this.world.score + "";
+			AssetLoader.font.draw(
+					batch,
+					str,
+					GameScreen.gameWidth-GameScreen.gameWidth/16-(str.length()*3f),
+					0);
+			
+		} else {
+			String highscoreTitle;
+			String highscore;
+			if (this.world.score < AssetLoader.getHighScore()) {
+				highscoreTitle = "Old highscore: ";
+				highscore = AssetLoader.getHighScore() + "";
+			} else {
+				
+				AssetLoader.setHighScore(this.world.score);
+				highscoreTitle = "New highscore!";
+				highscore = this.world.score + "";
+			}
+			AssetLoader.font.draw(
+					batch,
+					highscoreTitle,
+					(136 / 2) - (3 * score.length() - 1),
+					11);
+			AssetLoader.font.draw(
+					batch,
+					highscore + "",
+					(136 / 2) - (3 * score.length() - 1),
+					30);
+		}
+		
+		
 		// BATCH END
 		this.batch.end();
 
