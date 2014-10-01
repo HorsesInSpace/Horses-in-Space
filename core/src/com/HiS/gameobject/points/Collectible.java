@@ -1,8 +1,9 @@
-package com.HiS.gameobject;
+package com.HiS.gameobject.points;
 
+import com.HiS.gameobject.PhysGameObject;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class Collectible extends PhysGameObject {
+public class Collectible extends PhysGameObject implements PointObject {
 	
 	private int points;
 
@@ -13,10 +14,12 @@ public class Collectible extends PhysGameObject {
 		this.points = points;
 	}
 
+	@Override
 	public int getPoints() {
 		return points;
 	}
 
+	@Override
 	public void setPoints(int points) {
 		this.points = points;
 	}

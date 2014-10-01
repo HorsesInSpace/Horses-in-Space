@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import com.HiS.gameobject.Fence;
 import com.HiS.gameobject.Horse;
-import com.HiS.gameobject.Obstacle;
 import com.HiS.gameobject.PhysGameObject;
+import com.HiS.gameobject.obstacle.Fence;
+import com.HiS.gameobject.obstacle.Obstacle;
 import com.HiS.graphics.GfxObject;
 import com.HiS.graphics.TexObject;
 import com.HiS.hishelpers.AssetLoader;
@@ -39,7 +39,7 @@ public class GameWorld {
 	}
 
 	public void update(float delta, float runTime) {
-		scrollSpeed -= delta;
+//		scrollSpeed -= delta;
 		moveBackMiddle(delta);
 		for(PhysGameObject gameObject : objects) {
 			
