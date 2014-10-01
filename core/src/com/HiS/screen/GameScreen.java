@@ -27,7 +27,7 @@ public class GameScreen implements Screen {
 		
 		this.renderer = new GameRenderer(this.world);
 		
-		Gdx.input.setInputProcessor(new InputHandler(this.world));
+		Gdx.input.setInputProcessor(new InputHandler(this.world, this));
 	}
 
 	@Override
@@ -51,8 +51,10 @@ public class GameScreen implements Screen {
 	@Override
 	public void render(float delta) {
 		runTime += delta;
-		if (running) this.world.update(delta, runTime);
-		this.renderer.render(delta, runTime);
+		if (running) {
+			this.world.update(delta, runTime);
+			this.renderer.render(delta, runTime);
+		}
 	}
 
 	@Override
@@ -71,6 +73,16 @@ public class GameScreen implements Screen {
 	public void show() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public GameWorld restart() {
+		//don't know why, but this helps the garbage collector with its anorexia
+		this.world = null;
+		this.world = new GameWorld();
+		this.renderer.setWorld(this.world);
+		GameScreen.running = true;
+		
+		return this.world;
 	}
 
 }

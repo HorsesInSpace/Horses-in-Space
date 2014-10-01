@@ -16,13 +16,15 @@ import com.badlogic.gdx.InputProcessor;
 public class InputHandler implements InputProcessor{
 
 	private GameWorld world;
+	private GameScreen screen;
 
 	/**
 	 * Constructor for class InputHandler
 	 * @param world the world of the game
 	 */
-	public InputHandler(GameWorld world) {
+	public InputHandler(GameWorld world, GameScreen screen) {
 		this.world = world;
+		this.screen = screen;
 	}
 
 	@Override
@@ -63,6 +65,9 @@ public class InputHandler implements InputProcessor{
 				}
 			}
 			return true;
+		}
+		if (!GameScreen.running && keycode == Input.Keys.R) {
+			this.world = this.screen.restart();
 		}
 		return false;
 	}

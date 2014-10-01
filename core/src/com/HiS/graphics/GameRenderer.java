@@ -108,4 +108,8 @@ public class GameRenderer {
 		//		}
 		//		shape.end();
 	}
+	
+	public void setWorld(GameWorld world) {
+		this.world = world;
+	}
 }
