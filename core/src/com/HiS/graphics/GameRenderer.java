@@ -87,31 +87,29 @@ public class GameRenderer {
 
 		this.batch.enableBlending();
 
-		
-		String score = "Score: ";
-		
-		if (GameScreen.running) {
 
-			AssetLoader.font.draw(
-					batch,
-					score,
-					GameScreen.gameWidth/2,
-					0);
-			String str = this.world.score + "";
-			AssetLoader.font.draw(
-					batch,
-					str,
-					GameScreen.gameWidth-GameScreen.gameWidth/16-(str.length()*3f),
-					0);
-			
-		} else {
+		String score = "Score: ";
+
+		AssetLoader.font.draw(
+				batch,
+				score,
+				GameScreen.gameWidth/2,
+				0);
+		String str = this.world.score + "";
+		AssetLoader.font.draw(
+				batch,
+				str,
+				GameScreen.gameWidth-GameScreen.gameWidth/16-(str.length()*3f),
+				0);
+
+		if (!GameScreen.running) {
 			String highscoreTitle;
 			String highscore;
 			if (this.world.score < AssetLoader.getHighScore()) {
 				highscoreTitle = "Old highscore: ";
 				highscore = AssetLoader.getHighScore() + "";
 			} else {
-				
+
 				AssetLoader.setHighScore(this.world.score);
 				highscoreTitle = "New highscore!";
 				highscore = this.world.score + "";
@@ -127,8 +125,8 @@ public class GameRenderer {
 					(136 / 2) - (3 * score.length() - 1),
 					30);
 		}
-		
-		
+
+
 		// BATCH END
 		this.batch.end();
 
@@ -147,7 +145,7 @@ public class GameRenderer {
 		//		}
 		//		shape.end();
 	}
-	
+
 	public void setWorld(GameWorld world) {
 		this.world = world;
 	}
