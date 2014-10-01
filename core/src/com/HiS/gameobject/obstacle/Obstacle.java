@@ -8,7 +8,8 @@ public abstract class Obstacle extends PhysGameObject implements PointObject {
 
 	private boolean crashed = false;
 	private int points;
-	
+	private boolean passed = false;
+
 	public Obstacle(TextureRegion texture, int points, int width, int height, float weight,
 			float posX, float posY) {
 		super(texture, width, height, weight, posX, posY);
@@ -36,4 +37,13 @@ public abstract class Obstacle extends PhysGameObject implements PointObject {
 		this.points = points;
 	}
 	
+	@Override
+	public boolean isPassed() {
+		return passed;
+	}
+
+	@Override
+	public void setPassed(boolean passed) {
+		this.passed = passed;
+	}
 }

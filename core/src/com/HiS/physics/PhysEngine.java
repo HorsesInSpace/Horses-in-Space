@@ -15,7 +15,7 @@ import com.badlogic.gdx.math.Intersector;
  *
  */
 public class PhysEngine {
-
+	
 	/**
 	 * Constructor for physEngine
 	 * TODO: make class and method static, no need for the object itself?
@@ -54,8 +54,6 @@ public class PhysEngine {
 		physics.getPosition().add(physics.getVelocity().x * delta, 
 				physics.getVelocity().y * delta);
 		
-		// TODO Check if something collides, and return null if it should be destroyed.
-		
 		physics.getRect().setX(physics.getPosition().x);
 		physics.getRect().setY(physics.getPosition().y);
 		
@@ -68,15 +66,21 @@ public class PhysEngine {
 	 * @param objects the objects in the game that may collide with the subject
 	 * @return true if a crash happens, false if not
 	 */
-	public boolean collisionCheck(PhysObject subject, List<? extends PhysObject> objects) {
-		for(PhysObject object : objects) {
-			if(!object.equals(subject)) {
-				if(Intersector.overlaps(subject.getPhysics().getRect(), object.getPhysics().getRect())) {
+	public Collision collisionCheck(PhysObject subject, List<? extends PhysObject> objects) {
+		for (PhysObject object : objects) {
+			if (!object.equals(subject)) {
+				if (Intersector.overlaps(subject.getPhysics().getRect(), object.getPhysics().getRect())) {
 					subject.handleCollision(object);
+					return new Collision(CollisionType.CRASHED, subject, object);
+				} else if (
+						subject.getPhysics().getRect().x + (subject.getPhysics().getRect().width / 2)
+						>
+						object.getPhysics().getRect().x + object.getPhysics().getRect().width) {
+					return new Collision(CollisionType.PASSED, subject, object);
 				}
 			}
 		}
-		return false;
+		return new Collision(CollisionType.NONE, subject, null);
 	}
 	
 }

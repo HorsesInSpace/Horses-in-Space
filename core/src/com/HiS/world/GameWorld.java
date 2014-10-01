@@ -11,6 +11,7 @@ import com.HiS.gameobject.obstacle.Obstacle;
 import com.HiS.graphics.GfxObject;
 import com.HiS.graphics.TexObject;
 import com.HiS.hishelpers.AssetLoader;
+import com.HiS.physics.Collision;
 import com.HiS.physics.PhysEngine;
 import com.HiS.physics.Physics;
 import com.HiS.screen.GameScreen;
@@ -26,6 +27,8 @@ public class GameWorld {
 	private GfxObject middleground2;
 	private GfxObject foreground1;
 	private GfxObject foreground2;
+	
+	private long score;
 
 	private PhysEngine physEngine;
 	private float scrollSpeed = -(GameScreen.gameWidth/2);
@@ -39,21 +42,39 @@ public class GameWorld {
 	}
 
 	public void update(float delta, float runTime) {
+		this.score += delta*100;
+		Gdx.app.log("Score", this.score + "");
 //		scrollSpeed -= delta;
 		moveBackMiddle(delta);
 		for(PhysGameObject gameObject : objects) {
 			
 			gameObject.update(delta, runTime);
 			
-			Physics physics = gameObject.getPhysics();
-			physics = this.physEngine.update(gameObject, delta);
+			this.physEngine.update(gameObject, delta);
 			if(gameObject instanceof Horse) {
-				this.physEngine.collisionCheck(gameObject, objects);
+				Collision col = this.physEngine.collisionCheck(gameObject, objects);
+				switch (col.getCollisionType()) {
+				case PASSED:
+					if (col.getObject() instanceof Obstacle) {
+						Obstacle obstacle = (Obstacle) col.getObject();
+						if (!obstacle.isPassed()) {
+							this.score += obstacle.getPoints();
+							obstacle.setPassed(true);
+						}
+					}
+					break;
+				case CRASHED:
+					//
+					break;
+				default:
+					//
+					break;
+				}
 			}
-			if(physics == null) {
+//			if(physics == null) {
 //				this.objects.remove(gameObject);
 //				gameObject = null;
-			}
+//			}
 			if(gameObject instanceof Obstacle) {
 				gameObject.getPhysics().setVelocity(new Vector2(scrollSpeed,0));
 				Rectangle rect = gameObject.getPhysics().getRect();
@@ -62,10 +83,12 @@ public class GameWorld {
 					if (rightmostObstacle != null) {
 						nextPos = rightmostObstacle.getPosition().x + rand.nextInt((int) (GameScreen.gameWidth * 0.66)) + (GameScreen.gameWidth/2);
 						Gdx.app.log("NextPos", "" + nextPos);
+						Gdx.app.log("Score", this.score + "");
 					}
 					
 					gameObject.getPhysics().setPosition(new Vector2(nextPos, rect.y));
 					gameObject.setCrashed(false);
+					((Obstacle) gameObject).setPassed(false);
 					
 					Gdx.app.log("RecentObstacle", rightmostObstacle.toString());
 				}
@@ -75,7 +98,6 @@ public class GameWorld {
 				}
 			}
 		}
-		
 	}
 
 	public List<PhysGameObject> getObjects() {
