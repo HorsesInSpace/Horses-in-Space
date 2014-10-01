@@ -43,7 +43,7 @@ public class GameWorld {
 
 	public void update(float delta, float runTime) {
 		this.score += delta*100;
-		Gdx.app.log("Score", this.score + "");
+	//	Gdx.app.log("Score", this.score + "");
 //		scrollSpeed -= delta;
 		moveBackMiddle(delta);
 		for(PhysGameObject gameObject : objects) {

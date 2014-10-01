@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
@@ -24,6 +25,7 @@ public class AssetLoader {
 	public static TextureRegion fence;
 	public static TextureRegion middleground1;
 	public static Animation anim;
+	public static BitmapFont font;
 	
 	public static Sound whinning;
 	public static Sound gallopSound;
@@ -37,6 +39,8 @@ public class AssetLoader {
 	 * Loads all assets into memory for universal access
 	 */
 	public static void load() {
+		font = new BitmapFont(Gdx.files.internal("data/monohorseinspaced.fnt"));
+		
 		texture = new Texture(Gdx.files.internal("data/textures.png"));
 		texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		
@@ -87,5 +91,6 @@ public class AssetLoader {
 		journey.dispose();
 		punch.dispose();
 		whinning.dispose();
+		font.dispose();
 	}
 }

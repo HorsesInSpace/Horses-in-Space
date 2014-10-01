@@ -16,12 +16,14 @@ import com.badlogic.gdx.math.Intersector;
  */
 public class PhysEngine {
 	
+	private static Collision collision;
+	
 	/**
 	 * Constructor for physEngine
 	 * TODO: make class and method static, no need for the object itself?
 	 */
 	public PhysEngine() {
-
+		PhysEngine.collision = new Collision(null, null, null);
 	}
 
 	/**
@@ -71,16 +73,25 @@ public class PhysEngine {
 			if (!object.equals(subject)) {
 				if (Intersector.overlaps(subject.getPhysics().getRect(), object.getPhysics().getRect())) {
 					subject.handleCollision(object);
-					return new Collision(CollisionType.CRASHED, subject, object);
+					PhysEngine.collision.setSubject(subject);
+					PhysEngine.collision.setObject(object);
+					PhysEngine.collision.setCollisionType(CollisionType.CRASHED);
+					return PhysEngine.collision;
 				} else if (
 						subject.getPhysics().getRect().x + (subject.getPhysics().getRect().width / 2)
 						>
 						object.getPhysics().getRect().x + object.getPhysics().getRect().width) {
-					return new Collision(CollisionType.PASSED, subject, object);
+					PhysEngine.collision.setSubject(subject);
+					PhysEngine.collision.setObject(object);
+					PhysEngine.collision.setCollisionType(CollisionType.PASSED);
+					return PhysEngine.collision;
 				}
 			}
 		}
-		return new Collision(CollisionType.NONE, subject, null);
+		PhysEngine.collision.setSubject(subject);
+		PhysEngine.collision.setObject(null);
+		PhysEngine.collision.setCollisionType(CollisionType.NONE);
+		return PhysEngine.collision;
 	}
 	
 }
