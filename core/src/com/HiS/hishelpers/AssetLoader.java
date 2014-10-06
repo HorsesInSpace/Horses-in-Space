@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -29,13 +28,9 @@ public class AssetLoader {
 	public static Animation anim;
 	public static BitmapFont font;
 	
-	public static Sound whinning;
-	public static Sound gallopSound;
-	public static Sound punch;
+	public static Sound whinning, gallopSound, punch;
 	
-	public static Music badHorsie;
-	public static Music journey;
-	public static Music gallopMusic;
+	public static Music badHorsie, journey, gallopMusic, moon;
 	
 	public static Preferences prefs;
 	
@@ -81,6 +76,7 @@ public class AssetLoader {
 		badHorsie = Gdx.audio.newMusic(Gdx.files.internal("data/bad_horsie.ogg"));
 		journey = Gdx.audio.newMusic(Gdx.files.internal("data/Journey.ogg"));
 		gallopMusic = Gdx.audio.newMusic(Gdx.files.internal("data/gallop.ogg"));
+		moon = Gdx.audio.newMusic(Gdx.files.internal("data/moon.mp3"));
 		
 		punch = Gdx.audio.newSound(Gdx.files.internal("data/punchPain.ogg"));
 		

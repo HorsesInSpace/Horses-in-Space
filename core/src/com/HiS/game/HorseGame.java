@@ -69,11 +69,9 @@ public class HorseGame extends Game {
 		
 		gallopSoundID = AssetLoader.gallopSound.loop(gallopVol);
 		
-		AssetLoader.journey.setLooping(true);
-		AssetLoader.journey.setVolume(musicVol);
-		AssetLoader.journey.play();
-		
-		
+		AssetLoader.moon.setLooping(true);
+		AssetLoader.moon.setVolume(musicVol);
+		AssetLoader.moon.play();
 	}
 	
 	/**
