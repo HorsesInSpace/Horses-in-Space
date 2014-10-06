@@ -134,16 +134,16 @@ public class GameRenderer {
 
 
 		// Horse collision box KEEP FOR TESTING
-		//		ShapeRenderer shape = new ShapeRenderer();
-		//		shape.setProjectionMatrix(cam.combined);
-		//		shape.begin(ShapeType.Filled);
-		//		shape.setColor(Color.RED);
-		//		for(PhysGameObject gameobject : world.getObjects()) {
-		//			if(gameobject instanceof Horse) {
-		//				shape.rect(gameobject.getPhysics().getRect().x, gameobject.getPhysics().getRect().y, gameobject.getPhysics().getRect().width, gameobject.getPhysics().getRect().height);
-		//			}
-		//		}
-		//		shape.end();
+//		ShapeRenderer shape = new ShapeRenderer();
+//		shape.setProjectionMatrix(cam.combined);
+//		shape.begin(ShapeType.Filled);
+//		shape.setColor(Color.RED);
+//		for(PhysGameObject gameobject : world.getObjects()) {
+//			if(gameobject instanceof Horse) {
+//				shape.rect(gameobject.getPhysics().getRect().x, gameobject.getPhysics().getRect().y, gameobject.getPhysics().getRect().width, gameobject.getPhysics().getRect().height);
+//			}
+//		}
+//		shape.end();
 	}
 
 	public void setWorld(GameWorld world) {
