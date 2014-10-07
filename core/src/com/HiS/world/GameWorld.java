@@ -20,7 +20,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class GameWorld {
 
-	private List<PhysGameObject> objects = new ArrayList<>();
+	private List<PhysGameObject> objects = new ArrayList<PhysGameObject>();
 	private GfxObject background;
 	private GfxObject middleground1;
 	private GfxObject middleground2;
