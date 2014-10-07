@@ -36,7 +36,16 @@ public class PhysEngine {
 	 */
 	public Physics update(PhysObject physObject, float delta) {
 		Physics physics = physObject.getPhysics();
-		
+
+		if(physics.getWeight() == 0) {
+			physics.getVelocity().add(physics.getAcceleration().x * delta, 
+					0);
+			physics.getPosition().add(physics.getVelocity().x * delta, 
+					0);
+			physics.getRect().setX(physics.getPosition().x);
+			physics.getRect().setY(physics.getPosition().y);
+			return physics;
+		} else {
 		if(physics.isGrounded()) {
 			physics.getVelocity().y = 0f;
 			physics.getPosition().y = GameScreen.gameHeight - (physics.getRect().height + 15);
@@ -60,6 +69,7 @@ public class PhysEngine {
 		physics.getRect().setY(physics.getPosition().y);
 		
 		return physics;
+		}
 	}
 
 	/**

@@ -130,20 +130,33 @@ public class GameRenderer {
 		// BATCH END
 		this.batch.end();
 
-
+		
 
 
 		// Horse collision box KEEP FOR TESTING
-//		ShapeRenderer shape = new ShapeRenderer();
-//		shape.setProjectionMatrix(cam.combined);
-//		shape.begin(ShapeType.Filled);
-//		shape.setColor(Color.RED);
-//		for(PhysGameObject gameobject : world.getObjects()) {
-//			if(gameobject instanceof Horse) {
+		ShapeRenderer shape = new ShapeRenderer();
+		shape.setProjectionMatrix(cam.combined);
+		shape.begin(ShapeType.Line);
+		shape.setColor(Color.RED);
+		for(PhysGameObject gameobject : world.getObjects()) {
+			if(gameobject instanceof Horse) {
+//				shape.polygon(new float[]{2f, 5f, 10f, 4f, 20f, 19f});
+				shape.polygon(((Horse) gameobject).getPoly().getTransformedVertices());
+<<<<<<< HEAD
+//				for (float f : ((Horse) gameobject).getPoly().getTransformedVertices()) {
+//					System.out.print(f + " ");
+//				}
+//				System.out.println("");
+=======
+				//for (float f : ((Horse) gameobject).getPoly().getTransformedVertices()) {
+					//System.out.print(f + " ");
+				//}
+				//System.out.println("");
+>>>>>>> c879b1e22c15a23809dd06d7e8e4368c07c4d65a
 //				shape.rect(gameobject.getPhysics().getRect().x, gameobject.getPhysics().getRect().y, gameobject.getPhysics().getRect().width, gameobject.getPhysics().getRect().height);
-//			}
-//		}
-//		shape.end();
+			}
+		}
+		shape.end();
 	}
 
 	public void setWorld(GameWorld world) {

@@ -4,12 +4,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.PolygonRegionLoader;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Polygon;
 
 /**
  * Static class used to load data such as Textures, sounds and other
@@ -20,13 +23,14 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class AssetLoader {
 	private static Texture texture;
 	
-	public static TextureRegion horse, horse2, horse3, horseJump;
+	public static TextureRegion horse, horse2, horse3, horseJump, horseSlide;
 	public static TextureRegion background;
 	public static TextureRegion foreground;
 	public static TextureRegion fence;
 	public static TextureRegion middleground1;
 	public static Animation anim;
 	public static BitmapFont font;
+	public static Polygon polyHorse, polyHorse2, polyHorse3, polyHorseJump, polyHorseSlide;
 	
 	public static Sound whinning, gallopSound, punch;
 	
@@ -40,20 +44,45 @@ public class AssetLoader {
 	public static void load() {
 		font = new BitmapFont(Gdx.files.internal("data/monohorseinspaced.fnt"));
 		font.setScale(.10f, -.10f);
-//		font.setColor(Color.PURPLE);
 		
-		texture = new Texture(Gdx.files.internal("data/textures.png"));
+		FileHandle textureHandle = Gdx.files.internal("data/textures.png");
+		FileHandle horseHandle = Gdx.files.internal("data/horsetex.psh");
+		FileHandle horse2Handle = Gdx.files.internal("data/horsetex2.psh");
+		FileHandle horse3Handle = Gdx.files.internal("data/horsetex3.psh");
+		FileHandle horseJumpHandle = Gdx.files.internal("data/horsetexjump.psh");
+		FileHandle horseSlideHandle = Gdx.files.internal("data/horsetexslide.psh");
+		
+		texture = new Texture(textureHandle);
 		texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 		
-		horse = new TextureRegion(texture, 0,450,150,93);
+		horse = new TextureRegion(texture, 0, 450, 150, 93);
 		horse.flip(false, true);
-		horse2 = new TextureRegion(texture, 0,548,150,93);
+		horse2 = new TextureRegion(texture, 0, 548, 150, 93);
 		horse2.flip(false, true);
-		horse3 = new TextureRegion(texture, 0,645,150,93);
+		horse3 = new TextureRegion(texture, 0, 645, 150, 93);
 		horse3.flip(false, true);
 		horseJump = new TextureRegion(texture, 0, 748, 150, 93);
 		horseJump.flip(false, true);
+		horseSlide = new TextureRegion(texture, 0, 850, 150, 60);
+		horseSlide.flip(false, true);
 		
+		PolygonRegionLoader prl = new PolygonRegionLoader();
+		polyHorse = new Polygon(prl.load(horse, horseHandle).getVertices());
+		polyHorse2 = new Polygon(prl.load(horse2, horse2Handle).getVertices());
+		polyHorse3 = new Polygon(prl.load(horse3, horse3Handle).getVertices());
+		polyHorseJump = new Polygon(prl.load(horseJump, horseJumpHandle).getVertices());
+		polyHorseSlide = new Polygon(prl.load(horseSlide, horseSlideHandle).getVertices());
+//		float[] biotch = new float[polyHorse.getVertices().length];
+//		polyHorse.setPosition(5, 40);
+//		polyHorse.rotate(180);
+//		int count = 0;
+//		for(float f : polyHorse.getTransformedVertices()) {
+//			biotch[count] = f * 0.2f;
+//			count++;
+//		}
+//
+//		polyHorse.setVertices(biotch);
+				
 		TextureRegion[] horses = {horse, horse2, horse3};
 		anim = new Animation(0.10f, horses);
 		anim.setPlayMode(PlayMode.LOOP_PINGPONG);
