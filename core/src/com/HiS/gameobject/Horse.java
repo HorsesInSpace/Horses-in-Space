@@ -40,7 +40,7 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 		this.polyMap.put(AssetLoader.horseSlide, AssetLoader.polyHorseSlide);
 		
 		for (Polygon poly : polyMap.values()) {
-			poly.setScale(0.16f, 0.16f);
+			poly.setScale(0.15f, 0.16f);
 			poly.setPosition(posX, posY+50);
 		}
 		

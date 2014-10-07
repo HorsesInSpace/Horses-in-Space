@@ -7,6 +7,7 @@ import java.util.Random;
 import com.HiS.gameobject.Horse;
 import com.HiS.gameobject.PhysGameObject;
 import com.HiS.gameobject.obstacle.Fence;
+import com.HiS.gameobject.obstacle.FloatyPlatform;
 import com.HiS.gameobject.obstacle.Obstacle;
 import com.HiS.graphics.GfxObject;
 import com.HiS.graphics.TexObject;
@@ -124,6 +125,7 @@ public class GameWorld {
 		this.objects.add(new Fence(200, 75));
 		this.objects.add(new Fence(300, 75));
 		this.objects.add(new Fence(400, 75));
+		this.objects.add(new FloatyPlatform(600, 10));
 		this.objects.add(new Horse(AssetLoader.horse, 22, 15, 300, 15, (float)(GameScreen.gameHeight - 15) - 15));
 		
 		this.background = new TexObject(AssetLoader.background, 

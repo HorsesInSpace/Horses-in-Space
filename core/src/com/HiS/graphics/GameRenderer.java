@@ -142,10 +142,10 @@ public class GameRenderer {
 			if(gameobject instanceof Horse) {
 //				shape.polygon(new float[]{2f, 5f, 10f, 4f, 20f, 19f});
 				shape.polygon(((Horse) gameobject).getPoly().getTransformedVertices());
-				for (float f : ((Horse) gameobject).getPoly().getTransformedVertices()) {
-					System.out.print(f + " ");
-				}
-				System.out.println("");
+//				for (float f : ((Horse) gameobject).getPoly().getTransformedVertices()) {
+//					System.out.print(f + " ");
+//				}
+//				System.out.println("");
 //				shape.rect(gameobject.getPhysics().getRect().x, gameobject.getPhysics().getRect().y, gameobject.getPhysics().getRect().width, gameobject.getPhysics().getRect().height);
 			}
 		}
