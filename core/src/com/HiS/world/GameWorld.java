@@ -125,7 +125,7 @@ public class GameWorld {
 		this.objects.add(new Fence(200, 75));
 		this.objects.add(new Fence(300, 75));
 		this.objects.add(new Fence(400, 75));
-		this.objects.add(new FloatyPlatform(600, 10));
+		this.objects.add(new FloatyPlatform(100, 50));
 		this.objects.add(new Horse(AssetLoader.horse, 22, 15, 300, 15, (float)(GameScreen.gameHeight - 15) - 15));
 		
 		this.background = new TexObject(AssetLoader.background, 
