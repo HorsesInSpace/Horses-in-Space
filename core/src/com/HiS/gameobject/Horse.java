@@ -40,7 +40,7 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 		this.polyMap.put(AssetLoader.horseSlide, AssetLoader.polyHorseSlide);
 		
 		for (Polygon poly : polyMap.values()) {
-			poly.setScale(0.16f, 0.16f);
+			poly.setScale(0.15f, 0.16f);
 			poly.setPosition(posX, posY+50);
 		}
 		
@@ -51,7 +51,7 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 	public void update(float delta, float runTime) {
 		
 		// TODO Move below line logic into physengine
-		this.poly.setPosition(this.physics.getRect().x, this.physics.getRect().y);
+		
 		
 		if(!this.physics.isGrounded()) {
 			this.texture = AssetLoader.horseJump;
@@ -63,6 +63,7 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 			AssetLoader.gallopSound.resume(HorseGame.gallopSoundID);
 		}
 		this.poly = polyMap.get(this.texture);
+		this.poly.setPosition(this.physics.getRect().x, this.physics.getRect().y);
 	}
 	
 	/**
