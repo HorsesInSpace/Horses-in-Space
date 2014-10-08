@@ -31,9 +31,14 @@ out/
 com_crashlytics_export_strings.xml
 
 ##
+.classpath
 *.classpath
+*/.classpath
 *.classpath~
+.gitignore~
 *.gitignore~
+*/.gitignore~
+
 
 ## Eclipse
 .metadata
