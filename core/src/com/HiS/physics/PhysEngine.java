@@ -88,20 +88,38 @@ public class PhysEngine {
 		for (PhysObject object : objects) {
 						
 			if (!object.equals(subject)) {
-				if (Intersector.overlaps(subject.getPhysics().getRect(), object.getPhysics().getRect())) {
-					subject.handleCollision(object);
-					PhysEngine.collision.setSubject(subject);
-					PhysEngine.collision.setObject(object);
-					PhysEngine.collision.setCollisionType(CollisionType.CRASHED);
-					return PhysEngine.collision;
-				} else if (
-						subject.getPhysics().getRect().x + (subject.getPhysics().getRect().width / 2)
-						>
-						object.getPhysics().getRect().x + object.getPhysics().getRect().width) {
-					PhysEngine.collision.setSubject(subject);
-					PhysEngine.collision.setObject(object);
-					PhysEngine.collision.setCollisionType(CollisionType.PASSED);
-					return PhysEngine.collision;
+				if (subject.getPhysics().getPoly() != null) {
+					if (IntersectorPlus.overlapConcavePolygonRect(subject.getPhysics().getPoly(), object.getPhysics().getRect())) {
+						subject.handleCollision(object);
+						PhysEngine.collision.setSubject(subject);
+						PhysEngine.collision.setObject(object);
+						PhysEngine.collision.setCollisionType(CollisionType.PASSED);
+						return PhysEngine.collision;
+					} else if (
+							subject.getPhysics().getRect().x + (subject.getPhysics().getRect().width / 2)
+							>
+							object.getPhysics().getRect().x + object.getPhysics().getRect().width) {
+						PhysEngine.collision.setSubject(subject);
+						PhysEngine.collision.setObject(object);
+						PhysEngine.collision.setCollisionType(CollisionType.PASSED);
+						return PhysEngine.collision;
+					}
+				} else {
+					if (Intersector.overlaps(subject.getPhysics().getRect(), object.getPhysics().getRect())) {
+						subject.handleCollision(object);
+						PhysEngine.collision.setSubject(subject);
+						PhysEngine.collision.setObject(object);
+						PhysEngine.collision.setCollisionType(CollisionType.CRASHED);
+						return PhysEngine.collision;
+					} else if (
+							subject.getPhysics().getRect().x + (subject.getPhysics().getRect().width / 2)
+							>
+							object.getPhysics().getRect().x + object.getPhysics().getRect().width) {
+						PhysEngine.collision.setSubject(subject);
+						PhysEngine.collision.setObject(object);
+						PhysEngine.collision.setCollisionType(CollisionType.PASSED);
+						return PhysEngine.collision;
+					}
 				}
 			}
 		}
