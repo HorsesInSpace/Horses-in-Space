@@ -17,7 +17,9 @@ public class Physics {
 	private float weight;
 
 	private boolean isGrounded = true;
-	private boolean isOnTopOfObject = false;
+	private Physics onTopOfObject = null;
+
+	private boolean platform;
 
 	private Rectangle rect;
 	private Polygon poly;
@@ -48,6 +50,8 @@ public class Physics {
 		this.rect = new Rectangle(posX, posY + height, width, height);
 
 		this.poly = poly;
+
+		this.platform = false;
 
 		this.position = new Vector2(posX, posY);
 		this.velocity = new Vector2(0, 0);
@@ -91,13 +95,21 @@ public class Physics {
 		this.isGrounded = isGrounded;
 	}
 
+	public boolean isPlatform() {
+		return this.platform;
+	}
+
+	public void setPlatform(boolean platform) {
+		this.platform = platform;
+	}
+
 	/**
 	 * boolean to check if the object is on tothis.isOnTopOfObject *
 	 *
 	 * @return isOnTopOfObject the new value for isOnTopOfObject
 	 */
 	public boolean isOnTopOfObject() {
-		return this.isOnTopOfObject;
+		return this.onTopOfObject != null;
 	}
 
 	/**
@@ -106,8 +118,12 @@ public class Physics {
 	 * @param isOnTopOfObject
 	 *            the new value for isOnTopOfObject
 	 */
-	public void setOnTopOfObject(boolean isOnTopOfObject) {
-		this.isOnTopOfObject = isOnTopOfObject;
+	public void setOnTopOfObject(Physics onTopOfObject) {
+		this.onTopOfObject = onTopOfObject;
+	}
+
+	public Physics getOnTopOfObject() {
+		return this.onTopOfObject;
 	}
 
 	/**

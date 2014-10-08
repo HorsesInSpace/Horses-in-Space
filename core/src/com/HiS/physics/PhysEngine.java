@@ -39,6 +39,13 @@ public class PhysEngine {
 	public Physics update(PhysObject physObject, float delta) {
 		Physics physics = physObject.getPhysics();
 
+		if (physics.isOnTopOfObject()) {
+			if (physics.getPosition().x > (physics.getOnTopOfObject()
+					.getPosition().x + physics.getOnTopOfObject().getRect().width)) {
+				physics.setOnTopOfObject(null);
+			}
+		}
+
 		if (physics.getWeight() == 0) {
 			physics.getVelocity().add(physics.getAcceleration().x * delta, 0);
 			physics.getPosition().add(physics.getVelocity().x * delta, 0);
@@ -51,11 +58,11 @@ public class PhysEngine {
 				physics.getVelocity().y = 0f;
 				physics.getPosition().y = GameScreen.gameHeight
 						- (physics.getRect().height + 15);
-				// if(physics.isOnTopOfObject()) {
-				// physics.getVelocity().y = 0f;
-				//
-				// }
 
+			} else if (physics.isOnTopOfObject()) {
+				physics.getVelocity().y = 0f;
+				physics.getPosition().y = physics.getOnTopOfObject()
+						.getPosition().y - physics.getRect().height;
 			} else {
 				physics.getVelocity().add(physics.getAcceleration().x * delta,
 						physics.getAcceleration().y * delta);
@@ -93,6 +100,28 @@ public class PhysEngine {
 		for (PhysObject object : objects) {
 
 			if (!object.equals(subject)) {
+				if (object.getPhysics().isPlatform()
+						&& Intersector.overlaps(subject.getPhysics().getRect(),
+								object.getPhysics().getRect())) {
+					if (object.getPhysics().getPosition().y >= ((subject
+							.getPhysics().getPosition().y + subject
+							.getPhysics().getRect().height) - 2f)) {
+						PhysEngine.collision.setSubject(subject);
+						PhysEngine.collision.setObject(object);
+						PhysEngine.collision
+								.setCollisionType(CollisionType.ONTOP);
+						subject.getPhysics().setOnTopOfObject(
+								object.getPhysics());
+						return PhysEngine.collision;
+					} else {
+						PhysEngine.collision.setSubject(subject);
+						PhysEngine.collision.setObject(object);
+						PhysEngine.collision
+						.setCollisionType(CollisionType.CRASHED);
+					}
+
+				}
+
 				if (subject.getPhysics().getPoly() != null) {
 					if (IntersectorPlus.overlapConvexPolygonRect(subject
 							.getPhysics().getPoly(), object.getPhysics()
@@ -102,6 +131,7 @@ public class PhysEngine {
 						PhysEngine.collision.setObject(object);
 						PhysEngine.collision
 								.setCollisionType(CollisionType.CRASHED);
+
 						return PhysEngine.collision;
 					} else if ((subject.getPhysics().getRect().x + (subject
 							.getPhysics().getRect().width / 2)) > (object
@@ -140,5 +170,4 @@ public class PhysEngine {
 		PhysEngine.collision.setCollisionType(CollisionType.NONE);
 		return PhysEngine.collision;
 	}
-
 }

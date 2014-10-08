@@ -63,6 +63,9 @@ public class GameWorld {
 						}
 					}
 					break;
+				case ONTOP:
+
+					break;
 				case CRASHED:
 					GameScreen.running = false;
 					if (this.score > AssetLoader.getHighScore()) {

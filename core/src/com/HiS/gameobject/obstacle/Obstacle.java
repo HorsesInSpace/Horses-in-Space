@@ -10,33 +10,33 @@ public abstract class Obstacle extends PhysGameObject implements PointObject {
 	private int points;
 	private boolean passed = false;
 
-	public Obstacle(TextureRegion texture, int points, int width, int height, float weight,
-			float posX, float posY) {
+	public Obstacle(TextureRegion texture, int points, int width, int height,
+			float weight, float posX, float posY) {
 		super(texture, width, height, weight, posX, posY, null);
 		// TODO Auto-generated constructor stub
 		this.points = points;
 	}
-	
+
 	@Override
 	public boolean hasCrashed() {
 		return this.crashed;
 	}
-	
+
 	@Override
 	public void setCrashed(boolean crash) {
 		this.crashed = crash;
 	}
-	
+
 	@Override
 	public int getPoints() {
 		return this.points;
 	}
-	
+
 	@Override
 	public void setPoints(int points) {
 		this.points = points;
 	}
-	
+
 	@Override
 	public boolean isPassed() {
 		return this.passed;
