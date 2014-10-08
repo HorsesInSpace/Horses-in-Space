@@ -19,7 +19,7 @@ public class Horse extends PhysGameObject {
 
 	private static Horse instance = null;
 	private boolean sliding = false;
-	private HashMap<TextureRegion, Polygon> polyMap;
+	private final HashMap<TextureRegion, Polygon> polyMap;
 
 	public static Horse getInstance() {
 		if (instance == null) {
@@ -52,7 +52,7 @@ public class Horse extends PhysGameObject {
 
 		// TODO Move below line logic into physengine
 
-		if (!this.physics.isGrounded()) {
+		if (!this.physics.isGrounded() && !this.physics.isOnTopOfObject()) {
 			this.texture = AssetLoader.horseJump;
 			if (this.sliding) {
 				this.texture = AssetLoader.horseSlide;
@@ -73,13 +73,14 @@ public class Horse extends PhysGameObject {
 	 */
 	public void jump() {
 
-		if (this.physics.isGrounded()) {
+		if (this.physics.isGrounded() || this.physics.isOnTopOfObject()) {
 			Gdx.app.log("Horse", "jumping");
 
 			AssetLoader.gallopSound.pause(HorseGame.gallopSoundID);
 			AssetLoader.whinning.play(1f);
 
 			this.physics.setGrounded(false);
+			this.physics.setOnTopOfObject(null);
 			this.physics.getVelocity().y = (float) -(120 - (this.physics
 					.getWeight() * 0.05));
 
