@@ -14,11 +14,10 @@ import com.badlogic.gdx.math.Polygon;
  * @author morten, lars
  * @version 0.3
  */
-public class Horse extends PhysGameObject implements GameObject, PhysObject {
+public class Horse extends PhysGameObject {
 
 	private static Horse instance = null;
 	private boolean sliding = false;
-	private Polygon poly;
 	private HashMap<TextureRegion, Polygon> polyMap;
 	
 	public static Horse getInstance() {
@@ -31,20 +30,18 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 	//TODO can still be made into Singleton by making constructor private. 
 	//public now b/c testing purposes
 	public Horse(TextureRegion horse, int width, int height, float weight, float posX, float posY) {
-		super(horse, width, height, weight, posX, posY);
-		this.polyMap = new HashMap<TextureRegion, Polygon>();
+		super(horse, width, height, weight, posX, posY, AssetLoader.polyHorse);
+		this.polyMap = new HashMap<>();
 		this.polyMap.put(AssetLoader.horse, AssetLoader.polyHorse);
 		this.polyMap.put(AssetLoader.horse2, AssetLoader.polyHorse2);
 		this.polyMap.put(AssetLoader.horse3, AssetLoader.polyHorse3);
 		this.polyMap.put(AssetLoader.horseJump, AssetLoader.polyHorseJump);
 		this.polyMap.put(AssetLoader.horseSlide, AssetLoader.polyHorseSlide);
 		
-		for (Polygon poly : polyMap.values()) {
-			poly.setScale(0.15f, 0.16f);
-			poly.setPosition(posX, posY+50);
+		for (Polygon polygon : polyMap.values()) {
+			polygon.setScale(0.15f, 0.16f);
+			polygon.setPosition(posX, posY+50);
 		}
-		
-		this.poly = this.polyMap.get(this.texture);
 	}
 	
 	@Override
@@ -62,8 +59,8 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 			this.texture = AssetLoader.anim.getKeyFrame(runTime);
 			AssetLoader.gallopSound.resume(HorseGame.gallopSoundID);
 		}
-		this.poly = polyMap.get(this.texture);
-		this.poly.setPosition(this.physics.getRect().x, this.physics.getRect().y);
+		this.physics.setPoly(polyMap.get(this.texture));
+		this.physics.getPoly().setPosition(this.physics.getRect().x, this.physics.getRect().y);
 	}
 	
 	/**
@@ -117,14 +114,6 @@ public class Horse extends PhysGameObject implements GameObject, PhysObject {
 			this.sliding = false;
 			this.physics.getRect().height *= 2;
 		}
-	}
-
-	public Polygon getPoly() {
-		return poly;
-	}
-
-	public void setPoly(Polygon poly) {
-		this.poly = poly;
 	}
 
 }

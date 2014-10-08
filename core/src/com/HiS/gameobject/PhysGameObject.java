@@ -4,6 +4,7 @@ import com.HiS.graphics.GfxObject;
 import com.HiS.physics.PhysObject;
 import com.HiS.physics.Physics;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -12,8 +13,8 @@ public abstract class PhysGameObject implements GameObject, PhysObject, GfxObjec
 	protected Physics physics;
 	protected TextureRegion texture;
 
-	public PhysGameObject(TextureRegion texture, int width, int height, float weight, float posX, float posY) {
-		this.physics = new Physics(width, height, weight, posX, posY);
+	public PhysGameObject(TextureRegion texture, int width, int height, float weight, float posX, float posY, Polygon poly) {
+		this.physics = new Physics(width, height, weight, posX, posY, poly);
 		this.texture = texture;
 	}
 	

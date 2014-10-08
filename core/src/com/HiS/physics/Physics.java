@@ -1,5 +1,6 @@
 package com.HiS.physics;
 
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -19,6 +20,7 @@ public class Physics {
 	private boolean isOnTopOfObject = false;
 
 	private Rectangle rect;
+	private Polygon poly;
 
 	private Vector2 velocity;
 	private Vector2 position;
@@ -32,11 +34,13 @@ public class Physics {
 	 * @param posX position on screen, X axis
 	 * @param posY position on screen, Y axis
 	 */
-	public Physics(int width, int height, float weight, float posX, float posY) {
+	public Physics(int width, int height, float weight, float posX, float posY, Polygon poly) {
 		this.weight = weight;
 
-		this.rect = new Rectangle(posX,posY + height,width,height); 
 		//Rectangle is used as an easier way to detect collisions in physEngine
+		this.rect = new Rectangle(posX,posY + height,width,height); 
+		
+		this.poly = poly;
 
 		this.position = new Vector2(posX, posY);
 		this.velocity = new Vector2(0, 0);
@@ -106,6 +110,14 @@ public class Physics {
 	 */
 	public void setRect(Rectangle rect) {
 		this.rect = rect;
+	}
+
+	public Polygon getPoly() {
+		return poly;
+	}
+
+	public void setPoly(Polygon poly) {
+		this.poly = poly;
 	}
 
 	/**
