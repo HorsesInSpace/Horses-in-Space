@@ -27,14 +27,14 @@ public class GameWorld {
 	private GfxObject middleground2;
 	private GfxObject foreground1;
 	private GfxObject foreground2;
-	
+
 	public long score;
 
 	private PhysEngine physEngine;
-	private float scrollSpeed = -(GameScreen.gameWidth/2);
-	
+	private float scrollSpeed = -(GameScreen.gameWidth / 1.8f);
+
 	private Random rand;
-	
+
 	private Obstacle rightmostObstacle = null;
 
 	public GameWorld() {
@@ -42,17 +42,17 @@ public class GameWorld {
 	}
 
 	public void update(float delta, float runTime) {
-		this.score += delta*100;
-	//	Gdx.app.log("Score", this.score + "");
-//		scrollSpeed -= delta;
+		this.score += delta * 100;
+		// Gdx.app.log("Score", this.score + "");
+		// scrollSpeed -= delta;
 		moveBackMiddle(delta);
-		for(PhysGameObject gameObject : objects) {
-			
-			gameObject.update(delta, runTime);
-			
+		for (PhysGameObject gameObject : this.objects) {
+
 			this.physEngine.update(gameObject, delta);
-			if(gameObject instanceof Horse) {
-				Collision col = this.physEngine.collisionCheck(gameObject, objects);
+			gameObject.update(delta, runTime);
+			if (gameObject instanceof Horse) {
+				Collision col = this.physEngine.collisionCheck(gameObject,
+						this.objects);
 				switch (col.getCollisionType()) {
 				case PASSED:
 					if (col.getObject() instanceof Obstacle) {
@@ -65,115 +65,124 @@ public class GameWorld {
 					break;
 				case CRASHED:
 					GameScreen.running = false;
-					if (score > AssetLoader.getHighScore()) {
-		                AssetLoader.setHighScore(score);
-		            }
+					if (this.score > AssetLoader.getHighScore()) {
+						AssetLoader.setHighScore(this.score);
+					}
 					break;
 				default:
 					//
 					break;
 				}
-			} else if(gameObject instanceof Obstacle) {
-				gameObject.getPhysics().setVelocity(new Vector2(scrollSpeed,0));
+			} else if (gameObject instanceof Obstacle) {
+				gameObject.getPhysics().setVelocity(
+						new Vector2(this.scrollSpeed, 0));
 				Rectangle rect = gameObject.getPhysics().getRect();
-				if((rect.x + rect.width) < 0) {
+				if ((rect.x + rect.width) < 0) {
 					float nextPos = GameScreen.gameWidth;
-					if (rightmostObstacle != null) {
-						nextPos = rightmostObstacle.getPosition().x + rand.nextInt((int) (GameScreen.gameWidth * 0.66)) + (GameScreen.gameWidth/2);
+					if (this.rightmostObstacle != null) {
+						nextPos = this.rightmostObstacle.getPosition().x
+								+ this.rand
+										.nextInt((int) (GameScreen.gameWidth * 0.66))
+								+ (GameScreen.gameWidth / 2);
 						Gdx.app.log("NextPos", "" + nextPos);
 						Gdx.app.log("Score", this.score + "");
 					}
-					
-					gameObject.getPhysics().setPosition(new Vector2(nextPos, rect.y));
+
+					gameObject.getPhysics().setPosition(
+							new Vector2(nextPos, rect.y));
 					gameObject.setCrashed(false);
 					((Obstacle) gameObject).setPassed(false);
-					
-					Gdx.app.log("RecentObstacle", rightmostObstacle.toString());
+
+					Gdx.app.log("RecentObstacle",
+							this.rightmostObstacle.toString());
 				}
-				if(rightmostObstacle == null ||
-						gameObject.getPosition().x > rightmostObstacle.getPosition().x) {
-					rightmostObstacle = (Obstacle)gameObject;
+				if ((this.rightmostObstacle == null)
+						|| (gameObject.getPosition().x > this.rightmostObstacle
+								.getPosition().x)) {
+					this.rightmostObstacle = (Obstacle) gameObject;
 				}
 			}
 		}
 	}
 
 	public List<PhysGameObject> getObjects() {
-		return objects;
+		return this.objects;
 	}
 
 	public GfxObject getBackground() {
-		return background;
+		return this.background;
 	}
 
 	public GfxObject getMiddleground1() {
-		return middleground1;
+		return this.middleground1;
 	}
-	
+
 	public GfxObject getMiddleground2() {
-		return middleground2;
+		return this.middleground2;
 	}
 
 	public GfxObject getForeground1() {
-		return foreground1;
+		return this.foreground1;
 	}
-	
+
 	public GfxObject getForeground2() {
-		return foreground2;
+		return this.foreground2;
 	}
+
 	private void initWorld() {
 		this.objects.add(new Fence(200, 75));
 		this.objects.add(new Fence(300, 75));
 		this.objects.add(new Fence(400, 75));
 		this.objects.add(new FloatyPlatform(100, 50));
-		this.objects.add(new Horse(AssetLoader.horse, 22, 15, 300, 15, (float)(GameScreen.gameHeight - 15) - 15));
-		
-		this.background = new TexObject(AssetLoader.background, 
-				0, 
-				-90, 
-				GameScreen.gameHeight, 
-				GameScreen.gameWidth);
+		this.objects.add(new Horse(AssetLoader.horse, 22, 15, 300, 15,
+				GameScreen.gameHeight - 15 - 15));
 
-		this.middleground1 = new TexObject(AssetLoader.middleground1, 
-				0, 
-				GameScreen.gameHeight/4+(GameScreen.gameHeight/16), 
-				GameScreen.gameHeight/4, GameScreen.gameWidth + GameScreen.gameWidth/2);
-		this.middleground2 = new TexObject(AssetLoader.middleground1, 
-				this.getMiddleground1().getRect().width, 
-				GameScreen.gameHeight/4+(GameScreen.gameHeight/16), 
-				GameScreen.gameHeight/4, GameScreen.gameWidth + GameScreen.gameWidth /2);
-		
-		this.foreground1 = new TexObject(AssetLoader.foreground, 
-				0,
-				(GameScreen.gameHeight/2)+(GameScreen.gameHeight/20), 
-				GameScreen.gameHeight/4, GameScreen.gameWidth);
-		this.foreground2 = new TexObject(AssetLoader.foreground, 
-				this.foreground1.getRect().width, 
-				(GameScreen.gameHeight/2)+(GameScreen.gameHeight/20), 
-				GameScreen.gameHeight/4, GameScreen.gameWidth);
+		this.background = new TexObject(AssetLoader.background, 0, -90,
+				GameScreen.gameHeight, GameScreen.gameWidth);
 
-		
+		this.middleground1 = new TexObject(AssetLoader.middleground1, 0,
+				(GameScreen.gameHeight / 4) + (GameScreen.gameHeight / 16),
+				GameScreen.gameHeight / 4, GameScreen.gameWidth
+						+ (GameScreen.gameWidth / 2));
+		this.middleground2 = new TexObject(AssetLoader.middleground1,
+				getMiddleground1().getRect().width, (GameScreen.gameHeight / 4)
+						+ (GameScreen.gameHeight / 16),
+				GameScreen.gameHeight / 4, GameScreen.gameWidth
+						+ (GameScreen.gameWidth / 2));
+
+		this.foreground1 = new TexObject(AssetLoader.foreground, 0,
+				(GameScreen.gameHeight / 2) + (GameScreen.gameHeight / 20),
+				GameScreen.gameHeight / 4, GameScreen.gameWidth);
+		this.foreground2 = new TexObject(AssetLoader.foreground,
+				this.foreground1.getRect().width, (GameScreen.gameHeight / 2)
+						+ (GameScreen.gameHeight / 20),
+				GameScreen.gameHeight / 4, GameScreen.gameWidth);
+
 		this.physEngine = new PhysEngine();
-		
-		rand = new Random();
+
+		this.rand = new Random();
 	}
-	
+
 	private void moveBackMiddle(float delta) {
-		this.foreground1.getRect().x += scrollSpeed*delta;
-		this.foreground2.getRect().x += scrollSpeed*delta;
-		if((this.foreground1.getRect().x + this.foreground1.getRect().width) < 0) {
-			this.foreground1.getRect().x = this.foreground2.getRect().x + this.foreground2.getRect().width;
+		this.foreground1.getRect().x += this.scrollSpeed * delta;
+		this.foreground2.getRect().x += this.scrollSpeed * delta;
+		if ((this.foreground1.getRect().x + this.foreground1.getRect().width) < 0) {
+			this.foreground1.getRect().x = this.foreground2.getRect().x
+					+ this.foreground2.getRect().width;
 		}
-		if((this.foreground2.getRect().x + this.foreground2.getRect().width) < 0) {
-			this.foreground2.getRect().x = this.foreground1.getRect().x + this.foreground1.getRect().width;
+		if ((this.foreground2.getRect().x + this.foreground2.getRect().width) < 0) {
+			this.foreground2.getRect().x = this.foreground1.getRect().x
+					+ this.foreground1.getRect().width;
 		}
-		this.middleground1.getRect().x += (scrollSpeed/4)*delta;
-		this.middleground2.getRect().x += (scrollSpeed/4)*delta;
-		if((this.middleground1.getRect().x + this.middleground1.getRect().width) < 0) {
-			this.middleground1.getRect().x = this.getMiddleground2().getRect().x+this.getMiddleground2().getRect().width;
+		this.middleground1.getRect().x += (this.scrollSpeed / 4) * delta;
+		this.middleground2.getRect().x += (this.scrollSpeed / 4) * delta;
+		if ((this.middleground1.getRect().x + this.middleground1.getRect().width) < 0) {
+			this.middleground1.getRect().x = getMiddleground2().getRect().x
+					+ getMiddleground2().getRect().width;
 		}
-		if((this.middleground2.getRect().x + this.middleground2.getRect().width) < 0) {
-			this.middleground2.getRect().x = this.getMiddleground1().getRect().x+this.getMiddleground1().getRect().width;
+		if ((this.middleground2.getRect().x + this.middleground2.getRect().width) < 0) {
+			this.middleground2.getRect().x = getMiddleground1().getRect().x
+					+ getMiddleground1().getRect().width;
 		}
 	}
 }
