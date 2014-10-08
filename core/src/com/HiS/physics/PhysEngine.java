@@ -2,7 +2,9 @@ package com.HiS.physics;
 
 import java.util.List;
 
+import com.HiS.gameobject.obstacle.FloatyPlatform;
 import com.HiS.screen.GameScreen;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Intersector;
 
 /**
@@ -46,10 +48,16 @@ public class PhysEngine {
 			physics.getRect().setY(physics.getPosition().y);
 			return physics;
 		} else {
+			
 		if(physics.isGrounded()) {
 			physics.getVelocity().y = 0f;
 			physics.getPosition().y = GameScreen.gameHeight - (physics.getRect().height + 15);
-		} else {
+//		if(physics.isOnTopOfObject()) {
+//			physics.getVelocity().y = 0f;
+//			
+//					}
+		
+		}else {
 			physics.getVelocity().add(physics.getAcceleration().x * delta, 
 					physics.getAcceleration().y * delta);
 
@@ -80,6 +88,7 @@ public class PhysEngine {
 	 */
 	public Collision collisionCheck(PhysObject subject, List<? extends PhysObject> objects) {
 		for (PhysObject object : objects) {
+						
 			if (!object.equals(subject)) {
 				if (Intersector.overlaps(subject.getPhysics().getRect(), object.getPhysics().getRect())) {
 					subject.handleCollision(object);

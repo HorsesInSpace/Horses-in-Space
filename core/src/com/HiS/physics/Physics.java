@@ -16,6 +16,7 @@ public class Physics {
 	private float weight;
 
 	private boolean isGrounded = true;
+	private boolean isOnTopOfObject = false;
 
 	private Rectangle rect;
 
@@ -73,6 +74,22 @@ public class Physics {
 	 */
 	public void setGrounded(boolean isGrounded) {
 		this.isGrounded = isGrounded;
+	}
+	
+	/**
+	 * boolean to check if the object is on top of another object
+	 * @return isOnTopOfObject the new value for isOnTopOfObject
+	 */
+	public boolean isOnTopOfObject() {
+		return isOnTopOfObject;
+	}
+	
+	/**
+	 * set the value of isOnTopOfObject to true or false
+	 * @param isOnTopOfObject the new value for isOnTopOfObject
+	 */
+	public void setOnTopOfObject(boolean isOnTopOfObject){
+		this.isOnTopOfObject = isOnTopOfObject;
 	}
 
 	/**
