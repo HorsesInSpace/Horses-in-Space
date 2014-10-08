@@ -2,9 +2,7 @@ package com.HiS.physics;
 
 import java.util.List;
 
-import com.HiS.gameobject.obstacle.FloatyPlatform;
 import com.HiS.screen.GameScreen;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Intersector;
 
 /**

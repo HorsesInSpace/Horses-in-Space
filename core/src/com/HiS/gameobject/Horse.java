@@ -31,7 +31,7 @@ public class Horse extends PhysGameObject {
 	//public now b/c testing purposes
 	public Horse(TextureRegion horse, int width, int height, float weight, float posX, float posY) {
 		super(horse, width, height, weight, posX, posY, AssetLoader.polyHorse);
-		this.polyMap = new HashMap<>();
+		this.polyMap = new HashMap<TextureRegion, Polygon>();
 		this.polyMap.put(AssetLoader.horse, AssetLoader.polyHorse);
 		this.polyMap.put(AssetLoader.horse2, AssetLoader.polyHorse2);
 		this.polyMap.put(AssetLoader.horse3, AssetLoader.polyHorse3);
