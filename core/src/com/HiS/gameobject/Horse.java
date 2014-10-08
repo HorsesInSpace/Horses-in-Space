@@ -95,6 +95,7 @@ public class Horse extends PhysGameObject {
 	@Override
 	public void destroy() {
 		// TODO Correctly and effectively destroy the object
+		this.texture = AssetLoader.horseSplat;
 		Gdx.app.log("Horse", "destroyed");
 	}
 

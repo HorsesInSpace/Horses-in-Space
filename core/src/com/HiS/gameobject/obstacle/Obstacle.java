@@ -3,6 +3,7 @@ package com.HiS.gameobject.obstacle;
 import com.HiS.gameobject.PhysGameObject;
 import com.HiS.gameobject.points.PointObject;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Polygon;
 
 public abstract class Obstacle extends PhysGameObject implements PointObject {
 
@@ -11,8 +12,8 @@ public abstract class Obstacle extends PhysGameObject implements PointObject {
 	private boolean passed = false;
 
 	public Obstacle(TextureRegion texture, int points, int width, int height,
-			float weight, float posX, float posY) {
-		super(texture, width, height, weight, posX, posY, null);
+			float weight, float posX, float posY, Polygon poly) {
+		super(texture, width, height, weight, posX, posY, poly);
 		// TODO Auto-generated constructor stub
 		this.points = points;
 	}

@@ -9,6 +9,7 @@ import com.HiS.gameobject.PhysGameObject;
 import com.HiS.gameobject.obstacle.Fence;
 import com.HiS.gameobject.obstacle.FloatyPlatform;
 import com.HiS.gameobject.obstacle.Obstacle;
+import com.HiS.gameobject.obstacle.Ufo;
 import com.HiS.graphics.GfxObject;
 import com.HiS.graphics.TexObject;
 import com.HiS.hishelpers.AssetLoader;
@@ -68,6 +69,7 @@ public class GameWorld {
 					break;
 				case CRASHED:
 					GameScreen.running = false;
+					gameObject.destroy();
 					if (this.score > AssetLoader.getHighScore()) {
 						AssetLoader.setHighScore(this.score);
 					}
@@ -133,10 +135,11 @@ public class GameWorld {
 	}
 
 	private void initWorld() {
+		this.objects.add(new Fence(100, 75));
 		this.objects.add(new Fence(200, 75));
 		this.objects.add(new Fence(300, 75));
-		this.objects.add(new Fence(400, 75));
-		this.objects.add(new FloatyPlatform(100, 50));
+		this.objects.add(new FloatyPlatform(400, 50));
+		this.objects.add(new Ufo(500, 42));
 		this.objects.add(new Horse(AssetLoader.horse, 22, 15, 300, 15,
 				GameScreen.gameHeight - 15 - 15));
 
