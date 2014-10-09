@@ -14,7 +14,6 @@ public abstract class Obstacle extends PhysGameObject implements PointObject {
 	public Obstacle(TextureRegion texture, int points, int width, int height,
 			float weight, float posX, float posY, Polygon poly) {
 		super(texture, width, height, weight, posX, posY, poly);
-		// TODO Auto-generated constructor stub
 		this.points = points;
 	}
 

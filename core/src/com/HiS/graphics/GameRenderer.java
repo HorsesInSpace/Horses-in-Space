@@ -104,16 +104,20 @@ public class GameRenderer {
 		// BATCH END
 		this.batch.end();
 
-		// Horse collision box KEEP FOR TESTING
+		// Collision box KEEP FOR TESTING
 		// ShapeRenderer shape = new ShapeRenderer();
 		// shape.setProjectionMatrix(this.cam.combined);
 		// shape.begin(ShapeType.Line);
 		// shape.setColor(Color.RED);
 		// for (PhysGameObject gameobject : this.world.getObjects()) {
-		// if (gameobject.getPhysics().getPoly() != null) {
 		// shape.polygon(gameobject.getPhysics().getPoly()
 		// .getTransformedVertices());
 		// }
+		// shape.setColor(Color.GREEN);
+		// for (PhysGameObject gameobject : this.world.getObjects()) {
+		// shape.rect(gameobject.getPhysics().getRect().x, gameobject
+		// .getPhysics().getRect().y, gameobject.getPhysics()
+		// .getRect().width, gameobject.getPhysics().getRect().height);
 		// }
 		// shape.end();
 	}

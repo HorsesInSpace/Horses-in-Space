@@ -98,68 +98,43 @@ public class PhysEngine {
 	public Collision collisionCheck(PhysObject subject,
 			List<? extends PhysObject> objects) {
 		for (PhysObject object : objects) {
+			boolean collided = false;
+			boolean pass = false;
+			boolean platform = object.getPhysics().isPlatform();
 
 			if (!object.equals(subject)) {
-				if (object.getPhysics().isPlatform()
-						&& Intersector.overlaps(subject.getPhysics().getRect(),
-								object.getPhysics().getRect())) {
+
+				if (Intersector.overlapConvexPolygons(subject.getPhysics()
+						.getPoly(), object.getPhysics().getPoly())) {
+					collided = true;
+				}
+
+				if (collided && platform) {
 					if (object.getPhysics().getPosition().y >= ((subject
 							.getPhysics().getPosition().y + subject
 							.getPhysics().getRect().height) - 2f)) {
 						subject.getPhysics().setOnTopOfObject(
 								object.getPhysics());
+
 						return PhysEngine.collision.setCollision(subject,
 								object, CollisionType.ONTOP);
 					} else {
 						return PhysEngine.collision.setCollision(subject,
 								object, CollisionType.CRASHED);
 					}
-
-				} else if (subject.getPhysics().getPoly() != null) {
-					if (object.getPhysics().getPoly() != null) {
-						if (Intersector.overlapConvexPolygons(subject
-								.getPhysics().getPoly(), object.getPhysics()
-								.getPoly())) {
-							subject.handleCollision(object);
-							return PhysEngine.collision.setCollision(subject,
-									object, CollisionType.CRASHED);
-						}
-					} else {
-						if (IntersectorPlus.overlapConvexPolygonRect(subject
-								.getPhysics().getPoly(), object.getPhysics()
-								.getRect())) {
-							subject.handleCollision(object);
-							return PhysEngine.collision.setCollision(subject,
-									object, CollisionType.CRASHED);
-						}
-					}
+				} else if (collided) {
+					return PhysEngine.collision.setCollision(subject, object,
+							CollisionType.CRASHED);
 				} else if ((subject.getPhysics().getRect().x + (subject
 						.getPhysics().getRect().width / 2)) > (object
-								.getPhysics().getRect().x + object.getPhysics()
-								.getRect().width)) {
+						.getPhysics().getRect().x + object.getPhysics()
+						.getRect().width)) {
 					return PhysEngine.collision.setCollision(subject, object,
 							CollisionType.PASSED);
-
-				} else {
-					if (Intersector.overlaps(subject.getPhysics().getRect(),
-							object.getPhysics().getRect())) {
-						subject.handleCollision(object);
-
-						return PhysEngine.collision.setCollision(subject,
-								object, CollisionType.CRASHED);
-					} else if ((subject.getPhysics().getRect().x + (subject
-							.getPhysics().getRect().width / 2)) > (object
-									.getPhysics().getRect().x + object.getPhysics()
-									.getRect().width)) {
-						return PhysEngine.collision.setCollision(subject,
-								object, CollisionType.PASSED);
-					}
 				}
 			}
 		}
-		PhysEngine.collision.setSubject(subject);
-		PhysEngine.collision.setObject(null);
-		PhysEngine.collision.setCollisionType(CollisionType.NONE);
-		return PhysEngine.collision;
+		return PhysEngine.collision.setCollision(subject, null,
+				CollisionType.NONE);
 	}
 }

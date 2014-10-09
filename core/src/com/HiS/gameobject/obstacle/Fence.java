@@ -6,10 +6,6 @@ public class Fence extends Obstacle {
 
 	public Fence(float x, float y) {
 		super(AssetLoader.fence, 1000, 1, 9, 1000, x, y, null);
-	}
-
-	@Override
-	public void update(float delta, float runTime) {
-
+		getPhysics().getPoly().setPosition(x, y + 50);
 	}
 }

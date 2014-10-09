@@ -50,7 +50,10 @@ public class Physics {
 		this.rect = new Rectangle(posX, posY + height, width, height);
 
 		this.poly = poly;
-
+		if (this.poly == null) {
+			setPoly(Utilities.rectangleToPolygon(this.rect));
+		}
+		this.poly.setPosition(this.rect.x, this.rect.y);
 		this.platform = false;
 
 		this.position = new Vector2(posX, posY);

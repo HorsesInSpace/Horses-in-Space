@@ -16,14 +16,15 @@ public abstract class PhysGameObject implements GameObject, PhysObject,
 
 	public PhysGameObject(TextureRegion texture, int width, int height,
 			float weight, float posX, float posY, Polygon poly) {
+
 		this.physics = new Physics(width, height, weight, posX, posY, poly);
 		this.texture = texture;
 	}
 
 	@Override
 	public void update(float delta, float runTime) {
-		// TODO Auto-generated method stub
-
+		this.physics.getPoly().setPosition(this.physics.getRect().x,
+				this.physics.getRect().y);
 	}
 
 	@Override

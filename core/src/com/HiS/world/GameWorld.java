@@ -64,10 +64,9 @@ public class GameWorld {
 						}
 					}
 					break;
-				case ONTOP:
 
-					break;
 				case CRASHED:
+					col.getSubject().handleCollision(col.getObject());
 					GameScreen.running = false;
 					gameObject.destroy();
 					if (this.score > AssetLoader.getHighScore()) {

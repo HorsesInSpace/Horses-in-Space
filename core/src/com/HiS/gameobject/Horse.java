@@ -50,8 +50,6 @@ public class Horse extends PhysGameObject {
 	@Override
 	public void update(float delta, float runTime) {
 
-		// TODO Move below line logic into physengine
-
 		if (!this.physics.isGrounded() && !this.physics.isOnTopOfObject()) {
 			this.texture = AssetLoader.horseJump;
 			if (this.sliding) {
@@ -64,8 +62,7 @@ public class Horse extends PhysGameObject {
 			AssetLoader.gallopSound.resume(HorseGame.gallopSoundID);
 		}
 		this.physics.setPoly(this.polyMap.get(this.texture));
-		this.physics.getPoly().setPosition(this.physics.getRect().x,
-				this.physics.getRect().y);
+		super.update(delta, runTime);
 	}
 
 	/**
@@ -94,7 +91,6 @@ public class Horse extends PhysGameObject {
 	 */
 	@Override
 	public void destroy() {
-		// TODO Correctly and effectively destroy the object
 		this.texture = AssetLoader.horseSplat;
 		Gdx.app.log("Horse", "destroyed");
 	}
