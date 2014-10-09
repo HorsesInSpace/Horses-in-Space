@@ -1,11 +1,11 @@
 package com.HiS.physics;
 
 public class Collision {
-	
+
 	private CollisionType collisionType;
 	private PhysObject subject;
 	private PhysObject object;
-	
+
 	public Collision(CollisionType collisionType, PhysObject subject,
 			PhysObject object) {
 		super();
@@ -15,7 +15,7 @@ public class Collision {
 	}
 
 	public CollisionType getCollisionType() {
-		return collisionType;
+		return this.collisionType;
 	}
 
 	public void setCollisionType(CollisionType collisionType) {
@@ -23,7 +23,7 @@ public class Collision {
 	}
 
 	public PhysObject getSubject() {
-		return subject;
+		return this.subject;
 	}
 
 	public void setSubject(PhysObject subject) {
@@ -31,12 +31,19 @@ public class Collision {
 	}
 
 	public PhysObject getObject() {
-		return object;
+		return this.object;
 	}
 
 	public void setObject(PhysObject object) {
 		this.object = object;
 	}
-	
-	
+
+	public Collision setCollision(PhysObject subject, PhysObject object,
+			CollisionType collisionType) {
+		this.setSubject(subject);
+		this.setObject(object);
+		this.setCollisionType(collisionType);
+		return this;
+	}
+
 }

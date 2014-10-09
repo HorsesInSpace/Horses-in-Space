@@ -106,18 +106,13 @@ public class PhysEngine {
 					if (object.getPhysics().getPosition().y >= ((subject
 							.getPhysics().getPosition().y + subject
 							.getPhysics().getRect().height) - 2f)) {
-						PhysEngine.collision.setSubject(subject);
-						PhysEngine.collision.setObject(object);
-						PhysEngine.collision
-								.setCollisionType(CollisionType.ONTOP);
 						subject.getPhysics().setOnTopOfObject(
 								object.getPhysics());
-						return PhysEngine.collision;
+						return PhysEngine.collision.setCollision(subject,
+								object, CollisionType.ONTOP);
 					} else {
-						PhysEngine.collision.setSubject(subject);
-						PhysEngine.collision.setObject(object);
-						PhysEngine.collision
-								.setCollisionType(CollisionType.CRASHED);
+						return PhysEngine.collision.setCollision(subject,
+								object, CollisionType.CRASHED);
 					}
 
 				} else if (subject.getPhysics().getPoly() != null) {
@@ -126,53 +121,38 @@ public class PhysEngine {
 								.getPhysics().getPoly(), object.getPhysics()
 								.getPoly())) {
 							subject.handleCollision(object);
-							PhysEngine.collision.setSubject(subject);
-							PhysEngine.collision.setObject(object);
-							PhysEngine.collision
-									.setCollisionType(CollisionType.CRASHED);
-
-							return PhysEngine.collision;
+							return PhysEngine.collision.setCollision(subject,
+									object, CollisionType.CRASHED);
 						}
 					} else {
 						if (IntersectorPlus.overlapConvexPolygonRect(subject
 								.getPhysics().getPoly(), object.getPhysics()
 								.getRect())) {
 							subject.handleCollision(object);
-							PhysEngine.collision.setSubject(subject);
-							PhysEngine.collision.setObject(object);
-							PhysEngine.collision
-									.setCollisionType(CollisionType.CRASHED);
-
-							return PhysEngine.collision;
+							return PhysEngine.collision.setCollision(subject,
+									object, CollisionType.CRASHED);
 						}
 					}
 				} else if ((subject.getPhysics().getRect().x + (subject
 						.getPhysics().getRect().width / 2)) > (object
-						.getPhysics().getRect().x + object.getPhysics()
-						.getRect().width)) {
-					PhysEngine.collision.setSubject(subject);
-					PhysEngine.collision.setObject(object);
-					PhysEngine.collision.setCollisionType(CollisionType.PASSED);
-					return PhysEngine.collision;
+								.getPhysics().getRect().x + object.getPhysics()
+								.getRect().width)) {
+					return PhysEngine.collision.setCollision(subject, object,
+							CollisionType.PASSED);
 
 				} else {
 					if (Intersector.overlaps(subject.getPhysics().getRect(),
 							object.getPhysics().getRect())) {
 						subject.handleCollision(object);
-						PhysEngine.collision.setSubject(subject);
-						PhysEngine.collision.setObject(object);
-						PhysEngine.collision
-								.setCollisionType(CollisionType.CRASHED);
-						return PhysEngine.collision;
+
+						return PhysEngine.collision.setCollision(subject,
+								object, CollisionType.CRASHED);
 					} else if ((subject.getPhysics().getRect().x + (subject
 							.getPhysics().getRect().width / 2)) > (object
-							.getPhysics().getRect().x + object.getPhysics()
-							.getRect().width)) {
-						PhysEngine.collision.setSubject(subject);
-						PhysEngine.collision.setObject(object);
-						PhysEngine.collision
-								.setCollisionType(CollisionType.PASSED);
-						return PhysEngine.collision;
+									.getPhysics().getRect().x + object.getPhysics()
+									.getRect().width)) {
+						return PhysEngine.collision.setCollision(subject,
+								object, CollisionType.PASSED);
 					}
 				}
 			}
