@@ -99,7 +99,6 @@ public class PhysEngine {
 			List<? extends PhysObject> objects) {
 		for (PhysObject object : objects) {
 			boolean collided = false;
-			boolean pass = false;
 			boolean platform = object.getPhysics().isPlatform();
 
 			if (!object.equals(subject)) {
@@ -127,13 +126,14 @@ public class PhysEngine {
 							CollisionType.CRASHED);
 				} else if ((subject.getPhysics().getRect().x + (subject
 						.getPhysics().getRect().width / 2)) > (object
-						.getPhysics().getRect().x + object.getPhysics()
-						.getRect().width)) {
+								.getPhysics().getRect().x + object.getPhysics()
+								.getRect().width)) {
 					return PhysEngine.collision.setCollision(subject, object,
 							CollisionType.PASSED);
 				}
 			}
 		}
+
 		return PhysEngine.collision.setCollision(subject, null,
 				CollisionType.NONE);
 	}
