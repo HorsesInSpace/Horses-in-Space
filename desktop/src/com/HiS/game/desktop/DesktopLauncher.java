@@ -14,6 +14,12 @@ public class DesktopLauncher {
 		config.title = "Horses in Space";
 		config.width = Toolkit.getDefaultToolkit().getScreenSize().width / 2;
 		config.height = Toolkit.getDefaultToolkit().getScreenSize().height / 2;
+
+		if (config.width / config.height < 1.7) {
+			config.height = 450;
+			config.width = 800;
+		}
+
 		config.addIcon("data/his_logo2_128.png", FileType.Internal);
 		config.addIcon("data/his_logo2_32.png", FileType.Internal);
 		config.addIcon("data/his_logo2_16.png", FileType.Internal);
