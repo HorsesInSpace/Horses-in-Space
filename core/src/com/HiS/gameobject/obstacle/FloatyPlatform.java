@@ -2,11 +2,10 @@ package com.HiS.gameobject.obstacle;
 
 import com.HiS.hishelpers.AssetLoader;
 
-public class FloatyPlatform extends Obstacle{
+public class FloatyPlatform extends Obstacle {
 
 	public FloatyPlatform(float posX, float posY) {
-		super(AssetLoader.foreground, 0, 10, 3, 0, posX, posY);
-		// TODO Auto-generated constructor stub
+		super(AssetLoader.foreground, 1500, 20, 3, 0, posX, posY, null);
+		getPhysics().setPlatform(true);
 	}
-	
 }

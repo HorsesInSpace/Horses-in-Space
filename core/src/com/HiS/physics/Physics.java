@@ -7,10 +7,10 @@ import com.badlogic.gdx.math.Vector2;
 /**
  * Physics is an object which stores a game object's physical values. It assumes
  * all objects as rectangles
- * 
+ *
  * @author lars, morten
  * @version 0.2
- * 
+ *
  */
 public class Physics {
 
@@ -19,16 +19,18 @@ public class Physics {
 	private boolean isGrounded = true;
 	private Physics onTopOfObject = null;
 
+	private boolean platform;
+
 	private Rectangle rect;
 	private Polygon poly;
 
-	private Vector2 velocity;
 	private Vector2 position;
+	private Vector2 velocity;
 	private Vector2 acceleration;
 
 	/**
 	 * Constructor for class Physics
-	 * 
+	 *
 	 * @param width
 	 *            width of the object
 	 * @param height
@@ -48,6 +50,11 @@ public class Physics {
 		this.rect = new Rectangle(posX, posY + height, width, height);
 
 		this.poly = poly;
+		if (this.poly == null) {
+			setPoly(Utilities.rectangleToPolygon(this.rect));
+		}
+		this.poly.setPosition(this.rect.x, this.rect.y);
+		this.platform = false;
 
 		this.position = new Vector2(posX, posY);
 		this.velocity = new Vector2(0, 0);
@@ -56,90 +63,34 @@ public class Physics {
 	}
 
 	/**
-	 * getter for the current acceleration of the object
-	 * 
-	 * @return the acceleration of the object
-	 */
-	public Vector2 getAcceleration() {
-		return this.acceleration;
-	}
-
-	public Physics getOnTopOfObject() {
-		return this.onTopOfObject;
-	}
-
-	public Polygon getPoly() {
-		return this.poly;
-	}
-
-	/**
-	 * getter for the objects current position
-	 * 
-	 * @return the position of the object
-	 */
-	public Vector2 getPosition() {
-		return this.position;
-	}
-
-	/**
-	 * Getter for the rectangle of the object
-	 * 
-	 * @return the rectangle
-	 */
-	public Rectangle getRect() {
-		return this.rect;
-	}
-
-	/**
-	 * getter for the objects velocity
-	 * 
-	 * @return the objects velocity
-	 */
-	public Vector2 getVelocity() {
-		return this.velocity;
-	}
-
-	/**
-	 * getter for the weight of the object
-	 * 
-	 * @return the current weight of the object
+	 * getter for the weight of the object weight and the current weight of the
+	 * object
 	 */
 	public float getWeight() {
 		return this.weight;
 	}
 
 	/**
-	 * boolean to check if the object is on the ground
-	 * 
-	 * @return true if horse is on the ground, false if not
+	 * setter for the weight parameter of the object
+	 *
+	 * @param height
+	 *            the new weight for the object
+	 */
+	public void setWeight(float weight) {
+		this.weight = weight;
+	}
+
+	/**
+	 * boolean to check if the object is on the gthis.isGrounded@return true if
+	 * horse is on the ground, false if not
 	 */
 	public boolean isGrounded() {
 		return this.isGrounded;
 	}
 
 	/**
-	 * boolean to check if the object is on top of another object
-	 * 
-	 * @return isOnTopOfObject the new value for isOnTopOfObject
-	 */
-	public boolean onTopOfObject() {
-
-		return this.onTopOfObject != null;
-	}
-
-	/**
-	 * setter for the objects acceleration
-	 * 
-	 * @param acceleration
-	 *            the new acceleration of the object
-	 */
-	public void setAcceleration(Vector2 acceleration) {
-		this.acceleration = acceleration;
-	}
-
-	/**
 	 * sets the value of grounded to true or false
-	 * 
+	 *
 	 * @param isGrounded
 	 *            the new value for isGrounded
 	 */
@@ -147,9 +98,26 @@ public class Physics {
 		this.isGrounded = isGrounded;
 	}
 
+	public boolean isPlatform() {
+		return this.platform;
+	}
+
+	public void setPlatform(boolean platform) {
+		this.platform = platform;
+	}
+
+	/**
+	 * boolean to check if the object is on tothis.isOnTopOfObject *
+	 *
+	 * @return isOnTopOfObject the new value for isOnTopOfObject
+	 */
+	public boolean isOnTopOfObject() {
+		return this.onTopOfObject != null;
+	}
+
 	/**
 	 * set the value of isOnTopOfObject to true or false
-	 * 
+	 *
 	 * @param isOnTopOfObject
 	 *            the new value for isOnTopOfObject
 	 */
@@ -157,13 +125,68 @@ public class Physics {
 		this.onTopOfObject = onTopOfObject;
 	}
 
+	public Physics getOnTopOfObject() {
+		return this.onTopOfObject;
+	}
+
+	/**
+	 * Getter for the rectangle of the object
+	 *
+	 * @return the rectangle
+	 */
+	public Rectangle getRect() {
+		return this.rect;
+	}
+
+	/**
+	 * setter for the rectangle of ththis.poly *
+	 *
+	 * @param rect
+	 *            the new rectangle of the object
+	 */
+	public void setRect(Rectangle rect) {
+		this.rect = rect;
+	}
+
+	public Polygon getPoly() {
+		return this.poly;
+	}
+
 	public void setPoly(Polygon poly) {
 		this.poly = poly;
 	}
 
 	/**
+	 * getter for the objects velocity
+	 *
+	 * @return the objects velocity
+	 */
+	public Vector2 getVelocity() {
+		return this.velocity;
+	}
+
+	/**
+	 * setter for the objects velocity
+	 *
+	 * @param velocity
+	 *            the new velocity of the object
+	 */
+	public void setVelocity(Vector2 velocity) {
+		this.velocity = velocity;
+	}
+
+	/**
+	 * getter for the objects current position
+	 *
+	 * @return the position of the object
+	 */
+	public Vector2 getPosition() {
+		return this.position;
+	}
+
+	/**
 	 * setter for the objects position
-	 * 
+	 *
 	 * @param position
 	 *            the new position
 	 */
@@ -174,32 +197,21 @@ public class Physics {
 	}
 
 	/**
-	 * setter for the rectangle of the object
-	 * 
-	 * @param rect
-	 *            the new rectangle of the object
+	 * getter for the current acceleration of the object
+	 *
+	 * @return the acceleration of the object
 	 */
-	public void setRect(Rectangle rect) {
-		this.rect = rect;
+	public Vector2 getAcceleration() {
+		return this.acceleration;
 	}
 
 	/**
-	 * setter for the objects velocity
-	 * 
-	 * @param velocity
-	 *            the new velocity of the object
+	 * setter for the objects acceleration
+	 *
+	 * @param acceleration
+	 *            the new acceleration of the object
 	 */
-	public void setVelocity(Vector2 velocity) {
-		this.velocity = velocity;
-	}
-
-	/**
-	 * setter for the weight parameter of the object
-	 * 
-	 * @param height
-	 *            the new weight for the object
-	 */
-	public void setWeight(float weight) {
-		this.weight = weight;
+	public void setAcceleration(Vector2 acceleration) {
+		this.acceleration = acceleration;
 	}
 }

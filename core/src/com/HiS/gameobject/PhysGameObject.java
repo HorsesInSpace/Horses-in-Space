@@ -8,20 +8,23 @@ import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-public abstract class PhysGameObject implements GameObject, PhysObject, GfxObject {
-	
+public abstract class PhysGameObject implements GameObject, PhysObject,
+		GfxObject {
+
 	protected Physics physics;
 	protected TextureRegion texture;
 
-	public PhysGameObject(TextureRegion texture, int width, int height, float weight, float posX, float posY, Polygon poly) {
+	public PhysGameObject(TextureRegion texture, int width, int height,
+			float weight, float posX, float posY, Polygon poly) {
+
 		this.physics = new Physics(width, height, weight, posX, posY, poly);
 		this.texture = texture;
 	}
-	
+
 	@Override
 	public void update(float delta, float runTime) {
-		// TODO Auto-generated method stub
-
+		this.physics.getPoly().setPosition(this.physics.getRect().x,
+				this.physics.getRect().y);
 	}
 
 	@Override
@@ -29,7 +32,7 @@ public abstract class PhysGameObject implements GameObject, PhysObject, GfxObjec
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	@Override
 	public Physics getPhysics() {
 		return this.physics;
@@ -40,10 +43,11 @@ public abstract class PhysGameObject implements GameObject, PhysObject, GfxObjec
 		return this.texture;
 	}
 
+	@Override
 	public void setTexture(TextureRegion texture) {
 		this.texture = texture;
 	}
-	
+
 	/**
 	 * Sets the Physics.grounded to true
 	 */
@@ -51,38 +55,38 @@ public abstract class PhysGameObject implements GameObject, PhysObject, GfxObjec
 	public void ground() {
 		this.physics.setGrounded(true);
 	}
-	
+
 	@Override
 	public void setPhysics(Physics physics) {
 		this.physics = physics;
 	}
-	
+
 	@Override
 	public void handleCollision(PhysObject object) {
 	}
-	
+
 	@Override
 	public void setCrashed(boolean crash) {
 	}
-	
+
 	@Override
 	public boolean hasCrashed() {
 		return false;
 	}
-	
+
 	@Override
 	public Vector2 getPosition() {
 		return this.physics.getPosition();
 	}
-	
+
 	@Override
 	public void setPosition(int x, int y) {
 		this.physics.setPosition(new Vector2(x, y));
 	}
-	
+
 	@Override
 	public Rectangle getRect() {
-		return this.getPhysics().getRect();
+		return getPhysics().getRect();
 	}
 
 }
