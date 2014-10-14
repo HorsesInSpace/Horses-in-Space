@@ -35,7 +35,6 @@ public class HorseGame extends Game {
 	public void create() {
 		Gdx.app.log("Game", "created");
 		AssetLoader.load();
-		AssetLoader.thunder1.play(1);
 		try {
 			Thread.sleep(100);
 		} catch (Exception e) {
@@ -68,6 +67,8 @@ public class HorseGame extends Game {
 			soundVol = 1;
 			break;
 		}
+
+		AssetLoader.thunder1.play();
 		AssetLoader.moon.setLooping(true);
 		AssetLoader.moon.setVolume(musicVol);
 		AssetLoader.moon.play();
