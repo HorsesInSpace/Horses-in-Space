@@ -5,7 +5,9 @@ import com.HiS.hishelpers.AssetLoader;
 import com.HiS.world.GameWorld;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -34,6 +36,8 @@ public class StartMenu implements Screen {
 
 		this.alpha = 0;
 
+		AssetLoader.font.setScale(1, 1);
+		AssetLoader.font.setColor(Color.valueOf("971abbff"));
 	}
 
 	@Override
@@ -52,10 +56,13 @@ public class StartMenu implements Screen {
 		this.sprite.draw(this.texture,
 				(screenWidth / 2) - (this.texture.getWidth() / 2),
 				(screenHeight / 2) - (this.texture.getHeight() / 2));
+
+		AssetLoader.font.draw(this.sprite, "Press SPACE to start", 40, 50);
 		this.sprite.end();
 
-		if (Gdx.input.justTouched()) {
+		if (Gdx.input.justTouched() || Gdx.input.isKeyPressed(Keys.SPACE)) {
 			this.game.setScreen(new GameScreen());
+			AssetLoader.font.setScale(.10f, -.10f);
 
 			this.gallopSoundID = AssetLoader.gallopSound
 					.loop(HorseGame.gallopVol);
