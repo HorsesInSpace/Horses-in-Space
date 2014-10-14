@@ -17,7 +17,7 @@ import com.badlogic.gdx.math.Polygon;
 /**
  * Static class used to load data such as Textures, sounds and other assets from
  * files
- * 
+ *
  * @author Morten, Lars
  * @version 0.3
  */
@@ -25,11 +25,12 @@ public class AssetLoader {
 	private static Texture texture;
 
 	public static TextureRegion horse, horse2, horse3, horseJump, horseSlide,
-			horseSplat, background, foreground, middleground1, fence, ufo;
+	horseSplat, background, foreground, middleground1, fence, ufo,
+	earth;
 	public static Animation anim;
 	public static BitmapFont font;
 	public static Polygon polyHorse, polyHorse2, polyHorse3, polyHorseJump,
-			polyHorseSlide, polyUfo;
+	polyHorseSlide, polyUfo;
 
 	public static Sound whinning, gallopSound, punch, thunder1;
 	public static Music journey, gallopMusic, moon;
@@ -91,6 +92,9 @@ public class AssetLoader {
 
 		background = new TextureRegion(texture, 101, 0, 399, 240);
 		background.flip(false, true);
+
+		earth = new TextureRegion(texture, 1000, 445, 300, 300);
+		earth.flip(false, true);
 
 		middleground1 = new TextureRegion(texture, 11, 326, 1277, 99);
 		middleground1.flip(false, true);

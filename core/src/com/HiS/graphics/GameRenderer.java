@@ -44,8 +44,11 @@ public class GameRenderer {
 				.getRect().y, this.world.getBackground().getRect().width,
 				this.world.getBackground().getRect().height);
 
-		// Draw middleground 1 and 2
 		this.batch.enableBlending(); // Middleground has transparent areas
+		// draw earth:
+		this.batch.draw(AssetLoader.earth, 100, 30, 25, 25);
+
+		// Draw middleground 1 and 2
 		this.batch.draw(this.world.getMiddleground1().getTexture(), this.world
 				.getMiddleground1().getRect().x, this.world.getMiddleground1()
 				.getRect().y, this.world.getMiddleground1().getRect().width,
