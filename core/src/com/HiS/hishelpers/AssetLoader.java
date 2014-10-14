@@ -17,7 +17,7 @@ import com.badlogic.gdx.math.Polygon;
 /**
  * Static class used to load data such as Textures, sounds and other assets from
  * files
- *
+ * 
  * @author Morten, Lars
  * @version 0.3
  */
@@ -25,13 +25,13 @@ public class AssetLoader {
 	private static Texture texture;
 
 	public static TextureRegion horse, horse2, horse3, horseJump, horseSlide,
-	horseSplat, background, foreground, middleground1, fence, ufo;
+			horseSplat, background, foreground, middleground1, fence, ufo;
 	public static Animation anim;
 	public static BitmapFont font;
 	public static Polygon polyHorse, polyHorse2, polyHorse3, polyHorseJump,
-	polyHorseSlide, polyUfo;
+			polyHorseSlide, polyUfo;
 
-	public static Sound whinning, gallopSound, punch;
+	public static Sound whinning, gallopSound, punch, thunder1;
 	public static Music journey, gallopMusic, moon;
 
 	public static Preferences prefs;
@@ -105,7 +105,8 @@ public class AssetLoader {
 				.internal("data/audio/sound/jump.ogg"));
 		gallopSound = Gdx.audio.newSound(Gdx.files
 				.internal("data/audio/sound/gallop.ogg"));
-
+		thunder1 = Gdx.audio.newSound(Gdx.files
+				.internal("data/audio/sound/thunder1.mp3"));
 		journey = Gdx.audio.newMusic(Gdx.files
 				.internal("data/audio/music/Journey.ogg"));
 		gallopMusic = Gdx.audio.newMusic(Gdx.files
