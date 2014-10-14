@@ -27,6 +27,8 @@ public class GameWorld {
 	private GfxObject foreground1;
 	private GfxObject foreground2;
 
+	private Level level;
+
 	public long score;
 
 	private PhysEngine physEngine;
@@ -37,14 +39,14 @@ public class GameWorld {
 	private Obstacle rightmostObstacle = null;
 
 	public GameWorld() {
-		this.initWorld();
+		initWorld();
 	}
 
 	public void update(float delta, float runTime) {
 		this.score += delta * 100;
 		// Gdx.app.log("Score", this.score + "");
 		// this.scrollSpeed -= delta;
-		this.moveBackMiddle(delta);
+		moveBackMiddle(delta);
 		for (PhysGameObject gameObject : this.objects) {
 
 			this.physEngine.update(gameObject, delta);
@@ -52,6 +54,7 @@ public class GameWorld {
 			if (gameObject instanceof Horse) {
 				Collision col = this.physEngine.collisionCheck(gameObject,
 						this.objects);
+				Gdx.app.log("COLLISIONTYPE", col.getCollisionType().name());
 				switch (col.getCollisionType()) {
 				case PASSED:
 					if (col.getObject() instanceof Obstacle) {
@@ -84,7 +87,7 @@ public class GameWorld {
 					if (this.rightmostObstacle != null) {
 						nextPos = this.rightmostObstacle.getPosition().x
 								+ this.rand
-								.nextInt((int) (GameScreen.gameWidth * 0.66))
+										.nextInt((int) (GameScreen.gameWidth * 0.66))
 								+ (GameScreen.gameWidth / 2);
 						Gdx.app.log("NextPos", "" + nextPos);
 						Gdx.app.log("Score", this.score + "");
@@ -132,14 +135,15 @@ public class GameWorld {
 	}
 
 	private void initWorld() {
-		Level level = new Level("data/moon.csv");
+		this.level = new Level("data/moon.csv");
 		// this.objects.add(new Fence(100, 75));
 		// this.objects.add(new Fence(200, 75));
 		// this.objects.add(new Fence(300, 75));
 		// this.objects.add(new FloatyPlatform(400, 50));
 		// this.objects.add(new Ufo(500, 42));
 		// this.objects.add(new FloatyPlatform(465, 43));
-		this.objects = level.getObjects();
+		this.objects = this.level.getObjects();
+
 		this.objects.add(new Horse(AssetLoader.horse, 22, 15, 300, 15,
 				GameScreen.gameHeight - 15 - 15));
 
@@ -149,21 +153,22 @@ public class GameWorld {
 		this.middleground1 = new TexObject(AssetLoader.middleground1, 0,
 				(GameScreen.gameHeight / 4) + (GameScreen.gameHeight / 16),
 				GameScreen.gameHeight / 4, GameScreen.gameWidth
-				+ (GameScreen.gameWidth / 2));
+						+ (GameScreen.gameWidth / 2));
 		this.middleground2 = new TexObject(AssetLoader.middleground1,
-				this.getMiddleground1().getRect().width, (GameScreen.gameHeight / 4)
-				+ (GameScreen.gameHeight / 16),
+				getMiddleground1().getRect().width, (GameScreen.gameHeight / 4)
+						+ (GameScreen.gameHeight / 16),
 				GameScreen.gameHeight / 4, GameScreen.gameWidth
-				+ (GameScreen.gameWidth / 2));
+						+ (GameScreen.gameWidth / 2));
 
 		this.foreground1 = new TexObject(AssetLoader.foreground, 0,
 				(GameScreen.gameHeight / 2) + (GameScreen.gameHeight / 20),
 				GameScreen.gameHeight / 4, GameScreen.gameWidth);
 		this.foreground2 = new TexObject(AssetLoader.foreground,
 				this.foreground1.getRect().width, (GameScreen.gameHeight / 2)
-				+ (GameScreen.gameHeight / 20),
+						+ (GameScreen.gameHeight / 20),
 				GameScreen.gameHeight / 4, GameScreen.gameWidth);
 
+		// TODO Pass speed as parameter from level into PhysEngine constructor
 		this.physEngine = new PhysEngine();
 
 		this.rand = new Random();
@@ -183,12 +188,12 @@ public class GameWorld {
 		this.middleground1.getRect().x += (this.scrollSpeed / 4) * delta;
 		this.middleground2.getRect().x += (this.scrollSpeed / 4) * delta;
 		if ((this.middleground1.getRect().x + this.middleground1.getRect().width) < 0) {
-			this.middleground1.getRect().x = this.getMiddleground2().getRect().x
-					+ this.getMiddleground2().getRect().width;
+			this.middleground1.getRect().x = getMiddleground2().getRect().x
+					+ getMiddleground2().getRect().width;
 		}
 		if ((this.middleground2.getRect().x + this.middleground2.getRect().width) < 0) {
-			this.middleground2.getRect().x = this.getMiddleground1().getRect().x
-					+ this.getMiddleground1().getRect().width;
+			this.middleground2.getRect().x = getMiddleground1().getRect().x
+					+ getMiddleground1().getRect().width;
 		}
 	}
 }

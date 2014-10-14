@@ -26,13 +26,13 @@ public class Level {
 		for (int i = 1; i < list.size(); i++) {
 			String[] values = list.get(i);
 			try {
-				objects.add(createPhysGameObject(values));
+				objects.add(this.createPhysGameObject(values));
 			} catch (PhysGameObjectNotRecognizedException e) {
 				continue;
 			}
 		}
 
-		generateLevel(this.backGround, this.middleGround, this.foreGround,
+		this.generateLevel(this.backGround, this.middleGround, this.foreGround,
 				levelDetails[0], objects);
 	}
 
@@ -57,7 +57,7 @@ public class Level {
 
 	public Level(TextureRegion backGround, TextureRegion middleGround,
 			TextureRegion foreGround, String name, List<PhysGameObject> objects) {
-		generateLevel(backGround, middleGround, foreGround, name, objects);
+		this.generateLevel(backGround, middleGround, foreGround, name, objects);
 	}
 
 	private void generateLevel(TextureRegion backGround,
@@ -67,7 +67,7 @@ public class Level {
 		this.backGround = backGround;
 		this.middleGround = middleGround;
 		this.foreGround = foreGround;
-		setObjects(objects);
+		this.setObjects(objects);
 
 	}
 
@@ -80,7 +80,7 @@ public class Level {
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public void setName(String name) {
@@ -88,7 +88,7 @@ public class Level {
 	}
 
 	public TextureRegion getBackGround() {
-		return this.backGround;
+		return backGround;
 	}
 
 	public void setBackGround(TextureRegion backGround) {
@@ -96,7 +96,7 @@ public class Level {
 	}
 
 	public TextureRegion getMiddleGround() {
-		return this.middleGround;
+		return middleGround;
 	}
 
 	public void setMiddleGround(TextureRegion middleGround) {
@@ -104,7 +104,7 @@ public class Level {
 	}
 
 	public TextureRegion getForeGround() {
-		return this.foreGround;
+		return foreGround;
 	}
 
 	public void setForeGround(TextureRegion foreGround) {

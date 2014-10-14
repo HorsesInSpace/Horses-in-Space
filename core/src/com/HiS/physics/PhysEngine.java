@@ -124,10 +124,10 @@ public class PhysEngine {
 				} else if (collided) {
 					return PhysEngine.collision.setCollision(subject, object,
 							CollisionType.CRASHED);
-				} else if ((subject.getPhysics().getRect().x + (subject
-						.getPhysics().getRect().width / 2)) > (object
-								.getPhysics().getRect().x + object.getPhysics()
-								.getRect().width)) {
+				} else if ((subject.getPhysics().getRect().x + subject
+						.getPhysics().getRect().width) > (object.getPhysics()
+						.getRect().x + object.getPhysics().getRect().width)
+						&& PhysEngine.collision.getCollisionType() != CollisionType.PASSED) {
 					return PhysEngine.collision.setCollision(subject, object,
 							CollisionType.PASSED);
 				}

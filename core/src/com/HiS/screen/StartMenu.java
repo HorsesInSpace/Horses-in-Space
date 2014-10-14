@@ -35,6 +35,7 @@ public class StartMenu implements Screen {
 
 	@Override
 	public void render(float arg0) {
+		Gdx.gl.glClearColor(255, 255, 255, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		this.sprite.enableBlending();
 		this.sprite.begin();
