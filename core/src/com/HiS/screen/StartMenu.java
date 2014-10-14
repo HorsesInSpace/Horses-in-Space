@@ -18,8 +18,12 @@ public class StartMenu implements Screen {
 	private GameScreen screen;
 
 	private final Game game;
-	private Texture texture;
-	private SpriteBatch sprite;
+
+	private Texture logoTexture;
+	private Texture starsTexture;
+	private SpriteBatch logo;
+	private SpriteBatch stars;
+
 	private float alpha;
 	private float textAlpha;
 	private boolean fadeIn = false;
@@ -51,18 +55,26 @@ public class StartMenu implements Screen {
 
 		Gdx.gl.glClearColor(0, 0, 0, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+		this.stars.enableBlending();
+		this.stars.begin();
+		this.stars.draw(this.starsTexture, (screenWidth / 2)
+				- (this.starsTexture.getWidth() / 2), (screenHeight / 2)
+				- (this.starsTexture.getHeight() / 2));
+		this.stars.end();
+
 		this.alpha += delta / 2.5;
 		if (this.alpha >= 1) {
-			this.sprite.setColor(1, 1, 1, 1);
+			this.logo.setColor(1, 1, 1, 1);
 		} else {
-			this.sprite.setColor(1, 1, 1, this.alpha);
+			this.logo.setColor(1, 1, 1, this.alpha);
 		}
 		AssetLoader.font.setColor(Color.valueOf("971abbff"));
-		this.sprite.enableBlending();
-		this.sprite.begin();
-		this.sprite.draw(this.texture,
-				(screenWidth / 2) - (this.texture.getWidth() / 2),
-				(screenHeight / 2) - (this.texture.getHeight() / 2));
+		this.logo.enableBlending();
+		this.logo.begin();
+		this.logo.draw(this.logoTexture,
+				(screenWidth / 2) - (this.logoTexture.getWidth() / 2),
+				(screenHeight / 2) - (this.logoTexture.getHeight() / 2));
 		// AssetLoader.font.draw(this.sprite, this.startGame, (screenWidth / 2),
 		// 50);
 		if (!this.fadeIn) {
@@ -75,7 +87,6 @@ public class StartMenu implements Screen {
 
 		} else if (this.textAlpha > 0.5) {
 			AssetLoader.font.setColor(Color.valueOf("971abbff"));
-			System.out.println("TRUE");
 		}
 		if (this.textAlpha < 0) {
 			this.fadeIn = false;
@@ -83,13 +94,12 @@ public class StartMenu implements Screen {
 		}
 		if (this.textAlpha < 0.5) {
 			AssetLoader.font.setColor(Color.valueOf("971abb00"));
-			System.out.println("FALSE");
+
 		}
 
-		AssetLoader.font.drawWrapped(this.sprite, this.startGame, 0, 50,
+		AssetLoader.font.drawWrapped(this.logo, this.startGame, 0, 50,
 				screenWidth, HAlignment.CENTER);
-		System.out.println(this.textAlpha + "");
-		this.sprite.end();
+		this.logo.end();
 
 		// Starts the game on touch or when Space is pressed
 		if (Gdx.input.justTouched() || Gdx.input.isKeyPressed(Keys.SPACE)) {
@@ -105,8 +115,11 @@ public class StartMenu implements Screen {
 
 	@Override
 	public void show() {
-		this.sprite = new SpriteBatch();
-		this.texture = new Texture(
+		this.stars = new SpriteBatch();
+		this.logo = new SpriteBatch();
+		this.starsTexture = new Texture(
+				Gdx.files.internal("data/gfx/stars.png"));
+		this.logoTexture = new Texture(
 				Gdx.files.internal("data/gfx/logo-black.png"));
 
 	}
