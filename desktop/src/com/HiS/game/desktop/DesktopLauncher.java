@@ -15,7 +15,9 @@ public class DesktopLauncher {
 		config.width = Toolkit.getDefaultToolkit().getScreenSize().width / 2;
 		config.height = Toolkit.getDefaultToolkit().getScreenSize().height / 2;
 
-		if (config.width / config.height < 1.7) {
+		float ratio = (float) config.width / (float) config.height;
+
+		if (ratio < 1.7) {
 			config.height = 450;
 			config.width = 800;
 		}
