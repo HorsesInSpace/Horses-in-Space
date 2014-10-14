@@ -42,7 +42,7 @@ public class StartMenu implements Screen {
 		this.alpha = 0;
 		this.textAlpha = 0;
 
-		AssetLoader.font.setScale(1, 1);
+		AssetLoader.font.setScale(0.5f, 0.5f);
 		this.startGame = "TOUCH SCREEN TO START";
 	}
 
@@ -51,7 +51,7 @@ public class StartMenu implements Screen {
 
 		Gdx.gl.glClearColor(0, 0, 0, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		this.alpha += delta / 4;
+		this.alpha += delta / 2.5;
 		if (this.alpha >= 1) {
 			this.sprite.setColor(1, 1, 1, 1);
 		} else {
@@ -86,7 +86,7 @@ public class StartMenu implements Screen {
 			System.out.println("FALSE");
 		}
 
-		AssetLoader.font.drawWrapped(this.sprite, this.startGame, 5, 50,
+		AssetLoader.font.drawWrapped(this.sprite, this.startGame, 0, 50,
 				screenWidth, HAlignment.CENTER);
 		System.out.println(this.textAlpha + "");
 		this.sprite.end();
