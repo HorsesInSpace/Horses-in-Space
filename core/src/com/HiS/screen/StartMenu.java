@@ -53,8 +53,7 @@ public class StartMenu implements Screen {
 	@Override
 	public void show() {
 		this.sprite = new SpriteBatch();
-		this.texture = new Texture(Gdx.files.internal("data/his_logo2.png"));
-
+		this.texture = new Texture(Gdx.files.internal("data/gfx/his_logo2.png"));
 	}
 
 	@Override

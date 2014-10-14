@@ -25,14 +25,14 @@ public class AssetLoader {
 	private static Texture texture;
 
 	public static TextureRegion horse, horse2, horse3, horseJump, horseSlide,
-			horseSplat, background, foreground, middleground1, fence, ufo;
+	horseSplat, background, foreground, middleground1, fence, ufo;
 	public static Animation anim;
 	public static BitmapFont font;
 	public static Polygon polyHorse, polyHorse2, polyHorse3, polyHorseJump,
-			polyHorseSlide, polyUfo;
+	polyHorseSlide, polyUfo;
 
 	public static Sound whinning, gallopSound, punch;
-	public static Music badHorsie, journey, gallopMusic, moon;
+	public static Music journey, gallopMusic, moon;
 
 	public static Preferences prefs;
 
@@ -40,18 +40,22 @@ public class AssetLoader {
 	 * Loads all assets into memory for universal access
 	 */
 	public static void load() {
-		font = new BitmapFont(Gdx.files.internal("data/monohorseinspaced.fnt"));
+		font = new BitmapFont(
+				Gdx.files.internal("data/gfx/monohorseinspaced.fnt"));
 		font.setScale(.10f, -.10f);
 
-		FileHandle textureHandle = Gdx.files.internal("data/textures.png");
-		FileHandle horseHandle = Gdx.files.internal("data/horsetex.psh");
-		FileHandle horse2Handle = Gdx.files.internal("data/horsetex2.psh");
-		FileHandle horse3Handle = Gdx.files.internal("data/horsetex3.psh");
+		FileHandle textureHandle = Gdx.files.internal("data/gfx/textures.png");
+		FileHandle horseHandle = Gdx.files
+				.internal("data/polygon/horsetex.psh");
+		FileHandle horse2Handle = Gdx.files
+				.internal("data/polygon/horsetex2.psh");
+		FileHandle horse3Handle = Gdx.files
+				.internal("data/polygon/horsetex3.psh");
 		FileHandle horseJumpHandle = Gdx.files
-				.internal("data/horsetexjump.psh");
+				.internal("data/polygon/horsetexjump.psh");
 		FileHandle horseSlideHandle = Gdx.files
-				.internal("data/horsetexslide.psh");
-		FileHandle ufoHandle = Gdx.files.internal("data/ufotex.psh");
+				.internal("data/polygon/horsetexslide.psh");
+		FileHandle ufoHandle = Gdx.files.internal("data/polygon/ufotex.psh");
 
 		texture = new Texture(textureHandle);
 		texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
@@ -97,19 +101,23 @@ public class AssetLoader {
 		fence = new TextureRegion(texture, 920, 448, 9, 84);
 		fence.flip(false, true);
 
-		whinning = Gdx.audio.newSound(Gdx.files.internal("data/jump.ogg"));
-		gallopSound = Gdx.audio.newSound(Gdx.files.internal("data/gallop.ogg"));
+		whinning = Gdx.audio.newSound(Gdx.files
+				.internal("data/audio/sound/jump.ogg"));
+		gallopSound = Gdx.audio.newSound(Gdx.files
+				.internal("data/audio/sound/gallop.ogg"));
 
-		badHorsie = Gdx.audio.newMusic(Gdx.files
-				.internal("data/bad_horsie.ogg"));
-		journey = Gdx.audio.newMusic(Gdx.files.internal("data/Journey.ogg"));
-		gallopMusic = Gdx.audio.newMusic(Gdx.files.internal("data/gallop.ogg"));
-		moon = Gdx.audio.newMusic(Gdx.files.internal("data/moon.mp3"));
+		journey = Gdx.audio.newMusic(Gdx.files
+				.internal("data/audio/music/Journey.ogg"));
+		gallopMusic = Gdx.audio.newMusic(Gdx.files
+				.internal("data/audio/music/gallop.ogg"));
+		moon = Gdx.audio.newMusic(Gdx.files
+				.internal("data/audio/music/moon.mp3"));
 
-		punch = Gdx.audio.newSound(Gdx.files.internal("data/punchPain.ogg"));
+		punch = Gdx.audio.newSound(Gdx.files
+				.internal("data/audio/sound/punchPain.ogg"));
 
 		// Create (or retrieve existing) preferences file
-		prefs = Gdx.app.getPreferences("ZombieBird");
+		prefs = Gdx.app.getPreferences("HorsesInSpace");
 
 		// Provide default high score of 0
 		if (!prefs.contains("highScore")) {
@@ -139,7 +147,6 @@ public class AssetLoader {
 	public static void dispose() {
 		texture.dispose();
 
-		badHorsie.dispose();
 		gallopMusic.dispose();
 		gallopSound.dispose();
 		journey.dispose();

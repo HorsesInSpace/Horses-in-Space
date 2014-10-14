@@ -87,7 +87,7 @@ public class GameWorld {
 					if (this.rightmostObstacle != null) {
 						nextPos = this.rightmostObstacle.getPosition().x
 								+ this.rand
-										.nextInt((int) (GameScreen.gameWidth * 0.66))
+								.nextInt((int) (GameScreen.gameWidth * 0.66))
 								+ (GameScreen.gameWidth / 2);
 						Gdx.app.log("NextPos", "" + nextPos);
 						Gdx.app.log("Score", this.score + "");
@@ -135,7 +135,7 @@ public class GameWorld {
 	}
 
 	private void initWorld() {
-		this.level = new Level("data/moon.csv");
+		this.level = new Level("data/level/moon.csv");
 		this.objects = this.level.getObjects();
 
 		this.objects.add(new Horse(AssetLoader.horse, 22, 15, 300, 15,
@@ -147,19 +147,19 @@ public class GameWorld {
 		this.middleground1 = new TexObject(AssetLoader.middleground1, 0,
 				(GameScreen.gameHeight / 4) + (GameScreen.gameHeight / 16),
 				GameScreen.gameHeight / 4, GameScreen.gameWidth
-						+ (GameScreen.gameWidth / 2));
+				+ (GameScreen.gameWidth / 2));
 		this.middleground2 = new TexObject(AssetLoader.middleground1,
 				this.getMiddleground1().getRect().width, (GameScreen.gameHeight / 4)
-						+ (GameScreen.gameHeight / 16),
+				+ (GameScreen.gameHeight / 16),
 				GameScreen.gameHeight / 4, GameScreen.gameWidth
-						+ (GameScreen.gameWidth / 2));
+				+ (GameScreen.gameWidth / 2));
 
 		this.foreground1 = new TexObject(AssetLoader.foreground, 0,
 				(GameScreen.gameHeight / 2) + (GameScreen.gameHeight / 20),
 				GameScreen.gameHeight / 4, GameScreen.gameWidth);
 		this.foreground2 = new TexObject(AssetLoader.foreground,
 				this.foreground1.getRect().width, (GameScreen.gameHeight / 2)
-						+ (GameScreen.gameHeight / 20),
+				+ (GameScreen.gameHeight / 20),
 				GameScreen.gameHeight / 4, GameScreen.gameWidth);
 
 		// TODO Pass speed as parameter from level into PhysEngine constructor

@@ -20,9 +20,9 @@ public class DesktopLauncher {
 			config.width = 800;
 		}
 
-		config.addIcon("data/his_logo2_128.png", FileType.Internal);
-		config.addIcon("data/his_logo2_32.png", FileType.Internal);
-		config.addIcon("data/his_logo2_16.png", FileType.Internal);
+		config.addIcon("data/gfx/his_logo2_128.png", FileType.Internal);
+		config.addIcon("data/gfx/his_logo2_32.png", FileType.Internal);
+		config.addIcon("data/gfx/his_logo2_16.png", FileType.Internal);
 		new LwjglApplication(new HorseGame(HorseGame.Platform.DESKTOP), config);
 	}
 }
