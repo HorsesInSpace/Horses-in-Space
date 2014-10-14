@@ -35,6 +35,7 @@ public class HorseGame extends Game {
 	public void create() {
 		Gdx.app.log("Game", "created");
 		AssetLoader.load();
+		AssetLoader.thunder1.play(1);
 		try {
 			Thread.sleep(100);
 		} catch (Exception e) {
