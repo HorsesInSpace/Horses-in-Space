@@ -2,7 +2,6 @@ package com.HiS.screen;
 
 import com.HiS.game.HorseGame;
 import com.HiS.hishelpers.AssetLoader;
-import com.HiS.world.GameWorld;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -14,8 +13,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont.HAlignment;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class StartMenu implements Screen {
-	private GameWorld world;
-	private GameScreen screen;
 
 	private final Game game;
 
@@ -29,8 +26,6 @@ public class StartMenu implements Screen {
 	private boolean fadeIn = false;
 
 	private final String startGame;
-
-	private long gallopSoundID;
 
 	public static float gameHeight;
 	public static float gameWidth = 136;
@@ -46,7 +41,7 @@ public class StartMenu implements Screen {
 		this.alpha = 0;
 		this.textAlpha = 0;
 
-		AssetLoader.font.setScale(0.5f, 0.5f);
+		AssetLoader.font.setScale(0.75f, 0.75f);
 		this.startGame = "TOUCH SCREEN TO START";
 	}
 
@@ -56,6 +51,7 @@ public class StartMenu implements Screen {
 		Gdx.gl.glClearColor(0, 0, 0, 1f);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+		// Drawing background
 		this.stars.enableBlending();
 		this.stars.begin();
 		this.stars.draw(this.starsTexture, (screenWidth / 2)
@@ -63,20 +59,22 @@ public class StartMenu implements Screen {
 				- (this.starsTexture.getHeight() / 2));
 		this.stars.end();
 
+		AssetLoader.font.setColor(Color.valueOf("971abbff"));
+
+		// Draw + fade in logo
 		this.alpha += delta / 2.5;
 		if (this.alpha >= 1) {
 			this.logo.setColor(1, 1, 1, 1);
 		} else {
 			this.logo.setColor(1, 1, 1, this.alpha);
 		}
-		AssetLoader.font.setColor(Color.valueOf("971abbff"));
 		this.logo.enableBlending();
 		this.logo.begin();
 		this.logo.draw(this.logoTexture,
 				(screenWidth / 2) - (this.logoTexture.getWidth() / 2),
 				(screenHeight / 2) - (this.logoTexture.getHeight() / 2));
-		// AssetLoader.font.draw(this.sprite, this.startGame, (screenWidth / 2),
-		// 50);
+
+		// Creates flashing text
 		if (!this.fadeIn) {
 			this.textAlpha += delta;
 		} else {
@@ -97,7 +95,7 @@ public class StartMenu implements Screen {
 
 		}
 
-		AssetLoader.font.drawWrapped(this.logo, this.startGame, 0, 50,
+		AssetLoader.font.drawWrapped(this.logo, this.startGame, 0, 60,
 				screenWidth, HAlignment.CENTER);
 		this.logo.end();
 
@@ -108,7 +106,7 @@ public class StartMenu implements Screen {
 			AssetLoader.font.setScale(.10f, -.10f);
 			AssetLoader.font.setColor(Color.WHITE);
 
-			this.gallopSoundID = AssetLoader.gallopSound
+			HorseGame.gallopSoundID = AssetLoader.gallopSound
 					.loop(HorseGame.gallopVol);
 		}
 	}

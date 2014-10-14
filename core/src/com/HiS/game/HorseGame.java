@@ -20,7 +20,7 @@ public class HorseGame extends Game {
 
 	public static Platform platform;
 
-	public static float musicVol, gallopVol, soundVol;
+	public static float musicVol, gallopVol, soundVol, thunderVol;
 
 	public HorseGame(Platform platform) {
 		HorseGame.platform = platform;
@@ -44,6 +44,7 @@ public class HorseGame extends Game {
 
 		switch (platform) {
 		case ANDROID:
+			thunderVol = 0.2f;
 			musicVol = 1f;
 			gallopVol = 0.6f;
 			soundVol = 1;
@@ -53,6 +54,7 @@ public class HorseGame extends Game {
 			// AssetLoader.gallopMusic.play();
 			break;
 		case DESKTOP:
+			thunderVol = 0.2f; // Don't work I guess :S
 			musicVol = 1;
 			gallopVol = 0.6f;
 			soundVol = 1;
@@ -62,12 +64,13 @@ public class HorseGame extends Game {
 			// AssetLoader.gallopSound.loop(gallopVol);
 			break;
 		default:
+			thunderVol = 1;
 			musicVol = 1;
 			gallopVol = 0.6f;
 			soundVol = 1;
 			break;
 		}
-
+		AssetLoader.thunder1.setVolume(gallopSoundID, thunderVol);
 		AssetLoader.thunder1.play();
 		AssetLoader.moon.setLooping(true);
 		AssetLoader.moon.setVolume(musicVol);
