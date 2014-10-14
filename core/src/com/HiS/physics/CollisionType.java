@@ -1,5 +1,5 @@
 package com.HiS.physics;
 
 public enum CollisionType {
-	PASSED, CRASHED, NONE, ONTOP
+	PASSED, CRASHED, NONE, ONTOP, OVER
 }

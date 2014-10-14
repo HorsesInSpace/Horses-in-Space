@@ -14,9 +14,17 @@ public class DesktopLauncher {
 		config.title = "Horses in Space";
 		config.width = Toolkit.getDefaultToolkit().getScreenSize().width / 2;
 		config.height = Toolkit.getDefaultToolkit().getScreenSize().height / 2;
-		config.addIcon("data/his_logo2_128.png", FileType.Internal);
-		config.addIcon("data/his_logo2_32.png", FileType.Internal);
-		config.addIcon("data/his_logo2_16.png", FileType.Internal);
+
+		float ratio = (float) config.width / (float) config.height;
+
+		if (ratio < 1.7) {
+			config.height = 450;
+			config.width = 800;
+		}
+
+		config.addIcon("data/gfx/his_logo2_128.png", FileType.Internal);
+		config.addIcon("data/gfx/his_logo2_32.png", FileType.Internal);
+		config.addIcon("data/gfx/his_logo2_16.png", FileType.Internal);
 		new LwjglApplication(new HorseGame(HorseGame.Platform.DESKTOP), config);
 	}
 }

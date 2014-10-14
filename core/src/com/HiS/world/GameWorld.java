@@ -6,13 +6,11 @@ import java.util.Random;
 
 import com.HiS.gameobject.Horse;
 import com.HiS.gameobject.PhysGameObject;
-import com.HiS.gameobject.obstacle.Fence;
-import com.HiS.gameobject.obstacle.FloatyPlatform;
 import com.HiS.gameobject.obstacle.Obstacle;
-import com.HiS.gameobject.obstacle.Ufo;
 import com.HiS.graphics.GfxObject;
 import com.HiS.graphics.TexObject;
 import com.HiS.hishelpers.AssetLoader;
+import com.HiS.level.Level;
 import com.HiS.physics.Collision;
 import com.HiS.physics.PhysEngine;
 import com.HiS.screen.GameScreen;
@@ -29,10 +27,12 @@ public class GameWorld {
 	private GfxObject foreground1;
 	private GfxObject foreground2;
 
+	private Level level;
+
 	public long score;
 
 	private PhysEngine physEngine;
-	private float scrollSpeed = -(GameScreen.gameWidth / 1.8f);
+	private final float scrollSpeed = -(GameScreen.gameWidth / 1.8f);
 
 	private Random rand;
 
@@ -45,7 +45,7 @@ public class GameWorld {
 	public void update(float delta, float runTime) {
 		this.score += delta * 100;
 		// Gdx.app.log("Score", this.score + "");
-		// scrollSpeed -= delta;
+		// this.scrollSpeed -= delta;
 		moveBackMiddle(delta);
 		for (PhysGameObject gameObject : this.objects) {
 
@@ -54,6 +54,8 @@ public class GameWorld {
 			if (gameObject instanceof Horse) {
 				Collision col = this.physEngine.collisionCheck(gameObject,
 						this.objects);
+				Gdx.app.log("COLLISIONTYPE", col.getCollisionType().name()
+						+ ":" + col.getObject());
 				switch (col.getCollisionType()) {
 				case PASSED:
 					if (col.getObject() instanceof Obstacle) {
@@ -134,11 +136,9 @@ public class GameWorld {
 	}
 
 	private void initWorld() {
-		this.objects.add(new Fence(100, 75));
-		this.objects.add(new Fence(200, 75));
-		this.objects.add(new Fence(300, 75));
-		this.objects.add(new FloatyPlatform(400, 50));
-		this.objects.add(new Ufo(500, 42));
+		this.level = new Level("data/level/moon.csv");
+		this.objects = this.level.getObjects();
+
 		this.objects.add(new Horse(AssetLoader.horse, 22, 15, 300, 15,
 				GameScreen.gameHeight - 15 - 15));
 
@@ -163,6 +163,7 @@ public class GameWorld {
 						+ (GameScreen.gameHeight / 20),
 				GameScreen.gameHeight / 4, GameScreen.gameWidth);
 
+		// TODO Pass speed as parameter from level into PhysEngine constructor
 		this.physEngine = new PhysEngine();
 
 		this.rand = new Random();
