@@ -109,6 +109,7 @@ public class Horse extends PhysGameObject {
 		Gdx.app.log("Horse", "slidin");
 		this.sliding = true;
 		this.physics.getRect().height /= 2;
+
 	}
 
 	public void unSlide() {
@@ -116,6 +117,7 @@ public class Horse extends PhysGameObject {
 			Gdx.app.log("Horse", "not slidin");
 			this.sliding = false;
 			this.physics.getRect().height *= 2;
+
 		}
 	}
 

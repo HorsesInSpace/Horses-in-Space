@@ -99,6 +99,7 @@ public class PhysEngine {
 			List<? extends PhysObject> objects) {
 		for (PhysObject object : objects) {
 			boolean collided = false;
+			boolean over = false;
 			boolean platform = object.getPhysics().isPlatform();
 
 			if (!object.equals(subject)) {
@@ -106,12 +107,20 @@ public class PhysEngine {
 				if (Intersector.overlapConvexPolygons(subject.getPhysics()
 						.getPoly(), object.getPhysics().getPoly())) {
 					collided = true;
+				} else if (object.getPhysics().getPosition().y > subject
+						.getPhysics().getPosition().y
+						+ subject.getPhysics().getRect().height
+						&& object.getPhysics().getPosition().x < subject
+								.getPhysics().getPosition().x
+								+ subject.getPhysics().getRect().width) {
+					over = true;
 				}
 
 				if (collided && platform) {
 					if (object.getPhysics().getPosition().y >= ((subject
 							.getPhysics().getPosition().y + subject
-							.getPhysics().getRect().height) - 2f)) {
+							.getPhysics().getRect().height) - 2f)
+							|| PhysEngine.collision.getCollisionType() == CollisionType.OVER) {
 						subject.getPhysics().setOnTopOfObject(
 								object.getPhysics());
 
@@ -124,10 +133,15 @@ public class PhysEngine {
 				} else if (collided) {
 					return PhysEngine.collision.setCollision(subject, object,
 							CollisionType.CRASHED);
-				} else if ((subject.getPhysics().getRect().x + subject
-						.getPhysics().getRect().width) > (object.getPhysics()
-						.getRect().x + object.getPhysics().getRect().width)
-						&& PhysEngine.collision.getCollisionType() != CollisionType.PASSED) {
+				} else if (over && platform) {
+					return PhysEngine.collision.setCollision(subject, object,
+							CollisionType.OVER);
+
+				} else if ((subject.getPhysics().getRect().x) > (object
+						.getPhysics().getRect().x + object.getPhysics()
+						.getRect().width)
+						&& PhysEngine.collision.getCollisionType() != CollisionType.PASSED
+						&& PhysEngine.collision.getCollisionType() != CollisionType.OVER) {
 					return PhysEngine.collision.setCollision(subject, object,
 							CollisionType.PASSED);
 				}
