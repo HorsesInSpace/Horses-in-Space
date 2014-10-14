@@ -5,12 +5,9 @@ import com.HiS.hishelpers.AssetLoader;
 import com.HiS.screen.GameScreen;
 import com.HiS.world.GameWorld;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
 public class GameRenderer {
 
@@ -111,21 +108,21 @@ public class GameRenderer {
 		this.batch.end();
 
 		// Collision box KEEP FOR TESTING
-		ShapeRenderer shape = new ShapeRenderer();
-		shape.setProjectionMatrix(this.cam.combined);
-		shape.begin(ShapeType.Line);
-		shape.setColor(Color.RED);
-		for (PhysGameObject gameobject : this.world.getObjects()) {
-			shape.polygon(gameobject.getPhysics().getPoly()
-					.getTransformedVertices());
-		}
+		// ShapeRenderer shape = new ShapeRenderer();
+		// shape.setProjectionMatrix(this.cam.combined);
+		// shape.begin(ShapeType.Line);
+		// shape.setColor(Color.RED);
+		// for (PhysGameObject gameobject : this.world.getObjects()) {
+		// shape.polygon(gameobject.getPhysics().getPoly()
+		// .getTransformedVertices());
+		// }
 		// shape.setColor(Color.GREEN);
 		// for (PhysGameObject gameobject : this.world.getObjects()) {
 		// shape.rect(gameobject.getPhysics().getRect().x, gameobject
 		// .getPhysics().getRect().y, gameobject.getPhysics()
 		// .getRect().width, gameobject.getPhysics().getRect().height);
 		// }
-		shape.end();
+		// shape.end();
 	}
 
 	public void setWorld(GameWorld world) {
