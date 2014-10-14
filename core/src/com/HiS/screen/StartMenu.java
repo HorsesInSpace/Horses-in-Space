@@ -48,7 +48,6 @@ public class StartMenu implements Screen {
 			this.gallopSoundID = AssetLoader.gallopSound
 					.loop(HorseGame.gallopVol);
 		}
-
 	}
 
 	@Override

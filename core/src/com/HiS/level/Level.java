@@ -17,12 +17,12 @@ public class Level {
 	private TextureRegion middleGround;
 	private TextureRegion foreGround;
 
-	private List<PhysGameObject> objects = new ArrayList<>();
+	private List<PhysGameObject> objects = new ArrayList<PhysGameObject>();
 
 	public Level(String filePath) {
 		List<String[]> list = CsvLoader.LevelLoader(filePath);
 		String[] levelDetails = list.get(0);
-		List<PhysGameObject> objects = new ArrayList<>();
+		List<PhysGameObject> objects = new ArrayList<PhysGameObject>();
 		for (int i = 1; i < list.size(); i++) {
 			String[] values = list.get(i);
 			try {
@@ -80,7 +80,7 @@ public class Level {
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -88,7 +88,7 @@ public class Level {
 	}
 
 	public TextureRegion getBackGround() {
-		return backGround;
+		return this.backGround;
 	}
 
 	public void setBackGround(TextureRegion backGround) {
@@ -96,7 +96,7 @@ public class Level {
 	}
 
 	public TextureRegion getMiddleGround() {
-		return middleGround;
+		return this.middleGround;
 	}
 
 	public void setMiddleGround(TextureRegion middleGround) {
@@ -104,7 +104,7 @@ public class Level {
 	}
 
 	public TextureRegion getForeGround() {
-		return foreGround;
+		return this.foreGround;
 	}
 
 	public void setForeGround(TextureRegion foreGround) {

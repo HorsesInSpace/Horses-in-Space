@@ -39,14 +39,14 @@ public class GameWorld {
 	private Obstacle rightmostObstacle = null;
 
 	public GameWorld() {
-		initWorld();
+		this.initWorld();
 	}
 
 	public void update(float delta, float runTime) {
 		this.score += delta * 100;
 		// Gdx.app.log("Score", this.score + "");
 		// this.scrollSpeed -= delta;
-		moveBackMiddle(delta);
+		this.moveBackMiddle(delta);
 		for (PhysGameObject gameObject : this.objects) {
 
 			this.physEngine.update(gameObject, delta);
@@ -136,12 +136,6 @@ public class GameWorld {
 
 	private void initWorld() {
 		this.level = new Level("data/moon.csv");
-		// this.objects.add(new Fence(100, 75));
-		// this.objects.add(new Fence(200, 75));
-		// this.objects.add(new Fence(300, 75));
-		// this.objects.add(new FloatyPlatform(400, 50));
-		// this.objects.add(new Ufo(500, 42));
-		// this.objects.add(new FloatyPlatform(465, 43));
 		this.objects = this.level.getObjects();
 
 		this.objects.add(new Horse(AssetLoader.horse, 22, 15, 300, 15,
@@ -155,7 +149,7 @@ public class GameWorld {
 				GameScreen.gameHeight / 4, GameScreen.gameWidth
 						+ (GameScreen.gameWidth / 2));
 		this.middleground2 = new TexObject(AssetLoader.middleground1,
-				getMiddleground1().getRect().width, (GameScreen.gameHeight / 4)
+				this.getMiddleground1().getRect().width, (GameScreen.gameHeight / 4)
 						+ (GameScreen.gameHeight / 16),
 				GameScreen.gameHeight / 4, GameScreen.gameWidth
 						+ (GameScreen.gameWidth / 2));
@@ -188,12 +182,12 @@ public class GameWorld {
 		this.middleground1.getRect().x += (this.scrollSpeed / 4) * delta;
 		this.middleground2.getRect().x += (this.scrollSpeed / 4) * delta;
 		if ((this.middleground1.getRect().x + this.middleground1.getRect().width) < 0) {
-			this.middleground1.getRect().x = getMiddleground2().getRect().x
-					+ getMiddleground2().getRect().width;
+			this.middleground1.getRect().x = this.getMiddleground2().getRect().x
+					+ this.getMiddleground2().getRect().width;
 		}
 		if ((this.middleground2.getRect().x + this.middleground2.getRect().width) < 0) {
-			this.middleground2.getRect().x = getMiddleground1().getRect().x
-					+ getMiddleground1().getRect().width;
+			this.middleground2.getRect().x = this.getMiddleground1().getRect().x
+					+ this.getMiddleground1().getRect().width;
 		}
 	}
 }

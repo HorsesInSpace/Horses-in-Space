@@ -11,10 +11,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GameRenderer {
 
-	private SpriteBatch batch;
+	private final SpriteBatch batch;
 
 	private GameWorld world;
-	private OrthographicCamera cam;
+	private final OrthographicCamera cam;
 
 	public GameRenderer(GameWorld world) {
 		this.world = world;
