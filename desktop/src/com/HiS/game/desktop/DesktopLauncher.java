@@ -18,8 +18,8 @@ public class DesktopLauncher {
 		float ratio = (float) config.width / (float) config.height;
 
 		if (ratio < 1.7) {
-			config.height = 450;
-			config.width = 800;
+			config.height = 675;
+			config.width = 1200;
 		}
 
 		config.addIcon("data/gfx/his_logo2_128.png", FileType.Internal);

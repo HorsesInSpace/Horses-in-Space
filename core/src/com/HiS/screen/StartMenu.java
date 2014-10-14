@@ -95,7 +95,7 @@ public class StartMenu implements Screen {
 
 		}
 
-		AssetLoader.font.drawWrapped(this.logo, this.startGame, 0, 60,
+		AssetLoader.font.drawWrapped(this.logo, this.startGame, 0, gameHeight,
 				screenWidth, HAlignment.CENTER);
 		this.logo.end();
 
