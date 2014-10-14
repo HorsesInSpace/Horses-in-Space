@@ -54,7 +54,7 @@ public class GameWorld {
 			if (gameObject instanceof Horse) {
 				Collision col = this.physEngine.collisionCheck(gameObject,
 						this.objects);
-				Gdx.app.log("COLLISIONTYPE", col.getCollisionType().name());
+				// Gdx.app.log("COLLISIONTYPE", col.getCollisionType().name());
 				switch (col.getCollisionType()) {
 				case PASSED:
 					if (col.getObject() instanceof Obstacle) {
