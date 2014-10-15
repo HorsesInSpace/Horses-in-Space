@@ -5,7 +5,7 @@ import com.HiS.hishelpers.AssetLoader;
 public class FloatyPlatform extends Obstacle {
 
 	public FloatyPlatform(float posX, float posY) {
-		super(AssetLoader.moonForeground, 1500, 20, 3, 0, posX, posY, null);
-		getPhysics().setPlatform(true);
+		super(AssetLoader.moonForeground, 0, 20, 3, 0, posX, posY, null);
+		this.getPhysics().setPlatform(true);
 	}
 }
