@@ -44,7 +44,6 @@ public class InputHandler implements InputProcessor {
 				}
 			}
 		}
-
 		if (!GameScreen.running) {
 			this.world = this.screen.restart();
 		}

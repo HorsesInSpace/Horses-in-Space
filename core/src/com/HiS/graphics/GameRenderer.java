@@ -78,30 +78,29 @@ public class GameRenderer {
 				this.world.getForeground2().getRect().height);
 
 		this.batch.enableBlending();
-
-		String score = "Score: ";
-
-		AssetLoader.font.draw(this.batch, score, GameScreen.gameWidth / 2, 0);
+		
+		
+		// POENGSCORE
 		String str = this.world.score + "";
-		AssetLoader.font.draw(this.batch, str, GameScreen.gameWidth
-				- (GameScreen.gameWidth / 16) - (str.length() * 3f), 0);
+		AssetLoader.scoreFont.draw(this.batch, str, GameScreen.gameWidth/64, GameScreen.gameHeight/64);
 
 		if (!GameScreen.running) {
 			String highscoreTitle;
 			String highscore;
+			// OLD HIGHSCORE
 			if (this.world.score < AssetLoader.getHighScore()) {
 				highscoreTitle = "Old highscore: ";
+				highscoreTitle.toUpperCase();
 				highscore = AssetLoader.getHighScore() + "";
 			} else {
-
+				// NEW HIGHSCORE
 				AssetLoader.setHighScore(this.world.score);
-				highscoreTitle = "New highscore!";
+				highscoreTitle = "New highscore! ";
+				highscoreTitle.toUpperCase();
 				highscore = this.world.score + "";
 			}
-			AssetLoader.font.draw(this.batch, highscoreTitle, (136 / 2)
-					- ((3 * score.length()) - 1), 11);
-			AssetLoader.font.draw(this.batch, highscore + "", (136 / 2)
-					- ((3 * score.length()) - 1), 30);
+			AssetLoader.scoreFont.draw(this.batch, highscoreTitle + " " + highscore, GameScreen.gameWidth/2-25, 30);
+//			AssetLoader.scoreFont.draw(this.batch, highscore + "", GameScreen.gameWidth - highscoreTitle.length(),  30);
 		}
 
 		// BATCH END
