@@ -7,6 +7,7 @@ import com.HiS.gameobject.PhysGameObject;
 import com.HiS.gameobject.obstacle.Fence;
 import com.HiS.gameobject.obstacle.FloatyPlatform;
 import com.HiS.gameobject.obstacle.Ufo;
+import com.HiS.hishelpers.AssetLoader;
 import com.HiS.hishelpers.CsvLoader;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -63,12 +64,19 @@ public class Level {
 	private void generateLevel(TextureRegion backGround,
 			TextureRegion middleGround, TextureRegion foreGround, String name,
 			List<PhysGameObject> objects) {
-		this.name = name;
-		this.backGround = backGround;
-		this.middleGround = middleGround;
-		this.foreGround = foreGround;
-		this.setObjects(objects);
-
+		if (name.equals("moon")) {
+			this.name = "moon";
+			this.backGround = AssetLoader.moonBackground;
+			this.foreGround = AssetLoader.moonForeground;
+			this.middleGround = AssetLoader.moonMiddleground;
+			this.setObjects(objects);
+		} else {
+			this.name = name;
+			this.backGround = null;
+			this.middleGround = null;
+			this.foreGround = null;
+			this.setObjects(objects);
+		}
 	}
 
 	public List<PhysGameObject> getObjects() {

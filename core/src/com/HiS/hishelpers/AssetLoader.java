@@ -25,8 +25,9 @@ public class AssetLoader {
 	private static Texture texture;
 
 	public static TextureRegion horse, horse2, horse3, horseJump, horseSlide,
-	horseSplat, background, foreground, middleground1, fence, ufo,
+			horseSplat, moonBackground, moonForeground, fence, ufo,
 	earth;
+	public static TextureRegion moonMiddleground;
 	public static Animation anim;
 	public static BitmapFont font;
 	public static Polygon polyHorse, polyHorse2, polyHorse3, polyHorseJump,
@@ -90,17 +91,17 @@ public class AssetLoader {
 		anim = new Animation(0.10f, horses);
 		anim.setPlayMode(PlayMode.LOOP_PINGPONG);
 
-		background = new TextureRegion(texture, 101, 0, 399, 240);
-		background.flip(false, true);
+		moonBackground = new TextureRegion(texture, 101, 0, 399, 240);
+		moonBackground.flip(false, true);
 
 		earth = new TextureRegion(texture, 1000, 445, 300, 300);
 		earth.flip(false, true);
 
-		middleground1 = new TextureRegion(texture, 11, 326, 1277, 99);
-		middleground1.flip(false, true);
+		moonMiddleground = new TextureRegion(texture, 11, 326, 1277, 99);
+		moonMiddleground.flip(false, true);
 
-		foreground = new TextureRegion(texture, 102, 250, 399, 62);
-		foreground.flip(false, true);
+		moonForeground = new TextureRegion(texture, 102, 250, 399, 62);
+		moonForeground.flip(false, true);
 
 		fence = new TextureRegion(texture, 920, 448, 9, 84);
 		fence.flip(false, true);
