@@ -37,12 +37,14 @@ public class GameWorld {
 	private Random rand;
 
 	private Obstacle rightmostObstacle = null;
+	private boolean pause = true;
 
 	public GameWorld() {
 		initWorld();
 	}
 
 	public void update(float delta, float runTime) {
+		if(this.pause) {
 		this.score += delta * 100;
 		// Gdx.app.log("Score", this.score + "");
 		// this.scrollSpeed -= delta;
@@ -108,6 +110,7 @@ public class GameWorld {
 					this.rightmostObstacle = (Obstacle) gameObject;
 				}
 			}
+		}
 		}
 	}
 
@@ -190,5 +193,15 @@ public class GameWorld {
 			this.middleground2.getRect().x = getMiddleground1().getRect().x
 					+ getMiddleground1().getRect().width;
 		}
+	}
+
+	public boolean getPause() {
+		// TODO Auto-generated method stub
+		return this.pause;
+	}
+
+	public void setPause(boolean pause) {
+		// TODO Auto-generated method stub
+		this.pause = pause;
 	}
 }
