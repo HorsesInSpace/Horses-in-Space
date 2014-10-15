@@ -5,6 +5,7 @@ import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -28,7 +29,7 @@ public class AssetLoader {
 	horseSplat, background, foreground, middleground1, fence, ufo,
 	earth;
 	public static Animation anim;
-	public static BitmapFont font;
+	public static BitmapFont font, scoreFont;
 	public static Polygon polyHorse, polyHorse2, polyHorse3, polyHorseJump,
 	polyHorseSlide, polyUfo;
 
@@ -44,7 +45,12 @@ public class AssetLoader {
 		font = new BitmapFont(
 				Gdx.files.internal("data/gfx/monohorseinspaced.fnt"));
 		font.setScale(.10f, -.10f);
-
+		
+		scoreFont = new BitmapFont(
+				Gdx.files.internal("data/gfx/audiowide.fnt"));
+		scoreFont.setScale(.15f, -.15f);
+		scoreFont.setColor(Color.WHITE);
+		
 		FileHandle textureHandle = Gdx.files.internal("data/gfx/textures.png");
 		FileHandle horseHandle = Gdx.files
 				.internal("data/polygon/horsetex.psh");
