@@ -26,7 +26,7 @@ public class AssetLoader {
 	private static Texture texture;
 
 	public static TextureRegion horse, horse2, horse3, horseJump, horseSlide,
-			horseSplat, moonBackground, moonForeground, fence, ufo,
+	horseSplat, moonBackground, moonForeground, fence, ufo,
 	earth;
 	public static TextureRegion moonMiddleground;
 	public static Animation anim;
@@ -46,12 +46,12 @@ public class AssetLoader {
 		font = new BitmapFont(
 				Gdx.files.internal("data/gfx/monohorseinspaced.fnt"));
 		font.setScale(.10f, -.10f);
-		
+
 		scoreFont = new BitmapFont(
 				Gdx.files.internal("data/gfx/audiowide.fnt"));
 		scoreFont.setScale(.15f, -.15f);
 		scoreFont.setColor(Color.WHITE);
-		
+
 		FileHandle textureHandle = Gdx.files.internal("data/gfx/textures.png");
 		FileHandle horseHandle = Gdx.files
 				.internal("data/polygon/horsetex.psh");
@@ -165,5 +165,6 @@ public class AssetLoader {
 		punch.dispose();
 		whinning.dispose();
 		font.dispose();
+		scoreFont.dispose();
 	}
 }
