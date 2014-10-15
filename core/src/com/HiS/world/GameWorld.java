@@ -28,7 +28,8 @@ public class GameWorld {
 	private GfxObject foreground2;
 
 	private Level level;
-
+	
+	private boolean pause = true;
 	public long score;
 
 	private PhysEngine physEngine;
@@ -43,69 +44,71 @@ public class GameWorld {
 	}
 
 	public void update(float delta, float runTime) {
-		this.score += delta * 70;
-		// Gdx.app.log("Score", this.score + "");
-		// this.scrollSpeed -= delta;
-		moveBackMiddle(delta);
-		for (PhysGameObject gameObject : this.objects) {
+		if(this.pause) {
+			this.score += delta * 70;
+			// Gdx.app.log("Score", this.score + "");
+			// this.scrollSpeed -= delta;
+			moveBackMiddle(delta);
+			for (PhysGameObject gameObject : this.objects) {
 
-			this.physEngine.update(gameObject, delta);
-			gameObject.update(delta, runTime);
-			if (gameObject instanceof Horse) {
-				Collision col = this.physEngine.collisionCheck(gameObject,
-						this.objects);
-				Gdx.app.log("COLLISIONTYPE", col.getCollisionType().name()
-						+ ":" + col.getObject());
-				switch (col.getCollisionType()) {
-				case PASSED:
-					if (col.getObject() instanceof Obstacle) {
-						Obstacle obstacle = (Obstacle) col.getObject();
-						if (!obstacle.isPassed()) {
-							this.score += obstacle.getPoints();
-							obstacle.setPassed(true);
+				this.physEngine.update(gameObject, delta);
+				gameObject.update(delta, runTime);
+				if (gameObject instanceof Horse) {
+					Collision col = this.physEngine.collisionCheck(gameObject,
+							this.objects);
+					Gdx.app.log("COLLISIONTYPE", col.getCollisionType().name()
+							+ ":" + col.getObject());
+					switch (col.getCollisionType()) {
+					case PASSED:
+						if (col.getObject() instanceof Obstacle) {
+							Obstacle obstacle = (Obstacle) col.getObject();
+							if (!obstacle.isPassed()) {
+								this.score += obstacle.getPoints();
+								obstacle.setPassed(true);
+							}
 						}
-					}
-					break;
+						break;
 
-				case CRASHED:
-					col.getSubject().handleCollision(col.getObject());
-					GameScreen.running = false;
-					gameObject.destroy();
-					if (this.score > AssetLoader.getHighScore()) {
-						AssetLoader.setHighScore(this.score);
+					case CRASHED:
+						col.getSubject().handleCollision(col.getObject());
+						GameScreen.running = false;
+						gameObject.destroy();
+						if (this.score > AssetLoader.getHighScore()) {
+							AssetLoader.setHighScore(this.score);
+						}
+						break;
+					default:
+						//
+						break;
 					}
-					break;
-				default:
-					//
-					break;
-				}
-			} else if (gameObject instanceof Obstacle) {
-				gameObject.getPhysics().setVelocity(
-						new Vector2(this.scrollSpeed, 0));
-				Rectangle rect = gameObject.getPhysics().getRect();
-				if ((rect.x + rect.width) < 0) {
-					float nextPos = GameScreen.gameWidth;
-					if (this.rightmostObstacle != null) {
-						nextPos = this.rightmostObstacle.getPosition().x
-								+ this.rand
-										.nextInt((int) (GameScreen.gameWidth * 0.66))
-								+ (GameScreen.gameWidth / 2);
-						Gdx.app.log("NextPos", "" + nextPos);
-						Gdx.app.log("Score", this.score + "");
+				} else if (gameObject instanceof Obstacle) {
+					gameObject.getPhysics().setVelocity(
+							new Vector2(this.scrollSpeed, 0));
+					Rectangle rect = gameObject.getPhysics().getRect();
+					if ((rect.x + rect.width) < 0) {
+						float nextPos = GameScreen.gameWidth;
+						if (this.rightmostObstacle != null) {
+							nextPos = this.rightmostObstacle.getPosition().x
+									+ this.rand
+									.nextInt((int) (GameScreen.gameWidth * 0.66))
+									+ (GameScreen.gameWidth / 2);
+							Gdx.app.log("NextPos", "" + nextPos);
+							Gdx.app.log("Score", this.score + "");
+						}
+
+						gameObject.getPhysics().setPosition(
+								new Vector2(nextPos, rect.y));
+						gameObject.setCrashed(false);
+						((Obstacle) gameObject).setPassed(false);
+
+						Gdx.app.log("RecentObstacle",
+								this.rightmostObstacle.toString());
 					}
-
-					gameObject.getPhysics().setPosition(
-							new Vector2(nextPos, rect.y));
-					gameObject.setCrashed(false);
-					((Obstacle) gameObject).setPassed(false);
-
-					Gdx.app.log("RecentObstacle",
-							this.rightmostObstacle.toString());
-				}
-				if ((this.rightmostObstacle == null)
-						|| (gameObject.getPosition().x > this.rightmostObstacle
-								.getPosition().x)) {
-					this.rightmostObstacle = (Obstacle) gameObject;
+					if ((this.rightmostObstacle == null)
+							|| (gameObject.getPosition().x > this.rightmostObstacle
+									.getPosition().x)) {
+						this.rightmostObstacle = (Obstacle) gameObject;
+					}
 				}
 			}
 		}
@@ -148,19 +151,19 @@ public class GameWorld {
 		this.middleground1 = new TexObject(AssetLoader.middleground1, 0,
 				(GameScreen.gameHeight / 4) + (GameScreen.gameHeight / 16),
 				GameScreen.gameHeight / 4, GameScreen.gameWidth
-						+ (GameScreen.gameWidth / 2));
+				+ (GameScreen.gameWidth / 2));
 		this.middleground2 = new TexObject(AssetLoader.middleground1,
 				getMiddleground1().getRect().width, (GameScreen.gameHeight / 4)
-						+ (GameScreen.gameHeight / 16),
+				+ (GameScreen.gameHeight / 16),
 				GameScreen.gameHeight / 4, GameScreen.gameWidth
-						+ (GameScreen.gameWidth / 2));
+				+ (GameScreen.gameWidth / 2));
 
 		this.foreground1 = new TexObject(AssetLoader.foreground, 0,
 				(GameScreen.gameHeight / 2) + (GameScreen.gameHeight / 20),
 				GameScreen.gameHeight / 4, GameScreen.gameWidth);
 		this.foreground2 = new TexObject(AssetLoader.foreground,
 				this.foreground1.getRect().width, (GameScreen.gameHeight / 2)
-						+ (GameScreen.gameHeight / 20),
+				+ (GameScreen.gameHeight / 20),
 				GameScreen.gameHeight / 4, GameScreen.gameWidth);
 
 		// TODO Pass speed as parameter from level into PhysEngine constructor
@@ -191,4 +194,15 @@ public class GameWorld {
 					+ getMiddleground1().getRect().width;
 		}
 	}
+
+	public boolean getPause() {
+		// TODO Auto-generated method stub
+		return this.pause;
+	}
+
+	public void setPause(boolean pause) {
+		// TODO Auto-generated method stub
+		this.pause = pause;
+	}
+
 }
