@@ -26,6 +26,7 @@ public class GameWorld {
 	private GfxObject middleground2;
 	private GfxObject foreground1;
 	private GfxObject foreground2;
+	private Horse horse;
 
 	private Level level;
 
@@ -46,71 +47,66 @@ public class GameWorld {
 	public void update(float delta, float runTime) {
 		if(this.pause) {
 			this.score += delta * 70;
-			// Gdx.app.log("Score", this.score + "");
-			// this.scrollSpeed -= delta;
 			this.moveBackMiddle(delta);
 			for (PhysGameObject gameObject : this.objects) {
 
 				this.physEngine.update(gameObject, delta);
 				gameObject.update(delta, runTime);
-				if (gameObject instanceof Horse) {
-					Collision col = this.physEngine.collisionCheck(gameObject,
-							this.objects);
-					Gdx.app.log("COLLISIONTYPE", col.getCollisionType().name()
-							+ ":" + col.getObject());
-					switch (col.getCollisionType()) {
-					case PASSED:
-						if (col.getObject() instanceof Obstacle) {
-							Obstacle obstacle = (Obstacle) col.getObject();
-							if (!obstacle.isPassed()) {
-								this.score += obstacle.getPoints();
-								obstacle.setPassed(true);
-							}
-						}
-						break;
-
-					case CRASHED:
-						col.getSubject().handleCollision(col.getObject());
-						GameScreen.running = false;
-						gameObject.destroy();
-						if (this.score > AssetLoader.getHighScore()) {
-							AssetLoader.setHighScore(this.score);
-						}
-						break;
-					default:
-						//
-						break;
+				gameObject.getPhysics().setVelocity(
+						new Vector2(this.scrollSpeed, 0));
+				Rectangle rect = gameObject.getPhysics().getRect();
+				if ((rect.x + rect.width) < 0) {
+					float nextPos = GameScreen.gameWidth;
+					if (this.rightmostObstacle != null) {
+						nextPos = this.rightmostObstacle.getPosition().x
+								+ this.rand
+								.nextInt((int) (GameScreen.gameWidth * 0.66))
+								+ (GameScreen.gameWidth / 2);
+						Gdx.app.log("NextPos", "" + nextPos);
+						Gdx.app.log("Score", this.score + "");
 					}
-				} else if (gameObject instanceof Obstacle) {
-					gameObject.getPhysics().setVelocity(
-							new Vector2(this.scrollSpeed, 0));
-					Rectangle rect = gameObject.getPhysics().getRect();
-					if ((rect.x + rect.width) < 0) {
-						float nextPos = GameScreen.gameWidth;
-						if (this.rightmostObstacle != null) {
-							nextPos = this.rightmostObstacle.getPosition().x
-									+ this.rand
-									.nextInt((int) (GameScreen.gameWidth * 0.66))
-									+ (GameScreen.gameWidth / 2);
-							Gdx.app.log("NextPos", "" + nextPos);
-							Gdx.app.log("Score", this.score + "");
-						}
 
-						gameObject.getPhysics().setPosition(
-								new Vector2(nextPos, rect.y));
-						gameObject.setCrashed(false);
-						((Obstacle) gameObject).setPassed(false);
+					gameObject.getPhysics().setPosition(
+							new Vector2(nextPos, rect.y));
+					gameObject.setCrashed(false);
+					((Obstacle) gameObject).setPassed(false);
 
-						Gdx.app.log("RecentObstacle",
-								this.rightmostObstacle.toString());
-					}
-					if ((this.rightmostObstacle == null)
-							|| (gameObject.getPosition().x > this.rightmostObstacle
-									.getPosition().x)) {
-						this.rightmostObstacle = (Obstacle) gameObject;
-					}
+					Gdx.app.log("RecentObstacle",
+							this.rightmostObstacle.toString());
+				}
+				if ((this.rightmostObstacle == null)
+						|| (gameObject.getPosition().x > this.rightmostObstacle
+								.getPosition().x)) {
+					this.rightmostObstacle = (Obstacle) gameObject;
 				}
 			}
+			this.horse.update(delta, runTime);
+			Collision col = this.physEngine.collisionCheck(this.horse,
+					this.objects);
+			switch (col.getCollisionType()) {
+			case PASSED:
+				if (col.getObject() instanceof Obstacle) {
+					Obstacle obstacle = (Obstacle) col.getObject();
+					if (!obstacle.isPassed()) {
+						this.score += obstacle.getPoints();
+						obstacle.setPassed(true);
+					}
+				}
+				break;
+
+			case CRASHED:
+				col.getSubject().handleCollision(col.getObject());
+				GameScreen.running = false;
+				this.horse.destroy();
+				if (this.score > AssetLoader.getHighScore()) {
+					AssetLoader.setHighScore(this.score);
+				}
+				break;
+			default:
+				//
+				break;
+			}
+			this.physEngine.update(this.horse, delta);
 		}
 	}
 
@@ -140,10 +136,9 @@ public class GameWorld {
 
 	private void initWorld() {
 		this.level = new Level("data/level/moon.csv");
+		this.horse = new Horse(AssetLoader.horse, 22, 15, 300, 15,
+				GameScreen.gameHeight - 30);
 		this.objects = this.level.getObjects();
-
-		this.objects.add(new Horse(AssetLoader.horse, 22, 15, 300, 15,
-				GameScreen.gameHeight - 15 - 15));
 
 		this.background = new TexObject(this.level.getBackGround(), 0, -90,
 				GameScreen.gameHeight, GameScreen.gameWidth);
@@ -198,6 +193,14 @@ public class GameWorld {
 	public boolean getPause() {
 		// TODO Auto-generated method stub
 		return this.pause;
+	}
+
+	public Horse getHorse() {
+		return this.horse;
+	}
+
+	public void setHorse(Horse horse) {
+		this.horse = horse;
 	}
 
 	public void setPause(boolean pause) {
