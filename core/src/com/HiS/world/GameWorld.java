@@ -191,7 +191,6 @@ public class GameWorld {
 	}
 
 	public boolean getPause() {
-		// TODO Auto-generated method stub
 		return this.pause;
 	}
 
@@ -204,7 +203,6 @@ public class GameWorld {
 	}
 
 	public void setPause(boolean pause) {
-		// TODO Auto-generated method stub
 		this.pause = pause;
 	}
 
