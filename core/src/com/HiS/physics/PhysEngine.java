@@ -102,8 +102,6 @@ public class PhysEngine {
 			boolean over = false;
 			boolean platform = object.getPhysics().isPlatform();
 
-			if (!object.equals(subject)) {
-
 				if (Intersector.overlapConvexPolygons(subject.getPhysics()
 						.getPoly(), object.getPhysics().getPoly())) {
 					collided = true;
@@ -111,8 +109,8 @@ public class PhysEngine {
 						.getPhysics().getPosition().y
 						+ subject.getPhysics().getRect().height
 						&& object.getPhysics().getPosition().x < subject
-								.getPhysics().getPosition().x
-								+ subject.getPhysics().getRect().width) {
+						.getPhysics().getPosition().x
+						+ subject.getPhysics().getRect().width) {
 					over = true;
 				}
 
@@ -146,7 +144,6 @@ public class PhysEngine {
 							CollisionType.PASSED);
 				}
 			}
-		}
 
 		return PhysEngine.collision.setCollision(subject, null,
 				CollisionType.NONE);
