@@ -17,10 +17,19 @@ public class AudioExamples {
 		 */
 		AssetLoader.gallopSound.play(volume);
 
+		/**
+		 * works locally on desktop, global on android
+		 */
 		AssetLoader.gallopSound.pause();
 
+		/**
+		 * playback id
+		 */
 		long soundId = AssetLoader.gallopSound.play(volume);
 
+		/*
+		 * Works with both
+		 */
 		AssetLoader.gallopSound.pause(soundId);
 	}
 }
