@@ -57,14 +57,9 @@ public class GameWorld {
 				Rectangle rect = gameObject.getPhysics().getRect();
 				if ((rect.x + rect.width) < 0) {
 					float nextPos = GameScreen.gameWidth;
-					if (this.rightmostObstacle != null) {
-						nextPos = this.rightmostObstacle.getPosition().x
-								+ this.rand
-								.nextInt((int) (GameScreen.gameWidth * 0.66))
-								+ (GameScreen.gameWidth / 2);
-						Gdx.app.log("NextPos", "" + nextPos);
-						Gdx.app.log("Score", this.score + "");
-					}
+					nextPos = this.level.getLength()-rect.width;
+					// Gdx.app.log("NextPos", "" + nextPos);
+					// Gdx.app.log("Score", this.score + "");
 
 					gameObject.getPhysics().setPosition(
 							new Vector2(nextPos, rect.y));

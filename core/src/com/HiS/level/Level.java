@@ -17,6 +17,7 @@ public class Level {
 	private TextureRegion backGround;
 	private TextureRegion middleGround;
 	private TextureRegion foreGround;
+	private int length;
 
 	private List<PhysGameObject> objects = new ArrayList<PhysGameObject>();
 
@@ -24,17 +25,24 @@ public class Level {
 		List<String[]> list = CsvLoader.LevelLoader(filePath);
 		String[] levelDetails = list.get(0);
 		List<PhysGameObject> objects = new ArrayList<PhysGameObject>();
+		int length = 0;
 		for (int i = 1; i < list.size(); i++) {
 			String[] values = list.get(i);
+			int x = Integer.parseInt(values[1]);
+			System.out.println(x);
+			if (length <= x) {
+				length = x;
+			}
 			try {
 				objects.add(this.createPhysGameObject(values));
 			} catch (PhysGameObjectNotRecognizedException e) {
 				continue;
 			}
 		}
-
+		length = length + 100;
 		this.generateLevel(this.backGround, this.middleGround, this.foreGround,
 				levelDetails[0], objects);
+		this.setLength(length);
 	}
 
 	private PhysGameObject createPhysGameObject(String[] values)
@@ -117,6 +125,14 @@ public class Level {
 
 	public void setForeGround(TextureRegion foreGround) {
 		this.foreGround = foreGround;
+	}
+
+	public int getLength() {
+		return this.length;
+	}
+
+	public void setLength(int length) {
+		this.length = length;
 	}
 
 }
