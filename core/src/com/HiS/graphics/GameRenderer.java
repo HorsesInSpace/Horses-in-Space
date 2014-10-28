@@ -72,7 +72,7 @@ public class GameRenderer {
 		this.batch.draw(this.world.getHorse().getTexture(), this.world
 				.getHorse().getRect().x, this.world.getHorse().getRect().y,
 				this.world.getHorse().getRect().width, this.world.getHorse()
-						.getRect().height);
+				.getRect().height);
 
 		// Foreground
 		this.batch.disableBlending(); // Foreground is solid
@@ -115,21 +115,21 @@ public class GameRenderer {
 		this.batch.end();
 
 		// Collision box KEEP FOR TESTING
-		 ShapeRenderer shape = new ShapeRenderer();
-		 shape.setProjectionMatrix(this.cam.combined);
-		 shape.begin(ShapeType.Line);
-		 shape.setColor(Color.RED);
-		 for (PhysGameObject gameobject : this.world.getObjects()) {
-		 shape.polygon(gameobject.getPhysics().getPoly()
-		 .getTransformedVertices());
-		 }
-		 shape.setColor(Color.GREEN);
-		 for (PhysGameObject gameobject : this.world.getObjects()) {
-		 shape.rect(gameobject.getPhysics().getRect().x, gameobject
-		 .getPhysics().getRect().y, gameobject.getPhysics()
-		 .getRect().width, gameobject.getPhysics().getRect().height);
-		 }
-		 shape.end();
+		//		 ShapeRenderer shape = new ShapeRenderer();
+		//		 shape.setProjectionMatrix(this.cam.combined);
+		//		 shape.begin(ShapeType.Line);
+		//		 shape.setColor(Color.RED);
+		//		 for (PhysGameObject gameobject : this.world.getObjects()) {
+		//		 shape.polygon(gameobject.getPhysics().getPoly()
+		//		 .getTransformedVertices());
+		//		 }
+		//		 shape.setColor(Color.GREEN);
+		//		 for (PhysGameObject gameobject : this.world.getObjects()) {
+		//		 shape.rect(gameobject.getPhysics().getRect().x, gameobject
+		//		 .getPhysics().getRect().y, gameobject.getPhysics()
+		//		 .getRect().width, gameobject.getPhysics().getRect().height);
+		//		 }
+		//		 shape.end();
 	}
 
 	public void setWorld(GameWorld world) {
