@@ -87,7 +87,7 @@ public class GameScreen implements Screen {
 		
 		
 		button.setPosition(5, 5);
-		pbutton.setPosition(Gdx.graphics.getWidth() - 23,5);
+		pbutton.setPosition(Gdx.graphics.getWidth() - 70,5);
 		
 //		Gdx.input.setInputProcessor(stage);
 		

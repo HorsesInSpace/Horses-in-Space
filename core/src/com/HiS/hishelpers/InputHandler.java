@@ -1,7 +1,5 @@
 package com.HiS.hishelpers;
 
-import com.HiS.gameobject.GameObject;
-import com.HiS.gameobject.Horse;
 import com.HiS.screen.GameScreen;
 import com.HiS.world.GameWorld;
 import com.badlogic.gdx.Gdx;
@@ -19,7 +17,7 @@ import com.badlogic.gdx.InputProcessor;
 public class InputHandler implements InputProcessor {
 
 	private GameWorld world;
-	private GameScreen screen;
+	private final GameScreen screen;
 
 	/**
 	 * Constructor for class InputHandler
@@ -34,14 +32,11 @@ public class InputHandler implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-
-		for (GameObject gameObject : this.world.getObjects()) {
-			if (GameScreen.running && (gameObject instanceof Horse)) {
-				if (screenX < (GameScreen.screenWidth / 2)) {
-					((Horse) gameObject).jump();
-				} else {
-					((Horse) gameObject).slide();
-				}
+		if (GameScreen.running) {
+			if (screenX < (GameScreen.screenWidth / 2)) {
+				this.world.getHorse().jump();
+			} else {
+				this.world.getHorse().slide();
 			}
 		}
 		if (!GameScreen.running) {
@@ -59,21 +54,13 @@ public class InputHandler implements InputProcessor {
 	public boolean keyDown(int keycode) {
 		if (GameScreen.running
 				&& ((keycode == Input.Keys.SPACE) || (keycode == Input.Keys.W) || (keycode == Input.Keys.UP))) {
-			for (GameObject gameObject : this.world.getObjects()) {
-				if (gameObject instanceof Horse) {
-					((Horse) gameObject).jump();
-				}
-			}
+			this.world.getHorse().jump();
 			return true;
 		}
 		if (GameScreen.running
 				&& ((keycode == Input.Keys.CONTROL_LEFT)
 						|| (keycode == Input.Keys.S) || (keycode == Input.Keys.DOWN))) {
-			for (GameObject gameObject : this.world.getObjects()) {
-				if (gameObject instanceof Horse) {
-					((Horse) gameObject).slide();
-				}
-			}
+			this.world.getHorse().slide();
 			return true;
 		}
 		if (!GameScreen.running && (keycode == Input.Keys.R)) {
@@ -94,11 +81,7 @@ public class InputHandler implements InputProcessor {
 		if (GameScreen.running
 				&& ((keycode == Input.Keys.CONTROL_LEFT)
 						|| (keycode == Input.Keys.S) || (keycode == Input.Keys.DOWN))) {
-			for (GameObject gameObject : this.world.getObjects()) {
-				if (gameObject instanceof Horse) {
-					((Horse) gameObject).unSlide();
-				}
-			}
+			this.world.getHorse().unSlide();
 			return true;
 		}
 		return false;
@@ -112,13 +95,8 @@ public class InputHandler implements InputProcessor {
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		if (GameScreen.running) {
-			for (GameObject gameObject : this.world.getObjects()) {
-				if (gameObject instanceof Horse) {
-					((Horse) gameObject).unSlide();
-					return true;
-				}
-			}
-
+			this.world.getHorse().unSlide();
+			return true;
 		}
 		return false;
 

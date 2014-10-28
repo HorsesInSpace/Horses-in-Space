@@ -69,6 +69,11 @@ public class GameRenderer {
 						gameObject.getPhysics().getRect().height);
 			}
 		}
+		this.batch.draw(this.world.getHorse().getTexture(), this.world
+				.getHorse().getRect().x, this.world.getHorse().getRect().y,
+				this.world.getHorse().getRect().width, this.world.getHorse()
+						.getRect().height);
+
 		// Foreground
 		this.batch.disableBlending(); // Foreground is solid
 		this.batch.draw(this.world.getForeground1().getTexture(), this.world
@@ -81,8 +86,8 @@ public class GameRenderer {
 				this.world.getForeground2().getRect().height);
 
 		this.batch.enableBlending();
-		
-		
+
+
 		// POENGSCORE
 		String str = this.world.score + "";
 		AssetLoader.scoreFont.draw(this.batch, str, GameScreen.gameWidth/64, GameScreen.gameHeight/64);
@@ -103,7 +108,7 @@ public class GameRenderer {
 				highscore = this.world.score + "";
 			}
 			AssetLoader.scoreFont.draw(this.batch, highscoreTitle + " " + highscore, GameScreen.gameWidth/2-25, 30);
-//			AssetLoader.scoreFont.draw(this.batch, highscore + "", GameScreen.gameWidth - highscoreTitle.length(),  30);
+			//			AssetLoader.scoreFont.draw(this.batch, highscore + "", GameScreen.gameWidth - highscoreTitle.length(),  30);
 		}
 
 		// BATCH END
