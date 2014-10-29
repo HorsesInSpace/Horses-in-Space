@@ -7,7 +7,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
-
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -17,81 +16,85 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class GameScreen implements Screen {
-	
+
 	private GameWorld world;
 	private GameRenderer renderer;
-	public static float gameHeight;
-	public static float gameWidth = 136;
+	public static float gameHeight = 76.5f;
+	public static float gameWidth;
 	public static int screenWidth = Gdx.graphics.getWidth();
 	public static int screenHeight = Gdx.graphics.getHeight();
 	public static boolean running = true;
-	
+
 	public Stage stage;
-	
+
 	public TextureAtlas buttonAtlas, pbuttonAtlas;
-	public ImageButtonStyle buttonStyle,pbuttonStyle;
-	public ImageButton button,pbutton;
-	Skin skin,pskin;
-	
+	public ImageButtonStyle buttonStyle, pbuttonStyle;
+	public ImageButton soundButton, pauseButton;
+	Skin skin, pskin;
+
 	public float runTime;
-	
-	
-	
+
 	public GameScreen() {
 		Gdx.app.log("GameScreen", "CREATED");
 
-		GameScreen.gameHeight = screenHeight / (screenWidth / gameWidth);
+		GameScreen.gameWidth = screenWidth / (screenHeight / gameHeight);
 		this.runTime = 0;
 		this.world = new GameWorld();
 		this.stage = new Stage();
-		
+
 		this.renderer = new GameRenderer(this.world);
-		
-//		Gdx.input.setInputProcessor(new InputHandler(this.world, this));
-		
+
+		// Gdx.input.setInputProcessor(new InputHandler(this.world, this));
+
 		InputProcessor inputProcessorTwo = new InputHandler(this.world, this);
 		InputMultiplexer inputMultiplexer = new InputMultiplexer();
-		inputMultiplexer.addProcessor(stage);
+		inputMultiplexer.addProcessor(this.stage);
 		inputMultiplexer.addProcessor(inputProcessorTwo);
 		Gdx.input.setInputProcessor(inputMultiplexer);
-		
-		
-	
 
-		
-		
-		skin = new Skin();
-		buttonAtlas = new TextureAtlas("data/buttons/button.pack");
-		skin.addRegions(buttonAtlas);
-		
-		pskin = new Skin();
-		pbuttonAtlas = new TextureAtlas("data/buttons/pbutton.pack");
-		pskin.addRegions(pbuttonAtlas);
-		
-		
-		buttonStyle = new ImageButtonStyle();
-		buttonStyle.up = skin.getDrawable("button");
-		buttonStyle.checked = skin.getDrawable("buttonpressed");
-		
-		pbuttonStyle = new ImageButtonStyle();
-		pbuttonStyle.up = pskin.getDrawable("pbutton");
-		pbuttonStyle.checked = pskin.getDrawable("pbuttonpressed");
-		
-		
-		button = new ImageButton(buttonStyle);
-		stage.addActor(button);
-		
-		pbutton = new ImageButton(pbuttonStyle);
-		stage.addActor(pbutton);
-		
-		
-		
-		button.setPosition(5, 5);
-		pbutton.setPosition(Gdx.graphics.getWidth() - 70,5);
-		
-//		Gdx.input.setInputProcessor(stage);
-		
-		button.addListener(new InputListener(){
+		this.skin = new Skin();
+		this.buttonAtlas = new TextureAtlas("data/buttons/button.pack");
+		this.skin.addRegions(this.buttonAtlas);
+
+		this.pskin = new Skin();
+		this.pbuttonAtlas = new TextureAtlas("data/buttons/pbutton.pack");
+		this.pskin.addRegions(this.pbuttonAtlas);
+
+		this.buttonStyle = new ImageButtonStyle();
+		this.buttonStyle.up = this.skin.getDrawable("button");
+		this.buttonStyle.checked = this.skin.getDrawable("buttonpressed");
+
+		this.pbuttonStyle = new ImageButtonStyle();
+		this.pbuttonStyle.up = this.pskin.getDrawable("pbutton");
+		this.pbuttonStyle.checked = this.pskin.getDrawable("pbuttonpressed");
+
+		this.soundButton = new ImageButton(this.buttonStyle);
+		this.stage.addActor(this.soundButton);
+
+		this.pauseButton = new ImageButton(this.pbuttonStyle);
+		this.stage.addActor(this.pauseButton);
+
+		float sizeXRatio = GameScreen.screenHeight / GameScreen.gameHeight;
+		float sizeYRatio = GameScreen.screenWidth / GameScreen.gameWidth;
+
+		this.pauseButton.setSize(this.screenWidth / 16, this.screenWidth / 16);
+		this.soundButton.setSize(this.screenWidth / 16, this.screenWidth / 16);
+
+		this.pauseButton.setPosition(
+				GameScreen.screenWidth - this.pauseButton.getWidth()
+						- (this.pauseButton.getWidth() / 2),
+				GameScreen.screenHeight - this.pauseButton.getHeight()
+						- (this.pauseButton.getHeight() / 2));
+
+		this.soundButton.setPosition(
+				this.pauseButton.getX() - this.soundButton.getWidth()
+						- (this.soundButton.getWidth() / 2),
+				GameScreen.screenHeight - this.soundButton.getHeight()
+						- (this.soundButton.getHeight() / 2));
+
+		// Gdx.input.setInputProcessor(stage);
+
+		this.soundButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
@@ -99,71 +102,73 @@ public class GameScreen implements Screen {
 				System.out.print("Button clicked ");
 				return true;
 			}
-			
+
 		});
-		
-		pbutton.addListener(new InputListener(){
+
+		this.pauseButton.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
 				// TODO Auto-generated method stub
-				System.out.print("PButton clicked ");
-				world.setPause(!world.getPause());
+				System.out.print("Pause button clicked ");
+				GameScreen.this.world.setPause(!GameScreen.this.world
+						.getPause());
 				return true;
-				
+
 			}
 		});
-		
-		
+
 	}
 
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void render(float delta) {
-		runTime += delta;
-		if (running) this.world.update(delta, runTime);
-		this.renderer.render(delta, runTime);
-		stage.draw();
-		stage.act();
+		this.runTime += delta;
+		if (running)
+			this.world.update(delta, this.runTime);
+		this.renderer.render(delta, this.runTime);
+		this.stage.draw();
+		this.stage.act();
 	}
 
 	@Override
 	public void resize(int arg0, int arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	public GameWorld restart() {
-		//don't know why, but this helps the garbage collector with its anorexia
+		// don't know why, but this helps the garbage collector with its
+		// anorexia
 		this.world = null;
 		this.world = new GameWorld();
 		this.renderer.setWorld(this.world);
