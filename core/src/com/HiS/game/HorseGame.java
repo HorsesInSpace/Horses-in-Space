@@ -8,7 +8,7 @@ import com.badlogic.gdx.Gdx;
 /**
  * The game class, which also sets the screen and loads the assets used by the
  * application
- * 
+ *
  * @author Morten
  * @version 0.1
  */
@@ -21,6 +21,7 @@ public class HorseGame extends Game {
 	public static Platform platform;
 
 	public static float musicVol, gallopVol, soundVol, thunderVol;
+	public static float VOLUME = 1.0f;
 
 	public HorseGame(Platform platform) {
 		HorseGame.platform = platform;

@@ -25,6 +25,9 @@ public class GameScreen implements Screen {
 	public static int screenHeight = Gdx.graphics.getHeight();
 	public static boolean running = true;
 
+	public InputMultiplexer inputMultiplexer = new InputMultiplexer();
+	public InputProcessor inputProcessorTwo;
+
 	public Stage stage;
 
 	public TextureAtlas buttonAtlas, pbuttonAtlas;
@@ -46,11 +49,11 @@ public class GameScreen implements Screen {
 
 		// Gdx.input.setInputProcessor(new InputHandler(this.world, this));
 
-		InputProcessor inputProcessorTwo = new InputHandler(this.world, this);
-		InputMultiplexer inputMultiplexer = new InputMultiplexer();
-		inputMultiplexer.addProcessor(this.stage);
-		inputMultiplexer.addProcessor(inputProcessorTwo);
-		Gdx.input.setInputProcessor(inputMultiplexer);
+		this.inputProcessorTwo = new InputHandler(this.world, this);
+
+		this.inputMultiplexer.addProcessor(this.stage);
+		this.inputMultiplexer.addProcessor(this.inputProcessorTwo);
+		Gdx.input.setInputProcessor(this.inputMultiplexer);
 
 		this.skin = new Skin();
 		this.buttonAtlas = new TextureAtlas("data/buttons/button.pack");
@@ -77,8 +80,10 @@ public class GameScreen implements Screen {
 		float sizeXRatio = GameScreen.screenHeight / GameScreen.gameHeight;
 		float sizeYRatio = GameScreen.screenWidth / GameScreen.gameWidth;
 
-		this.pauseButton.setSize(this.screenWidth / 16, this.screenWidth / 16);
-		this.soundButton.setSize(this.screenWidth / 16, this.screenWidth / 16);
+		this.pauseButton.setSize(GameScreen.screenWidth / 16,
+				GameScreen.screenWidth / 16);
+		this.soundButton.setSize(GameScreen.screenWidth / 16,
+				GameScreen.screenWidth / 16);
 
 		this.pauseButton.setPosition(
 				GameScreen.screenWidth - this.pauseButton.getWidth()
@@ -99,7 +104,8 @@ public class GameScreen implements Screen {
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
 				// TODO Auto-generated method stub
-				System.out.print("Button clicked ");
+				System.out.print("Sound button clicked");
+
 				return true;
 			}
 
@@ -111,12 +117,19 @@ public class GameScreen implements Screen {
 					int pointer, int button) {
 				// TODO Auto-generated method stub
 				System.out.print("Pause button clicked ");
-				GameScreen.this.world.setPause(!GameScreen.this.world
-						.getPause());
+				boolean paused = GameScreen.this.world.getPause();
+				if (paused) {
+					GameScreen.this.world.setPause(false);
+				} else {
+					GameScreen.this.world.setPause(true);
+				}
+
 				return true;
 
 			}
 		});
+		// LARS: bare for å vise hvordan man fjerner inputProcessor, det funker
+		// ikke inne i addListener fordi det går i separat klasse!
 
 	}
 

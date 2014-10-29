@@ -32,14 +32,14 @@ public class InputHandler implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		if (GameScreen.running) {
+		if (!this.world.getPause()) {
 			if (screenX < (GameScreen.screenWidth / 2)) {
 				this.world.getHorse().jump();
 			} else {
 				this.world.getHorse().slide();
 			}
 		}
-		if (!GameScreen.running) {
+		if (!GameScreen.running && !this.world.getPause()) {
 			this.world = this.screen.restart();
 		}
 		return true;
@@ -52,18 +52,19 @@ public class InputHandler implements InputProcessor {
 
 	@Override
 	public boolean keyDown(int keycode) {
-		if (GameScreen.running
+		if (!this.world.getPause()
 				&& ((keycode == Input.Keys.SPACE) || (keycode == Input.Keys.W) || (keycode == Input.Keys.UP))) {
 			this.world.getHorse().jump();
 			return true;
 		}
-		if (GameScreen.running
+		if (!this.world.getPause()
 				&& ((keycode == Input.Keys.CONTROL_LEFT)
 						|| (keycode == Input.Keys.S) || (keycode == Input.Keys.DOWN))) {
 			this.world.getHorse().slide();
 			return true;
 		}
-		if (!GameScreen.running && (keycode == Input.Keys.R)) {
+		if (!GameScreen.running && !this.world.getPause()
+				&& (keycode == Input.Keys.R)) {
 			this.world = this.screen.restart();
 		}
 
@@ -78,7 +79,7 @@ public class InputHandler implements InputProcessor {
 
 	@Override
 	public boolean keyUp(int keycode) {
-		if (GameScreen.running
+		if (!this.world.getPause()
 				&& ((keycode == Input.Keys.CONTROL_LEFT)
 						|| (keycode == Input.Keys.S) || (keycode == Input.Keys.DOWN))) {
 			this.world.getHorse().unSlide();
@@ -94,7 +95,7 @@ public class InputHandler implements InputProcessor {
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		if (GameScreen.running) {
+		if (!this.world.getPause()) {
 			this.world.getHorse().unSlide();
 			return true;
 		}

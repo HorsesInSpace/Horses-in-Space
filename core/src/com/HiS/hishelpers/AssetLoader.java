@@ -26,16 +26,15 @@ public class AssetLoader {
 	private static Texture texture;
 
 	public static TextureRegion horse, horse2, horse3, horseJump, horseSlide,
-	horseSplat, moonBackground, moonForeground, fence, ufo,
-	earth;
+			horseSplat, moonBackground, moonForeground, fence, ufo, earth;
 	public static TextureRegion moonMiddleground;
 	public static Animation anim;
 	public static BitmapFont font, scoreFont;
 	public static Polygon polyHorse, polyHorse2, polyHorse3, polyHorseJump,
-	polyHorseSlide, polyUfo;
+			polyHorseSlide, polyUfo;
 
 	public static Sound whinning, gallopSound, punch, thunder1;
-	public static Music journey, gallopMusic, moon;
+	public static Music journey, moon;
 
 	public static Preferences prefs;
 
@@ -47,8 +46,7 @@ public class AssetLoader {
 				Gdx.files.internal("data/gfx/monohorseinspaced.fnt"));
 		font.setScale(.10f, -.10f);
 
-		scoreFont = new BitmapFont(
-				Gdx.files.internal("data/gfx/audiowide.fnt"));
+		scoreFont = new BitmapFont(Gdx.files.internal("data/gfx/audiowide.fnt"));
 		scoreFont.setScale(.15f, -.15f);
 		scoreFont.setColor(Color.WHITE);
 
@@ -120,8 +118,6 @@ public class AssetLoader {
 				.internal("data/audio/sound/thunder1.mp3"));
 		journey = Gdx.audio.newMusic(Gdx.files
 				.internal("data/audio/music/Journey.ogg"));
-		gallopMusic = Gdx.audio.newMusic(Gdx.files
-				.internal("data/audio/music/gallop.ogg"));
 		moon = Gdx.audio.newMusic(Gdx.files
 				.internal("data/audio/music/moon.mp3"));
 
@@ -159,7 +155,6 @@ public class AssetLoader {
 	public static void dispose() {
 		texture.dispose();
 
-		gallopMusic.dispose();
 		gallopSound.dispose();
 		journey.dispose();
 		punch.dispose();

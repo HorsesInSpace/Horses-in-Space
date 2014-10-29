@@ -30,7 +30,7 @@ public class GameWorld {
 
 	private Level level;
 
-	private boolean pause = true;
+	private boolean pause = false;
 	public long score;
 
 	private PhysEngine physEngine;
@@ -41,13 +41,13 @@ public class GameWorld {
 	private Obstacle rightmostObstacle = null;
 
 	public GameWorld() {
-		this.initWorld();
+		initWorld();
 	}
 
 	public void update(float delta, float runTime) {
-		if(this.pause) {
+		if (!this.pause) {
 			this.score += delta * 70;
-			this.moveBackMiddle(delta);
+			moveBackMiddle(delta);
 			for (PhysGameObject gameObject : this.objects) {
 
 				this.physEngine.update(gameObject, delta);
@@ -57,7 +57,7 @@ public class GameWorld {
 				Rectangle rect = gameObject.getPhysics().getRect();
 				if ((rect.x + rect.width) < 0) {
 					float nextPos = GameScreen.gameWidth;
-					nextPos = this.level.getLength()-rect.width;
+					nextPos = this.level.getLength() - rect.width;
 					// Gdx.app.log("NextPos", "" + nextPos);
 					// Gdx.app.log("Score", this.score + "");
 
@@ -141,19 +141,19 @@ public class GameWorld {
 		this.middleground1 = new TexObject(this.level.getMiddleGround(), 0,
 				(GameScreen.gameHeight / 4) + (GameScreen.gameHeight / 16),
 				GameScreen.gameHeight / 4, GameScreen.gameWidth
-				+ (GameScreen.gameWidth / 2));
+						+ (GameScreen.gameWidth / 2));
 		this.middleground2 = new TexObject(this.level.getMiddleGround(),
-				this.getMiddleground1().getRect().width, (GameScreen.gameHeight / 4)
-				+ (GameScreen.gameHeight / 16),
+				getMiddleground1().getRect().width, (GameScreen.gameHeight / 4)
+						+ (GameScreen.gameHeight / 16),
 				GameScreen.gameHeight / 4, GameScreen.gameWidth
-				+ (GameScreen.gameWidth / 2));
+						+ (GameScreen.gameWidth / 2));
 
 		this.foreground1 = new TexObject(this.level.getForeGround(), 0,
 				(GameScreen.gameHeight / 2) + (GameScreen.gameHeight / 20),
 				GameScreen.gameHeight / 4, GameScreen.gameWidth);
 		this.foreground2 = new TexObject(this.level.getForeGround(),
 				this.foreground1.getRect().width, (GameScreen.gameHeight / 2)
-				+ (GameScreen.gameHeight / 20),
+						+ (GameScreen.gameHeight / 20),
 				GameScreen.gameHeight / 4, GameScreen.gameWidth);
 
 		// TODO Pass speed as parameter from level into PhysEngine constructor
@@ -176,12 +176,12 @@ public class GameWorld {
 		this.middleground1.getRect().x += (this.scrollSpeed / 4) * delta;
 		this.middleground2.getRect().x += (this.scrollSpeed / 4) * delta;
 		if ((this.middleground1.getRect().x + this.middleground1.getRect().width) < 0) {
-			this.middleground1.getRect().x = this.getMiddleground2().getRect().x
-					+ this.getMiddleground2().getRect().width;
+			this.middleground1.getRect().x = getMiddleground2().getRect().x
+					+ getMiddleground2().getRect().width;
 		}
 		if ((this.middleground2.getRect().x + this.middleground2.getRect().width) < 0) {
-			this.middleground2.getRect().x = this.getMiddleground1().getRect().x
-					+ this.getMiddleground1().getRect().width;
+			this.middleground2.getRect().x = getMiddleground1().getRect().x
+					+ getMiddleground1().getRect().width;
 		}
 	}
 
