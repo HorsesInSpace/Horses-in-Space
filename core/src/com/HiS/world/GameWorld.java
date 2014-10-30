@@ -2,7 +2,6 @@ package com.HiS.world;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import com.HiS.gameobject.Horse;
 import com.HiS.gameobject.PhysGameObject;
@@ -34,8 +33,6 @@ public class GameWorld {
 
 	private PhysEngine physEngine;
 	private final float scrollSpeed = -(GameScreen.gameWidth / 1.8f);
-
-	private Random rand;
 
 	private Obstacle rightmostObstacle = null;
 
@@ -152,8 +149,6 @@ public class GameWorld {
 
 		// TODO Pass speed as parameter from level into PhysEngine constructor
 		this.physEngine = new PhysEngine();
-
-		this.rand = new Random();
 	}
 
 	private void moveBackMiddle(float delta) {
