@@ -26,6 +26,7 @@ public class Level {
 		String[] levelDetails = list.get(0);
 		List<PhysGameObject> objects = new ArrayList<PhysGameObject>();
 		int length = 0;
+		int prevX = 0;
 		for (int i = 1; i < list.size(); i++) {
 			String[] values = list.get(i);
 			int x = Integer.parseInt(values[1]);
@@ -34,22 +35,26 @@ public class Level {
 				length = x;
 			}
 			try {
-				objects.add(this.createPhysGameObject(values));
+				PhysGameObject physGameObject = createPhysGameObject(values,
+						prevX);
+				objects.add(physGameObject);
+				prevX += x + physGameObject.getPhysics().getRect().width;
 			} catch (PhysGameObjectNotRecognizedException e) {
+				prevX += x;
 				continue;
 			}
 		}
 		length = length + 100;
-		this.generateLevel(this.backGround, this.middleGround, this.foreGround,
+		generateLevel(this.backGround, this.middleGround, this.foreGround,
 				levelDetails[0], objects);
-		this.setLength(length);
+		setLength(length);
 	}
 
-	private PhysGameObject createPhysGameObject(String[] values)
+	private PhysGameObject createPhysGameObject(String[] values, int prevX)
 			throws PhysGameObjectNotRecognizedException {
 		String typeString = values[0];
 		char type = typeString.charAt(0);
-		int x = Integer.parseInt(values[1]);
+		int x = Integer.parseInt(values[1]) + prevX;
 		int y = Integer.parseInt(values[2]);
 
 		switch (type) {
@@ -66,7 +71,7 @@ public class Level {
 
 	public Level(TextureRegion backGround, TextureRegion middleGround,
 			TextureRegion foreGround, String name, List<PhysGameObject> objects) {
-		this.generateLevel(backGround, middleGround, foreGround, name, objects);
+		generateLevel(backGround, middleGround, foreGround, name, objects);
 	}
 
 	private void generateLevel(TextureRegion backGround,
@@ -77,13 +82,13 @@ public class Level {
 			this.backGround = AssetLoader.moonBackground;
 			this.foreGround = AssetLoader.moonForeground;
 			this.middleGround = AssetLoader.moonMiddleground;
-			this.setObjects(objects);
+			setObjects(objects);
 		} else {
 			this.name = name;
 			this.backGround = null;
 			this.middleGround = null;
 			this.foreGround = null;
-			this.setObjects(objects);
+			setObjects(objects);
 		}
 	}
 
