@@ -14,7 +14,6 @@ import com.HiS.level.Level;
 import com.HiS.physics.Collision;
 import com.HiS.physics.PhysEngine;
 import com.HiS.screen.GameScreen;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -58,16 +57,11 @@ public class GameWorld {
 				if ((rect.x + rect.width) < 0) {
 					float nextPos = GameScreen.gameWidth;
 					nextPos = this.level.getLength() - rect.width;
-					// Gdx.app.log("NextPos", "" + nextPos);
-					// Gdx.app.log("Score", this.score + "");
 
 					gameObject.getPhysics().setPosition(
 							new Vector2(nextPos, rect.y));
 					gameObject.setCrashed(false);
 					((Obstacle) gameObject).setPassed(false);
-
-					Gdx.app.log("RecentObstacle",
-							this.rightmostObstacle.toString());
 				}
 				if ((this.rightmostObstacle == null)
 						|| (gameObject.getPosition().x > this.rightmostObstacle

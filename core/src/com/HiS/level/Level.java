@@ -30,14 +30,11 @@ public class Level {
 		for (int i = 1; i < list.size(); i++) {
 			String[] values = list.get(i);
 			int x = Integer.parseInt(values[1]);
-			System.out.println(x);
-			if (length <= x) {
-				length = x;
-			}
 			try {
 				PhysGameObject physGameObject = createPhysGameObject(values,
 						prevX);
 				objects.add(physGameObject);
+				length += x + physGameObject.getRect().width;
 				prevX += x + physGameObject.getPhysics().getRect().width;
 			} catch (PhysGameObjectNotRecognizedException e) {
 				prevX += x;
